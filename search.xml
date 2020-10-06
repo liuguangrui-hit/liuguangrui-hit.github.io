@@ -38,6 +38,15 @@
   <entry>
     <title>2</title>
     <url>/2020/10/06/2/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>世间所有的相遇，都是久别重逢</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+
+<span class="label default">默认</span>
+
+<div class="tabs" id="tab"><ul class="nav-tabs"><li class="tab active"><a href="#tab-1">选1</a></li><li class="tab"><a href="#tab-2">选1</a></li><li class="tab"><a href="#tab-3">选1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-1"><p><strong>选项卡 1</strong> </p></div><div class="tab-pane" id="tab-2"><p><strong>选项卡 2</strong></p></div><div class="tab-pane" id="tab-3"><p><strong>选项卡 3</strong> 名字为A</p></div></div></div>]]></content>
   </entry>
 </search>
