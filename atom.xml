@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-10-06T11:25:10.188Z</updated>
+  <updated>2020-10-06T12:11:51.576Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2020/10/06/Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/"/>
     <id>http://example.com/2020/10/06/Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/</id>
     <published>2020-10-06T11:06:43.000Z</published>
-    <updated>2020-10-06T11:25:10.188Z</updated>
+    <updated>2020-10-06T12:11:51.576Z</updated>
     
-    <content type="html"><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="注册-GitHub-账号"><a href="#注册-GitHub-账号" class="headerlink" title="注册 GitHub 账号"></a>注册 GitHub 账号</h2><p>访问(<a href="https://github.com),注册/">https://github.com)，注册</a> GitHub 账号并进行邮箱验证。</p>]]></content>
+    <content type="html"><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="注册-GitHub-账号"><a href="#注册-GitHub-账号" class="headerlink" title="注册 GitHub 账号"></a>注册 GitHub 账号</h2><p>访问 <a href="http://www.google.com/">Github 官网</a>注册 GitHub 账号并进行邮箱验证。</p><h2 id="安装-Node-js-和-nmp"><a href="#安装-Node-js-和-nmp" class="headerlink" title="安装 Node.js 和 nmp"></a>安装 Node.js 和 nmp</h2><p>访问 <a href="https://nodejs.org/">Node.js 官网</a>安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。</p><h2 id="安装-Git-for-Windows"><a href="#安装-Git-for-Windows" class="headerlink" title="安装 Git for Windows"></a>安装 Git for Windows</h2><p>访问 <a href="https://gitforwindows.org/">Git 官网</a>安装 Git for Windows。</p><h1 id="搭建-Github-博客"><a href="#搭建-Github-博客" class="headerlink" title="搭建 Github 博客"></a>搭建 Github 博客</h1><h2 id="创建-Github-仓库"><a href="#创建-Github-仓库" class="headerlink" title="创建 Github 仓库"></a>创建 Github 仓库</h2><p>新建一个 Repositories, 存放博客项目文件。</p>]]></content>
     
     
     <summary type="html">Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</summary>
