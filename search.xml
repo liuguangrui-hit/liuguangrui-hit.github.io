@@ -1,69 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/10/04/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>1</title>
-    <url>/2020/10/05/1/</url>
-    <content><![CDATA[<p>sdfadfa </p>
-<hr>
-<p>sdafsdf</p>
+    <title>Hexo 搭建个人博客教程</title>
+    <url>/2020/10/06/Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="注册-GitHub-账号"><a href="#注册-GitHub-账号" class="headerlink" title="注册 GitHub 账号"></a>注册 GitHub 账号</h2><p>访问(<a href="https://github.com),注册/">https://github.com)，注册</a> GitHub 账号并进行邮箱验证。</p>
 ]]></content>
       <categories>
-        <category>论文研读报告</category>
+        <category>工具教程</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>洋葱服务</tag>
-        <tag>匿名通信</tag>
+        <tag>Hexo</tag>
+        <tag>前端</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>5</title>
-    <url>/2020/10/06/5/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>4</title>
-    <url>/2020/10/06/4/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>3</title>
-    <url>/2020/10/06/3/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>2</title>
-    <url>/2020/10/06/2/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>世间所有的相遇，都是久别重逢</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-
-<span class="label default">默认</span>
-
-<div class="tabs" id="tab"><ul class="nav-tabs"><li class="tab active"><a href="#tab-1">选1</a></li><li class="tab"><a href="#tab-2">选1</a></li><li class="tab"><a href="#tab-3">选1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-1"><p><strong>选项卡 1</strong> </p></div><div class="tab-pane" id="tab-2"><p><strong>选项卡 2</strong></p></div><div class="tab-pane" id="tab-3"><p><strong>选项卡 3</strong> 名字为A</p></div></div></div>]]></content>
   </entry>
 </search>
