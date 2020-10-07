@@ -35,7 +35,7 @@
 <p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>此时访问博客地址就和本地预览服务一样了。<br><img src="/images/20201006/13.png" alt="avatar"></p>
 <h2 id="3-4-写第一篇博文"><a href="#3-4-写第一篇博文" class="headerlink" title="3.4 写第一篇博文"></a>3.4 写第一篇博文</h2><p>定位到 Hexo 根目录，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&#x27;my-first-blog&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>Hexo 会在 _posts 下生成相关md文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
+<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></table></figure>
 <h1 id="4-美化主题"><a href="#4-美化主题" class="headerlink" title="4 美化主题"></a>4 美化主题</h1><h2 id="4-1-下载-Next-主题"><a href="#4-1-下载-Next-主题" class="headerlink" title="4.1 下载 Next 主题"></a>4.1 下载 Next 主题</h2><p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
