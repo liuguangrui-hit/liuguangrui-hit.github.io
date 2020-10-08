@@ -103,19 +103,19 @@
 <h1 id="2-学术界研究现状"><a href="#2-学术界研究现状" class="headerlink" title="2 学术界研究现状"></a>2 学术界研究现状</h1><p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br><img src="/images/20201008/3.webp" alt="人工智能内生安全近年论文发表数量"><br><img src="/images/20201008/4.webp" alt="人工智能内生安全近年论文应用领域"><br>但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br><img src="/images/20201008/5.webp" alt="人工智能内生安全研究内容"><br>由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
 <blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p><a href="#">Post not found: 20201008-1 人工智能内生安全——对抗攻击</a></p>
+            <p><a href="/2020/10/08/20201008-1/" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a></p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote><br>
 <blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p><a href="#">Post not found: 20201008-1 人工智能内生安全——数据投毒</a></p>
+            <p><a href="/2020/10/08/20201008-1/" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a></p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote><br>
 <blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p><a href="#">Post not found: 20201008-1 人工智能内生安全——模型窃取</a></p>
+            <p><a href="/2020/10/08/20201008-1/" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a></p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote><br>
