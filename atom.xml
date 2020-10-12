@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2020-10-11T11:41:21.876Z</updated>
+  <updated>2020-10-12T02:30:41.959Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
+    <link href="https://liuguangrui.top/archives/bebd9392.html"/>
+    <id>https://liuguangrui.top/archives/bebd9392.html</id>
+    <published>2020-10-12T00:48:59.000Z</published>
+    <updated>2020-10-12T02:30:41.959Z</updated>
+    
+    <content type="html"><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际传输空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院王之梁团队研究完成。<br>#1 创新点</p><ul><li>实用性：在不修改流量功能的前提下，以有限知识自动诱变恶意流量。</li><li>通用性：此方案可攻击任何机器学习分类器（与模型无关）。</li><li>可解释：提出一种基于特征的机器学习解释方法，衡量目标系统抵御此类攻击的鲁棒性。</li></ul>]]></content>
+    
+    
+    <summary type="html">中文译名：实际传输空间中基于机器学习入侵检测系统的对抗攻击。越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际传输空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院王之梁团队研究完成。</summary>
+    
+    
+    
+    <category term="科研总结" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="论文研读报告" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="对抗攻击" scheme="https://liuguangrui.top/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/"/>
+    
+    <category term="网络安全" scheme="https://liuguangrui.top/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="入侵检测系统" scheme="https://liuguangrui.top/tags/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>《卡拉马佐夫兄弟》读书笔记</title>
