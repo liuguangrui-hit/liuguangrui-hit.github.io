@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2020-10-12T14:09:01.324Z</updated>
+  <updated>2020-10-12T15:38:47.197Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>欢迎来到刘广睿的思维实验室</title>
+    <link href="https://liuguangrui.top/archives/27b4c228.html"/>
+    <id>https://liuguangrui.top/archives/27b4c228.html</id>
+    <published>2020-10-12T15:34:35.000Z</published>
+    <updated>2020-10-12T15:38:47.197Z</updated>
+    
+    <content type="html"><![CDATA[<p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>，这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能有兴趣，欢迎在留言区与我讨论相关问题。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个Hexo类别下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;欢迎来到&lt;a href=&quot;https://liuguangrui.top/&quot;&gt;刘广睿的思维实验室&lt;/a&gt;，这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能有兴趣，欢迎在留言区与我讨论相关问题。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>

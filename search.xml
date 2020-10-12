@@ -1,254 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>人工智能内生安全——背景介绍</title>
-    <url>/archives/b967121.html</url>
-    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
-<h1 id="1-工业界应用现状"><a href="#1-工业界应用现状" class="headerlink" title="1 工业界应用现状"></a>1 工业界应用现状</h1><p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br><img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br><img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
-<h1 id="2-学术界研究现状"><a href="#2-学术界研究现状" class="headerlink" title="2 学术界研究现状"></a>2 学术界研究现状</h1><p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br><img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br><img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br><img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
-<ul>
-<li><a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a></li>
-<li><a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a></li>
-<li><a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
-
-</li>
-</ul>
-<h1 id="3-推荐书目"><a href="#3-推荐书目" class="headerlink" title="3 推荐书目"></a>3 推荐书目</h1><p>最后推荐四本与人工智能内生安全相关的书籍。<br><img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</p>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
-<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
-</ul>
+    <title>欢迎来到刘广睿的思维实验室</title>
+    <url>/archives/27b4c228.html</url>
+    <content><![CDATA[<p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>，这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能有兴趣，欢迎在留言区与我讨论相关问题。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个Hexo类别下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。</p>
 ]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 搭建个人博客教程</title>
-    <url>/archives/1085c2b.html</url>
-    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h1 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1 准备工作"></a>1 准备工作</h1><h2 id="1-1-注册-GitHub-账号"><a href="#1-1-注册-GitHub-账号" class="headerlink" title="1.1 注册 GitHub 账号"></a>1.1 注册 GitHub 账号</h2><p>访问 <a href="https://github.com/">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br><img src="/images/20201006-1/1.webp" alt="图 1"></p>
-<h2 id="1-2-安装-Node-js-和-nmp"><a href="#1-2-安装-Node-js-和-nmp" class="headerlink" title="1.2 安装 Node.js 和 nmp"></a>1.2 安装 Node.js 和 nmp</h2><p>访问 <a href="https://nodejs.org/">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br><img src="/images/20201006-1/2.webp" alt="图 2"></p>
-<h2 id="1-3-安装-Git-for-Windows"><a href="#1-3-安装-Git-for-Windows" class="headerlink" title="1.3 安装 Git for Windows"></a>1.3 安装 Git for Windows</h2><p>访问 <a href="https://gitforwindows.org/">Git</a> 官网安装 Git for Windows。<br><img src="/images/20201006-1/3.webp" alt="图 3"></p>
-<h1 id="2-搭建-GitHub-博客"><a href="#2-搭建-GitHub-博客" class="headerlink" title="2 搭建 GitHub 博客"></a>2 搭建 GitHub 博客</h1><h2 id="2-1-创建-GitHub-仓库"><a href="#2-1-创建-GitHub-仓库" class="headerlink" title="2.1 创建 GitHub 仓库"></a>2.1 创建 GitHub 仓库</h2><p>新建一个 Repositories, 存放博客项目文件。<br><img src="/images/20201006-1/4.webp" alt="图 4"><br>新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br><img src="/images/20201006-1/5.webp" alt="图 5"><br>跳转到该库界面，选择 Settings。<br><img src="/images/20201006-1/6.webp" alt="图 6"><br>进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br><img src="/images/20201006-1/7.webp" alt="图 7"><br>选择一个博客主题，然后点击 Select theme。<br><img src="/images/20201006-1/8.webp" alt="图片 8"><br>到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br><img src="/images/20201006-1/9.webp" alt="图 9"></p>
-<h2 id="2-2-配置-SSH-Key"><a href="#2-2-配置-SSH-Key" class="headerlink" title="2.2 配置 SSH Key"></a>2.2 配置 SSH Key</h2><p>在 Windows 菜单里搜索启动 Git Bash，设置 user.name 和 user.email 的配置信息：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的 GitHub 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的 GitHub 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-<p>生产SSH秘钥文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的 GitHub 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-<p>然后直接三个回车即可，默认不需要设置密码。<br>找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br><img src="/images/20201006-1/10.webp" alt="图 10"><br>打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br><img src="/images/20201006-1/11.webp" alt="图 11"><br>启动 Git Bash 输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure>
-<p>如果提示：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></table></figure>
-<p>输入 <span class="label default">yes</span>，然后会看到：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
-<p>看到这个信息说明 SSH 已配置成功！</p>
-<h1 id="3-使用Hexo写博客"><a href="#3-使用Hexo写博客" class="headerlink" title="3 使用Hexo写博客"></a>3 使用Hexo写博客</h1><h2 id="3-1-安装Hexo"><a href="#3-1-安装Hexo" class="headerlink" title="3.1 安装Hexo"></a>3.1 安装Hexo</h2><p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-2-初始化Hexo"><a href="#3-2-初始化Hexo" class="headerlink" title="3.2 初始化Hexo"></a>3.2 初始化Hexo</h2><p>仍在该目录下右键 Git Bash Here，输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<p>输入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></table></figure>
-<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>打开浏览器访问 <a href="http://localhost:4000/">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br><img src="/images/20201006-1/12.webp" alt="图 12"></p>
-<h2 id="3-3-配置-Hexo"><a href="#3-3-配置-Hexo" class="headerlink" title="3.3 配置 Hexo"></a>3.3 配置 Hexo</h2><p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>并安装插件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></table></figure>
-<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>此时访问博客地址就和本地预览服务一样了。<br><img src="/images/20201006-1/13.webp" alt="图 13"></p>
-<h2 id="3-4-写第一篇博文"><a href="#3-4-写第一篇博文" class="headerlink" title="3.4 写第一篇博文"></a>3.4 写第一篇博文</h2><p>定位到 Hexo 根目录，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&#x27;my-first-blog&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></table></figure>
-<p>#4 美化主题</p>
-<h2 id="4-1-下载-Next-主题"><a href="#4-1-下载-Next-主题" class="headerlink" title="4.1 下载 Next 主题"></a>4.1 下载 Next 主题</h2><p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-<h2 id="4-2-启用主题"><a href="#4-2-启用主题" class="headerlink" title="4.2 启用主题"></a>4.2 启用主题</h2><p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
-<p>使用浏览器访问 <a href="http://localhost:4000/">http://localhost:4000</a> ，检查站点是否正确运行。<br>当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br><img src="/images/20201006-1/14.webp" alt="图 14"><br>执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
-<ul>
-<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a><blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>开始耕耘你的网上花园吧！</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-</li>
-</ul>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
-<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——模型窃取</title>
-    <url>/archives/7bfc85ae.html</url>
-    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br><img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br><img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
-<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
-<div class="note danger">
-            <p>模型萃取攻击</p>
-          </div>
-<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
-<div class="note danger">
-            <p>成员推断攻击</p>
-          </div>
-<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
-<div class="note danger">
-            <p>模型逆向攻击</p>
-          </div>
-<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
-<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>目前比较有效的防御方案是模型水印和联邦学习。</p>
-<div class="note success">
-            <p>模型水印技术</p>
-          </div>
-<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
-<div class="note success">
-            <p>联邦学习技术</p>
-          </div>
-<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
-<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>模型窃取</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——对抗攻击</title>
-    <url>/archives/929f209b.html</url>
-    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br><img src="/images/20201008-1/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
-<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
-<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
-<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
-<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br><img src="/images/20201008-1/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br><img src="/images/20201008-1/3.webp" alt="边界样本更容易被对抗攻击"><br>用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
-<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br><img src="/images/20201008-1/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
-<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
-<div class="note danger">
-            <p>基于梯度的对抗攻击</p>
-          </div>
-<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
-<div class="note danger">
-            <p>基于优化的对抗攻击</p>
-          </div>
-<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
-<div class="note danger">
-            <p>置信度降低攻击</p>
-          </div>
-<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
-<div class="note danger">
-            <p>无目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
-<div class="note danger">
-            <p>有目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
-<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
-<div class="note success">
-            <p>对抗训练技术</p>
-          </div>
-<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
-<div class="note success">
-            <p>梯度隐藏</p>
-          </div>
-<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
-<div class="note success">
-            <p>模型随机化</p>
-          </div>
-<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
-<div class="note success">
-            <p>样本去噪</p>
-          </div>
-<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&wfr=spider&for=pc">神经网络中的对抗攻击与对抗样本</a></li>
-<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>对抗攻击</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——数据投毒</title>
-    <url>/archives/e598100d.html</url>
-    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br><img src="/images/20201008-2/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
-<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
-<div class="note danger">
-            <p>反馈化武器</p>
-          </div>
-<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br><img src="/images/20201008-2/2.webp" alt="反馈化武器"></p>
-<div class="note danger">
-            <p>模型偏斜攻击</p>
-          </div>
-<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br><img src="/images/20201008-2/3.webp" alt="模型偏斜"></p>
-<div class="note danger">
-            <p>后门攻击</p>
-          </div>
-<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br><img src="/images/20201008-2/4.webp" alt="后门攻击"></p>
-<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
-<div class="note success">
-            <p>均匀采样</p>
-          </div>
-<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
-<div class="note success">
-            <p>构建标准数据集</p>
-          </div>
-<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
-<div class="note success">
-            <p>集成学习技术</p>
-          </div>
-<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
-<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>数据投毒</tag>
-      </tags>
   </entry>
   <entry>
     <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
@@ -409,6 +165,256 @@
         <tag>俄罗斯文学</tag>
         <tag>陀思妥耶夫斯基</tag>
         <tag>卡拉马佐夫兄弟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——模型窃取</title>
+    <url>/archives/7bfc85ae.html</url>
+    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br><img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br><img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
+<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
+<div class="note danger">
+            <p>模型萃取攻击</p>
+          </div>
+<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
+<div class="note danger">
+            <p>成员推断攻击</p>
+          </div>
+<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
+<div class="note danger">
+            <p>模型逆向攻击</p>
+          </div>
+<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
+<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>目前比较有效的防御方案是模型水印和联邦学习。</p>
+<div class="note success">
+            <p>模型水印技术</p>
+          </div>
+<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
+<div class="note success">
+            <p>联邦学习技术</p>
+          </div>
+<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
+<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>模型窃取</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——数据投毒</title>
+    <url>/archives/e598100d.html</url>
+    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br><img src="/images/20201008-2/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
+<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
+<div class="note danger">
+            <p>反馈化武器</p>
+          </div>
+<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br><img src="/images/20201008-2/2.webp" alt="反馈化武器"></p>
+<div class="note danger">
+            <p>模型偏斜攻击</p>
+          </div>
+<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br><img src="/images/20201008-2/3.webp" alt="模型偏斜"></p>
+<div class="note danger">
+            <p>后门攻击</p>
+          </div>
+<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br><img src="/images/20201008-2/4.webp" alt="后门攻击"></p>
+<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
+<div class="note success">
+            <p>均匀采样</p>
+          </div>
+<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
+<div class="note success">
+            <p>构建标准数据集</p>
+          </div>
+<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
+<div class="note success">
+            <p>集成学习技术</p>
+          </div>
+<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
+<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>数据投毒</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——对抗攻击</title>
+    <url>/archives/929f209b.html</url>
+    <content><![CDATA[<h1 id="1-技术简介"><a href="#1-技术简介" class="headerlink" title="1 技术简介"></a>1 技术简介</h1><p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br><img src="/images/20201008-1/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
+<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
+<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
+<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
+<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br><img src="/images/20201008-1/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br><img src="/images/20201008-1/3.webp" alt="边界样本更容易被对抗攻击"><br>用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
+<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br><img src="/images/20201008-1/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
+<h1 id="2-攻击方案"><a href="#2-攻击方案" class="headerlink" title="2 攻击方案"></a>2 攻击方案</h1><p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
+<div class="note danger">
+            <p>基于梯度的对抗攻击</p>
+          </div>
+<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
+<div class="note danger">
+            <p>基于优化的对抗攻击</p>
+          </div>
+<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
+<div class="note danger">
+            <p>置信度降低攻击</p>
+          </div>
+<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
+<div class="note danger">
+            <p>无目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
+<div class="note danger">
+            <p>有目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
+<h1 id="3-防御方案"><a href="#3-防御方案" class="headerlink" title="3 防御方案"></a>3 防御方案</h1><p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
+<div class="note success">
+            <p>对抗训练技术</p>
+          </div>
+<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
+<div class="note success">
+            <p>梯度隐藏</p>
+          </div>
+<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
+<div class="note success">
+            <p>模型随机化</p>
+          </div>
+<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
+<div class="note success">
+            <p>样本去噪</p>
+          </div>
+<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&wfr=spider&for=pc">神经网络中的对抗攻击与对抗样本</a></li>
+<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>对抗攻击</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——背景介绍</title>
+    <url>/archives/b967121.html</url>
+    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
+<h1 id="1-工业界应用现状"><a href="#1-工业界应用现状" class="headerlink" title="1 工业界应用现状"></a>1 工业界应用现状</h1><p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br><img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br><img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
+<h1 id="2-学术界研究现状"><a href="#2-学术界研究现状" class="headerlink" title="2 学术界研究现状"></a>2 学术界研究现状</h1><p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br><img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br><img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br><img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
+<ul>
+<li><a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a></li>
+<li><a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a></li>
+<li><a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
+
+</li>
+</ul>
+<h1 id="3-推荐书目"><a href="#3-推荐书目" class="headerlink" title="3 推荐书目"></a>3 推荐书目</h1><p>最后推荐四本与人工智能内生安全相关的书籍。<br><img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</p>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
+<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 搭建个人博客教程</title>
+    <url>/archives/1085c2b.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h1 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1 准备工作"></a>1 准备工作</h1><h2 id="1-1-注册-GitHub-账号"><a href="#1-1-注册-GitHub-账号" class="headerlink" title="1.1 注册 GitHub 账号"></a>1.1 注册 GitHub 账号</h2><p>访问 <a href="https://github.com/">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br><img src="/images/20201006-1/1.webp" alt="图 1"></p>
+<h2 id="1-2-安装-Node-js-和-nmp"><a href="#1-2-安装-Node-js-和-nmp" class="headerlink" title="1.2 安装 Node.js 和 nmp"></a>1.2 安装 Node.js 和 nmp</h2><p>访问 <a href="https://nodejs.org/">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br><img src="/images/20201006-1/2.webp" alt="图 2"></p>
+<h2 id="1-3-安装-Git-for-Windows"><a href="#1-3-安装-Git-for-Windows" class="headerlink" title="1.3 安装 Git for Windows"></a>1.3 安装 Git for Windows</h2><p>访问 <a href="https://gitforwindows.org/">Git</a> 官网安装 Git for Windows。<br><img src="/images/20201006-1/3.webp" alt="图 3"></p>
+<h1 id="2-搭建-GitHub-博客"><a href="#2-搭建-GitHub-博客" class="headerlink" title="2 搭建 GitHub 博客"></a>2 搭建 GitHub 博客</h1><h2 id="2-1-创建-GitHub-仓库"><a href="#2-1-创建-GitHub-仓库" class="headerlink" title="2.1 创建 GitHub 仓库"></a>2.1 创建 GitHub 仓库</h2><p>新建一个 Repositories, 存放博客项目文件。<br><img src="/images/20201006-1/4.webp" alt="图 4"><br>新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br><img src="/images/20201006-1/5.webp" alt="图 5"><br>跳转到该库界面，选择 Settings。<br><img src="/images/20201006-1/6.webp" alt="图 6"><br>进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br><img src="/images/20201006-1/7.webp" alt="图 7"><br>选择一个博客主题，然后点击 Select theme。<br><img src="/images/20201006-1/8.webp" alt="图片 8"><br>到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br><img src="/images/20201006-1/9.webp" alt="图 9"></p>
+<h2 id="2-2-配置-SSH-Key"><a href="#2-2-配置-SSH-Key" class="headerlink" title="2.2 配置 SSH Key"></a>2.2 配置 SSH Key</h2><p>在 Windows 菜单里搜索启动 Git Bash，设置 user.name 和 user.email 的配置信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的 GitHub 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的 GitHub 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>生产SSH秘钥文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的 GitHub 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后直接三个回车即可，默认不需要设置密码。<br>找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br><img src="/images/20201006-1/10.webp" alt="图 10"><br>打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br><img src="/images/20201006-1/11.webp" alt="图 11"><br>启动 Git Bash 输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></table></figure>
+<p>如果提示：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></table></figure>
+<p>输入 <span class="label default">yes</span>，然后会看到：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+<p>看到这个信息说明 SSH 已配置成功！</p>
+<h1 id="3-使用Hexo写博客"><a href="#3-使用Hexo写博客" class="headerlink" title="3 使用Hexo写博客"></a>3 使用Hexo写博客</h1><h2 id="3-1-安装Hexo"><a href="#3-1-安装Hexo" class="headerlink" title="3.1 安装Hexo"></a>3.1 安装Hexo</h2><p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-2-初始化Hexo"><a href="#3-2-初始化Hexo" class="headerlink" title="3.2 初始化Hexo"></a>3.2 初始化Hexo</h2><p>仍在该目录下右键 Git Bash Here，输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<p>输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></table></figure>
+<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>打开浏览器访问 <a href="http://localhost:4000/">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br><img src="/images/20201006-1/12.webp" alt="图 12"></p>
+<h2 id="3-3-配置-Hexo"><a href="#3-3-配置-Hexo" class="headerlink" title="3.3 配置 Hexo"></a>3.3 配置 Hexo</h2><p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>并安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></table></figure>
+<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>此时访问博客地址就和本地预览服务一样了。<br><img src="/images/20201006-1/13.webp" alt="图 13"></p>
+<h2 id="3-4-写第一篇博文"><a href="#3-4-写第一篇博文" class="headerlink" title="3.4 写第一篇博文"></a>3.4 写第一篇博文</h2><p>定位到 Hexo 根目录，执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&#x27;my-first-blog&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></table></figure>
+<p>#4 美化主题</p>
+<h2 id="4-1-下载-Next-主题"><a href="#4-1-下载-Next-主题" class="headerlink" title="4.1 下载 Next 主题"></a>4.1 下载 Next 主题</h2><p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-启用主题"><a href="#4-2-启用主题" class="headerlink" title="4.2 启用主题"></a>4.2 启用主题</h2><p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>使用浏览器访问 <a href="http://localhost:4000/">http://localhost:4000</a> ，检查站点是否正确运行。<br>当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br><img src="/images/20201006-1/14.webp" alt="图 14"><br>执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
+<ul>
+<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a><blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>开始耕耘你的网上花园吧！</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+</li>
+</ul>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
       </tags>
   </entry>
 </search>
