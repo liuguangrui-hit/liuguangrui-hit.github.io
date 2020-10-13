@@ -3,7 +3,13 @@
   <entry>
     <title>欢迎来到刘广睿的思维实验室</title>
     <url>/archives/27b4c228.html</url>
-    <content><![CDATA[<p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>，这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能有兴趣，欢迎在留言区与我讨论相关问题。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个Hexo类别下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。</p>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>！ </p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<p>这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能感兴趣，欢迎在留言区与我讨论相关问题,或者瞧瞧我的几个<a href="https://github.com/liuguangrui-hit">GitHub项目</a>。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个Hexo类别下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。</p>
 ]]></content>
   </entry>
   <entry>
@@ -409,12 +415,12 @@
 </ul>
 ]]></content>
       <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
+        <category>工具教程</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
       </tags>
   </entry>
 </search>
