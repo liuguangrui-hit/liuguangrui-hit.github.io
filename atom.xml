@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2020-10-13T03:56:29.400Z</updated>
+  <updated>2020-10-13T07:26:22.651Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://liuguangrui.top/archives/27b4c228.html"/>
     <id>https://liuguangrui.top/archives/27b4c228.html</id>
     <published>2020-10-12T15:34:35.000Z</published>
-    <updated>2020-10-13T03:56:29.400Z</updated>
+    <updated>2020-10-13T07:26:22.651Z</updated>
     
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">            <i class="fa fa-quote-left"></i>            <p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>！</p>            <i class="fa fa-quote-right"></i>          </blockquote><p>这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能感兴趣，欢迎在<a href="https://liuguangrui.top/guestbook/">留言区</a>与我讨论相关问题，或者瞧瞧我的几个<a href="https://github.com/liuguangrui-hit">GitHub开源项目</a>。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个<a href="https://liuguangrui.top/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/Hexo/">Hexo分类</a>下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。希望您能在这里找到对您有用的信息，祝您玩的开心！</p><a id="more"></a>    <script src="/js/src/phaser.min.js"></script>    <script src="/js/src/catch-the-cat.js"></script>    <div id="catch-the-cat"></div>    <script>      window.game = new CatchTheCatGame({        w: 11,        h: 11,        r: 20,        backgroundColor: 0xffffff,        parent: 'catch-the-cat',        statusBarAlign: 'center',        credit: 'https://liuguangrui.top/'      });    </script>]]></content>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">            <i class="fa fa-quote-left"></i>            <p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>！</p>            <i class="fa fa-quote-right"></i>          </blockquote><p>这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能感兴趣，欢迎在<a href="https://liuguangrui.top/guestbook/">留言区</a>与我讨论相关问题，或者瞧瞧我的几个<a href="https://github.com/liuguangrui-hit">GitHub开源项目</a>。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个<a href="https://liuguangrui.top/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/Hexo/">Hexo分类</a>下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。希望您能在这里找到对您有用的信息，祝您玩的开心！</p><a id="more"></a>    <script src="/js/src/phaser.min.js"></script>    <script src="/js/src/catch-the-cat.js"></script>    <div id="catch-the-cat"></div>    <script>      window.game = new CatchTheCatGame({        w: 11,        h: 11,        r: 20,        backgroundColor: 0xffffff,        parent: 'catch-the-cat',        statusBarAlign: 'center',        credit: 'liuguangrui.top'      });    </script>]]></content>
     
     
     <summary type="html">&lt;blockquote class=&quot;blockquote-center&quot;&gt;
