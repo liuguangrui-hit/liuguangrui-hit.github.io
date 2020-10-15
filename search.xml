@@ -604,12 +604,13 @@ C’(f^*)&lt;h \label{anomaly_threshold}<br>
 <li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
 <li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a></li>
 </ul>
-<h2 id="swig￼16"><blockquote class="blockquote-center">
+<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
             <p>开始耕耘你的网上花园吧！</p>
 
             <i class="fa fa-quote-right"></i>
-          </blockquote></h2>
+          </blockquote>
+<hr>
 <h1>参考</h1>
 <ul>
 <li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
