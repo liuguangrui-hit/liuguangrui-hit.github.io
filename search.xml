@@ -35,6 +35,27 @@
 ]]></content>
   </entry>
   <entry>
+    <title>《罪与罚》读书笔记</title>
+    <url>/archives/af8ce812.html</url>
+    <content><![CDATA[<p>123</p>
+<h1>1 人物介绍</h1>
+<h1>2 故事梗概</h1>
+<h1>3 精彩桥段</h1>
+<h1>4 个人感悟</h1>
+<h1>5 好句摘抄</h1>
+<hr>
+<h1>参考</h1>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+        <category>俄罗斯文学</category>
+      </categories>
+      <tags>
+        <tag>俄罗斯文学</tag>
+        <tag>陀思妥耶夫斯基</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
     <url>/archives/bebd9392.html</url>
     <content><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际流量空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院王之梁团队研究完成。</p>
@@ -150,6 +171,11 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
 <li>本课题使用基于特征的机器学习可解释方法衡量目标系统低于对抗攻击的鲁棒性，并提出通过删除安全性较差的特征的防御策略。这种策略没有考虑删除的特征对目标分类器分类性能的影响，应该考虑更佳的防御方案，而不是直接删除特征这种硬性策略。</li>
 <li>只考虑非有效载荷判定。非有效载荷完全不会改变流量恶意行为吗？</li>
 <li>如何检测组合流量攻击？</li>
+</ul>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2005.07519v2">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 原文</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -328,7 +354,6 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
       <tags>
         <tag>俄罗斯文学</tag>
         <tag>陀思妥耶夫斯基</tag>
-        <tag>卡拉马佐夫兄弟</tag>
       </tags>
   </entry>
   <entry>
