@@ -35,6 +35,30 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Generating Adversarial Examples with Adversarial Networks</title>
+    <url>/archives/ae4e8225.html</url>
+    <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
+<h1>1 课题创新点</h1>
+<h1>2 方案设计</h1>
+<h1>3 理论证明</h1>
+<h1>4 实验</h1>
+<h1>5 贡献</h1>
+<h1>6 可改进</h1>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/1801.02610v5">Generating Adversarial Examples with Adversarial Networks</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
+      </categories>
+      <tags>
+        <tag>-对抗攻击 -生成对抗网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《罪与罚》读书笔记</title>
     <url>/archives/af8ce812.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -155,7 +179,7 @@
   <entry>
     <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
     <url>/archives/bebd9392.html</url>
-    <content><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际流量空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院王之梁团队研究完成。</p>
+    <content><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际流量空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院<a href="http://www.insc.tsinghua.edu.cn/publish/wyy/10857/2018/20180410092237634446731/20180410092237634446731_.html">王之梁</a>团队研究完成。</p>
 <h1>1 课题创新点</h1>
 <ul>
 <li>实用性：在不修改流量功能的前提下，以有限知识自动诱变恶意流量。</li>
