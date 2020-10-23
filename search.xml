@@ -35,11 +35,27 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Generating Adversarial Examples with Adversarial Networks</title>
+    <title>Generating Adversarial Examples with Adversarial Networks 研读报告</title>
     <url>/archives/ae4e8225.html</url>
     <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
 <h1>1 课题创新点</h1>
+<ul>
+<li>生成不仅视觉上逼真，而且还能误导目标模型的对抗样本。</li>
+<li>使用前馈神经网络生成对抗样本，比基于优化的方法有更高的攻击成功率。</li>
+<li>通过查询信息动态提炼模型，可产生对黑盒DNN的对抗样本。</li>
+</ul>
 <h1>2 方案设计</h1>
+<h2 id="2-1-问题定义">2.1 问题定义</h2>
+<p>$ X $: 特征空间$ X \subseteq R^n $<br><br>
+$ n $: 特征数量<br><br>
+$ (x_i,y_i) $: 训练集中第 $ i $ 个样本<br><br>
+$ x_i $: 特征向量 $ x_i \in X $, 服从未知分布 $ x_i \sim P_{data} $ <br><br>
+$ y_i $: 样本真实类别标签 $ y_i \in Y $, 其中$ \left | Y \right | 表示可能的输出分类数量 $ <br></p>
+<span class="label success">学习系统</span>旨在从样本空间 $ X $ 域到分类输出 $ Y $ 集合中学习分类器 $ f: X \rightarrow Y $ <br><br>
+<span class="label success">对抗攻击</span>旨在对于给定样本 $ x $, 生成对抗样本 $ x_A $，其分类 $ f(x_A) \neq y $ （无目标攻击），其中 $ y $ 为样本x的真实类别标签；或者 $ f(x_A)=t $ （有目标攻击），其中 $ t $ 为目标类别。<br>
+<p>就 $ L_2 $ 或其他距离度量而言，$ x_A $ 还应接近原始样本 $ x $</p>
+<h2 id="2-2-结构框架">2.2 结构框架</h2>
+<p><img src="/images/20201023-1/1.webp" alt="图1：AdvGAN结构框架"></p>
 <h1>3 理论证明</h1>
 <h1>4 实验</h1>
 <h1>5 贡献</h1>
@@ -191,7 +207,7 @@
 <p>基于非有效载荷的NIDS：指在NIDS的检测未对流量的有效载荷进行检查。大多数ML-NIDS都属于此类，其原因是因为对于加密流量来说，检查有效载荷非常困难。逃避使用异常检测实现对流量有效载荷进行检测的工作已经比较完善。基于非有效载荷的NIDS更注重于检查DDos、Dos、扫描、爆破和僵尸网络等基于迭代的攻击。</p>
 <h2 id="2-2-实现方法">2.2 实现方法</h2>
 <p>为规避黑盒ML-NIDS检测，课题定制了一个双层优化模型。第一层模型使用生成对抗网络（GAN）计算恶意流量在目标分类器中的最优对抗样本特征；第二层模型使用粒子群优化算法，在不修改流量功能的前提下，以有限知识自动有百年恶意流量，提取特征相似的最佳流量突变体。<br>
-<img src="/images/20201012-1/1.webp" alt="NIDS攻击检测逃避框架"></p>
+<img src="/images/20201012-1/1.webp" alt="图1：NIDS攻击检测逃避框架"></p>
 <h1>3 理论证明</h1>
 <h2 id="3-1-现有工作">3.1 现有工作</h2>
 <p>$ E(\cdot) $ 目标系统特征提取器：输入流量，输出特征向量。<br><br>
@@ -234,7 +250,7 @@ C’(f^*)&lt;h \label{anomaly_threshold}<br>
 \end{equation}</p>
 <p>先在公式\eqref{anomaly_threshold}的限制下通过公式\eqref{feature_adversarial}计算 $ f^* $ ，即对抗样本特征。然后使用得出的结果 $ f^* $ 在公式\eqref{safe_mutation}的限制下通过公式\eqref{traffic_adversarial}计算 $ \hat{t} $<br>
 从拓扑角度解释双层模型，如图所示。先在原本分类良好的特征空间中（Construction），计算出对抗样本特征（Generation），然后将恶意流量靠近对抗样本特征（Mutation）。<br>
-<img src="/images/20201012-1/2.webp" alt="特征空间中的攻击步骤"><br>
+<img src="/images/20201012-1/2.webp" alt="图2：特征空间中的攻击步骤"><br>
 其中对抗样本特征使用生成对抗网络（GAN）计算产生，其损失函数为：</p>
 <p>\begin{equation}<br>
 \hat{t}\in M_s(t) \label{lG}<br>
@@ -277,9 +293,9 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
 </ul>
 <h2 id="4-2-实验结果">4.2 实验结果</h2>
 <p>本课题提出的方案比过往工作如随机化突变和白盒对抗方法（TWA）具有更强规避性。<br>
-<img src="/images/20201012-1/3.webp" alt="规避率对比"><br>
+<img src="/images/20201012-1/3.webp" alt="图3：规避率对比"><br>
 本课题提出的特征剔除方案比对抗训练和特征工程方案对模型加强效果更好。<br>
-<img src="/images/20201012-1/4.webp" alt="防御表现"></p>
+<img src="/images/20201012-1/4.webp" alt="图4：防御表现"></p>
 <h1>5 贡献</h1>
 <ul>
 <li>总结了大部分最新的ML-NIDS中的常用功能，并介绍了一些流量突变运算符。这些运算符可以在不破坏流量恶意特征的前提下对流量进行变换。</li>
