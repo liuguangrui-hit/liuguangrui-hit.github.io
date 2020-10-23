@@ -37,7 +37,7 @@
   <entry>
     <title>Generating Adversarial Examples with Adversarial Networks 研读报告</title>
     <url>/archives/ae4e8225.html</url>
-    <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
+    <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东公司与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
 <h1>1 课题创新点</h1>
 <ul>
 <li>生成不仅视觉上逼真，而且还能误导目标模型的对抗样本。</li>
@@ -103,10 +103,32 @@ G_i,D_i = arg \ min_G \ max_D \ L_{adv}^{f_i-1} + \alpha L_{GAN} + \beta L_{hing
 f_i = arg \ min_f \ E_x \ H(f(x),b(x)) + E_x \ H(f(x+G(x)),b(x+G(x)))<br>
 \label{Dynamic_Distillation_2}<br>
 \end{equation}</p>
-<h1>3 理论证明</h1>
-<h1>4 实验</h1>
-<h1>5 贡献</h1>
-<h1>6 可改进</h1>
+<h1>3 实验</h1>
+<h2 id="3-1-实验配置">3.1 实验配置</h2>
+<ul>
+<li>实验数据；MINTSI, CIFAR-10, NIPS 2017 DEV数据集</li>
+<li>测试环境：半白盒测试，黑盒测试</li>
+<li>对比攻击算法：梯度法(FGSM), 优化法(Opt.), 迁移攻击(Trans.)</li>
+<li>对比防御算法：对抗训练(Adv.), 整体对抗训练(Ens.) ,迭代对抗训练(Iter.Adv)</li>
+</ul>
+<h2 id="3-2-攻击测试">3.2 攻击测试</h2>
+<ol>
+<li>AdvGAN在运行时间、有目标攻击和黑盒攻击等方面存在优势:<br>
+<img src="/images/20201023-1/2.webp" alt="表1：AdvGAN对比其他对抗攻击算法优势"></li>
+<li>AdvGAN在不同环境下（原始数据集p、半白盒攻击w、黑盒攻击-动态整理b-D、黑盒攻击-静态蒸馏b-S）的攻击成功率:<br>
+<img src="/images/20201023-1/3.webp" alt="表2：AdvGAN对比其他对抗攻击算法优势"></li>
+<li>AdvGAN在MINIS和CIFAR-10数据集上攻击效果图：<br>
+<img src="/images/20201023-1/4.webp" alt="图2：AdvGAN在MINIS数据集上攻击效果图"><br>
+<img src="/images/20201023-1/5.webp" alt="图3：AdvGAN在CIFAR-10数据集上攻击效果图"></li>
+<li>AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率：<br>
+<img src="/images/20201023-1/6.webp" alt="表3：AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率"></li>
+<li>AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率：<br>
+<img src="/images/20201023-1/7.webp" alt="表4：AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率"></li>
+<li>白盒环境中不同攻击算法的MadryLab公共模型准确性对比：<br>
+<img src="/images/20201023-1/8.webp" alt="表5：白盒环境中不同攻击算法的MadryLab公共模型准确性对比"></li>
+<li>AdvGAN在高分辨率对抗样本生成效果（NIPS 2017 DEV数据集）：<br>
+<img src="/images/20201023-1/9.webp" alt="图4：AdvGAN在高分辨率对抗样本生成效果"></li>
+</ol>
 <hr>
 <h1>参考</h1>
 <ul>
