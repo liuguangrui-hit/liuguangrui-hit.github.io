@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2020-10-23T14:42:16.170Z</updated>
+  <updated>2020-10-26T11:17:11.146Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN 研读报告</title>
+    <link href="https://liuguangrui.top/archives/a88540ce.html"/>
+    <id>https://liuguangrui.top/archives/a88540ce.html</id>
+    <published>2020-10-24T01:49:14.000Z</published>
+    <updated>2020-10-26T11:17:11.146Z</updated>
+    
+    <content type="html"><![CDATA[<p>近年来，机器学习算法被用于检测未知恶意软件。相对的攻击者也想尽办法攻击这种新的防御系统。恶意软件制作者通常无法访问机器学习模型的详细结构与参数，因此他们只能执行黑盒攻击。本文提出了一种基于生成对抗网络（GAN）的算法——MalGAN，该算法能使恶意软件绕过黑盒机器学习检测。其使用替代检测器配合黑盒模型训练GAN，通过最大程度减少替代检测器对对抗样本的恶意预测概率，生成可绕过黑盒模型的对抗样本。本课题由北京大学机器感知与智能教育部重点实验室<a href="https://eecs.pku.edu.cn/info/1505/6634.htm">谭营</a>团队研究完成。</p><h1>1 课题创新点</h1><h1>2 方案设计</h1><h1>2.1 系统环境</h1><p>本文所指的黑盒环境：由于基于机器学习的恶意软件检测算法通常托管在云端，因此对于攻击者（恶意软件制作者）而言机器学习算法是黑盒算法，即不知道检测系统使用的分类器种类及其具体参数。然而攻击者可以通过精心构造的测试样例检测出机器学习算法使用的特征。例如，如果恶意软件使用目录表中某DLL或调用某API的特征，则攻击者可以修改恶意软件DLL内容或调用API内容，并将修改后的样本输入检测器，如果检测器判别类别发生改变，那么可以判定机器学习算法使用了该特征。因此本文假设攻击者知道恶意软件机器学习算法使用的特征，但是对机器学习模型一无所知。</p><h2 id="2-2-体系结构">2.2 体系结构</h2><p>Malware 系统架构如图 1 所示。假设恶意软件制作者仅知道黑盒模型使用的特征，并可从检测器中获取软件检测结果。整个模型包含生成器、黑盒模型检测器以及替代检测器，生成器与替代检测器都是前馈神经网络。<br><img src="/images/20201024-1/1.webp" alt="图 1: Malware 系统架构"></p><ul><li>生成器</li></ul><h1>3 实验</h1>]]></content>
+    
+    
+    <summary type="html">中文译名“基于GAN生成针对黑盒攻击的恶意软件对抗样本”。近年来，机器学习算法被用于检测未知恶意软件。相对的攻击者也想尽办法攻击这种新的防御系统。恶意软件制作者通常无法访问机器学习模型的详细结构与参数，因此他们只能执行黑盒攻击。本文提出了一种基于生成对抗网络（GAN）的算法——MalGAN，该算法能使恶意软件绕过黑盒机器学习检测。其使用替代检测器配合黑盒模型训练GAN，通过最大程度减少替代检测器对对抗样本的恶意预测概率，生成可绕过黑盒模型的对抗样本。本课题由北京大学机器感知与智能教育部重点实验室谭营团队研究完成。</summary>
+    
+    
+    
+    <category term="科研总结" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="论文研读报告" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
+    
+    
+    <category term="对抗攻击" scheme="https://liuguangrui.top/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/"/>
+    
+    <category term="生成对抗网络" scheme="https://liuguangrui.top/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Generating Adversarial Examples with Adversarial Networks 研读报告</title>
     <link href="https://liuguangrui.top/archives/ae4e8225.html"/>
     <id>https://liuguangrui.top/archives/ae4e8225.html</id>
     <published>2020-10-21T02:01:32.000Z</published>
-    <updated>2020-10-23T14:42:16.170Z</updated>
+    <updated>2020-10-24T01:50:44.869Z</updated>
     
     <content type="html"><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东公司与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p><h1>1 课题创新点</h1><ul><li>生成不仅视觉上逼真，而且还能误导目标模型的对抗样本。</li><li>使用前馈神经网络生成对抗样本，比基于优化的方法有更高的攻击成功率。</li><li>通过查询信息动态提炼模型，可产生对黑盒DNN的对抗样本。</li></ul><h1>2 方案设计</h1><h2 id="2-1-问题定义">2.1 问题定义</h2><p>$ X $: 特征空间$ X \subseteq R^n $<br><br>$ n $: 特征数量<br><br>$ (x_i,y_i) $: 训练集中第 $ i $ 个样本<br><br>$ x_i $: 特征向量 $ x_i \in X $, 服从未知分布 $ x_i \sim P_{data} $ <br><br>$ y_i $: 样本真实类别标签 $ y_i \in Y $, 其中$ \left | Y \right | 表示可能的输出分类数量 $ <br></p><span class="label default">学习系统</span>旨在从样本空间 $ X $ 域到分类输出 $ Y $ 集合中学习分类器 $ f: X \rightarrow Y $ <br><br><span class="label default">对抗攻击</span>旨在对于给定样本 $ x $, 生成对抗样本 $ x_A $，其分类 $ f(x_A) \neq y $ （无目标攻击），其中 $ y $ 为样本x的真实类别标签；或者 $ f(x_A)=t $ （有目标攻击），其中 $ t $ 为目标类别。<br><p>就 $ L_2 $ 或其他距离度量而言，$ x_A $ 还应接近原始样本 $ x $</p><h2 id="2-2-结构框架">2.2 结构框架</h2><p><img src="/images/20201023-1/1.webp" alt="图1：AdvGAN结构框架"><br>AdvGAN结构框架如图1所示，其主要由三部分组成：生成器 $ G $、描述器 $ D $ 和目标神经网络 $ f $。首先生成器 $ G $ 根据输入的原始样本 $ x $ 计算出对抗扰动 $ G(x) $。然后分别将原始样本 $ x $ 和对抗样本 $ x+G(x) $ 输入判别器$ D $，训练判别器 $ D $ 使其可区分原始数据和生成的数据（$ D $ 的目的是促进生成的对抗样本无法与原始样本类别区分开来）。<br>为了可以欺骗目标分类器 $ f $，将 $ x+G(x) $ 输入 $ f $ 中，在白盒环境下输出分类器损失 $ L_{adv} $，表示输出类别与目标类别 $ t $ 的距离（有目标攻击）；或表示输出类别与原始类别 $ y $ 的相反数（无目标攻击）。<br><br>则对抗损失可以交叉熵表示为：</p><p>\begin{equation}<br>L_{GAN} = E_x log D(x) + E_x log (1-D(x+G(x)))<br>\label{G_Loss}<br>\end{equation}</p><p>欺骗目标神经网络损失可表示为：</p><p>\begin{equation}<br>L_{adv}^{f} = E_x l_f (x+G(x),t)<br>\label{f_Loss}<br>\end{equation}</p><p>其中f表示目标神经网络使用的损失函数（比如交叉熵损失）<br>另增加一正则项损失，为约束对抗扰动，避免扰动过大：</p><p>\begin{equation}<br>L_{hinge} = E_x max(0,||G(x)||_2 - c)<br>\label{hinge_Loss}<br>\end{equation}</p><p>其中 $ c $ 为用户设定的约束值，其也可以稳定GAN的训练过程。<br><br>最终整体目标损失可表示为：</p><p>\begin{equation}<br>L=L_{adv}^{f} + \alpha L_{GAN} + \beta L_{hinge}<br>\label{Full_Loss}<br>\end{equation}</p><p>其中 $ \alpha $ 与 $ \beta $ 控制每一项的重要程度。$ L_{GAN} $ 鼓励对抗样本从视觉上与原始数据相似，而 $ L_{adv}^{f} $ 旨在生成高攻击成功率的对抗样本。最后通过最大最小值算法计算 $ arg \ min_G \ max_D \ L $ 得到 $ G $ 与 $ D $。<br><br>一旦在目标模型中将生成器 $ G $ 训练好，之后就可以对任意输入添加扰动以生成对抗样本，且无需再访问目标神经网络。</p><h2 id="2-3-黑盒攻击">2.3 黑盒攻击</h2><span class="label default">静态蒸馏法</span>优化黑盒模型 $ b(x) $ 与蒸馏模型 $ f(x) $ 的交叉熵，得到一个功能与黑盒模型功能相似的蒸馏模型。将蒸馏模型作为目标神经网络训练对抗样本。<p>\begin{equation}<br>arg \ \underset{f}{min} \ E_x \ H(f(x),b(x))<br>\label{Static_Distillation}<br>\end{equation}</p><span class="label default">动态蒸馏法</span>由于静态蒸馏方案无法确定蒸馏模型与原模型的差距，故提出动态蒸馏方案，联合训练蒸馏模型 $ f $ 与生成器 $ G $。具体分为两步：<ol><li>固定 $ f_{i-1} $ 更新 $ G_i $：<br></li></ol><p>\begin{equation}<br>G_i,D_i = arg \ min_G \ max_D \ L_{adv}^{f_i-1} + \alpha L_{GAN} + \beta L_{hinge}<br>\label{Dynamic_Distillation_1}<br>\end{equation}</p><ol start="2"><li>固定 $ G_i $ 更新 $ f_i $:<br></li></ol><p>\begin{equation}<br>f_i = arg \ min_f \ E_x \ H(f(x),b(x)) + E_x \ H(f(x+G(x)),b(x+G(x)))<br>\label{Dynamic_Distillation_2}<br>\end{equation}</p><h1>3 实验</h1><h2 id="3-1-实验配置">3.1 实验配置</h2><ul><li>实验数据；MINTSI, CIFAR-10, NIPS 2017 DEV数据集</li><li>测试环境：半白盒测试，黑盒测试</li><li>对比攻击算法：梯度法(FGSM), 优化法(Opt.), 迁移攻击(Trans.)</li><li>对比防御算法：对抗训练(Adv.), 整体对抗训练(Ens.) ,迭代对抗训练(Iter.Adv)</li></ul><h2 id="3-2-攻击测试">3.2 攻击测试</h2><ol><li>AdvGAN在运行时间、有目标攻击和黑盒攻击等方面存在优势:<br><img src="/images/20201023-1/2.webp" alt="表1：AdvGAN对比其他对抗攻击算法优势"></li><li>AdvGAN在不同环境下（原始数据集p、半白盒攻击w、黑盒攻击-动态整理b-D、黑盒攻击-静态蒸馏b-S）的攻击成功率:<br><img src="/images/20201023-1/3.webp" alt="表2：AdvGAN对比其他对抗攻击算法优势"></li><li>AdvGAN在MINIS和CIFAR-10数据集上攻击效果图：<br><img src="/images/20201023-1/4.webp" alt="图2：AdvGAN在MINIS数据集上攻击效果图"><br><img src="/images/20201023-1/5.webp" alt="图3：AdvGAN在CIFAR-10数据集上攻击效果图"></li><li>AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率：<br><img src="/images/20201023-1/6.webp" alt="表3：AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率"></li><li>AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率：<br><img src="/images/20201023-1/7.webp" alt="表4：AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率"></li><li>白盒环境中不同攻击算法的MadryLab公共模型准确性对比：<br><img src="/images/20201023-1/8.webp" alt="表5：白盒环境中不同攻击算法的MadryLab公共模型准确性对比"></li><li>AdvGAN在高分辨率对抗样本生成效果（NIPS 2017 DEV数据集）：<br><img src="/images/20201023-1/9.webp" alt="图4：AdvGAN在高分辨率对抗样本生成效果"></li></ol><hr><h1>参考</h1><ul><li><a href="https://arxiv.org/abs/1801.02610v5">Generating Adversarial Examples with Adversarial Networks</a></li></ul>]]></content>
     
@@ -35,7 +60,9 @@
     <category term="论文研读报告" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
     
     
-    <category term="-对抗攻击 -生成对抗网络" scheme="https://liuguangrui.top/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB-%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
+    <category term="对抗攻击" scheme="https://liuguangrui.top/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/"/>
+    
+    <category term="生成对抗网络" scheme="https://liuguangrui.top/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
