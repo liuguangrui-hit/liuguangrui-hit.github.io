@@ -1,295 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo 搭建个人博客教程</title>
-    <url>/archives/1085c2b.html</url>
-    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h1>1 准备工作</h1>
-<h2 id="1-1-注册-GitHub-账号">1.1 注册 GitHub 账号</h2>
-<p>访问 <a href="https://github.com">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br>
-<img src="/images/20201006-1/1.webp" alt="图 1"></p>
-<h2 id="1-2-安装-Node-js-和-nmp">1.2 安装 Node.js 和 nmp</h2>
-<p>访问 <a href="https://nodejs.org">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br>
-<img src="/images/20201006-1/2.webp" alt="图 2"></p>
-<h2 id="1-3-安装-Git-for-Windows">1.3 安装 Git for Windows</h2>
-<p>访问 <a href="https://gitforwindows.org">Git</a> 官网安装 Git for Windows。<br>
-<img src="/images/20201006-1/3.webp" alt="图 3"></p>
-<h1>2 搭建 GitHub 博客</h1>
-<h2 id="2-1-创建-GitHub-仓库">2.1 创建 GitHub 仓库</h2>
-<p>新建一个 Repositories, 存放博客项目文件。<br>
-<img src="/images/20201006-1/4.webp" alt="图 4"><br>
-新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br>
-<img src="/images/20201006-1/5.webp" alt="图 5"><br>
-跳转到该库界面，选择 Settings。<br>
-<img src="/images/20201006-1/6.webp" alt="图 6"><br>
-进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br>
-<img src="/images/20201006-1/7.webp" alt="图 7"><br>
-选择一个博客主题，然后点击 Select theme。<br>
-<img src="/images/20201006-1/8.webp" alt="图片 8"><br>
-到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br>
-<img src="/images/20201006-1/9.webp" alt="图 9"></p>
-<h2 id="2-2-配置-SSH-Key">2.2 配置 SSH Key</h2>
-<p>在 Windows 菜单里搜索启动 Git Bash，设置 <a href="http://user.name">user.name</a> 和 user.email 的配置信息：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"你的 GitHub 用户名"</span></span><br><span class="line">git config --global user.email <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>生产SSH秘钥文件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>然后直接三个回车即可，默认不需要设置密码。<br>
-找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br>
-<img src="/images/20201006-1/10.webp" alt="图 10"><br>
-打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>
-新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br>
-<img src="/images/20201006-1/11.webp" alt="图 11"><br>
-启动 Git Bash 输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></tbody></table></figure>
-<p>如果提示：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></tbody></table></figure>
-<p>输入 <span class="label default">yes</span>，然后会看到：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></tbody></table></figure>
-<p>看到这个信息说明 SSH 已配置成功！</p>
-<h1>3 使用Hexo写博客</h1>
-<h2 id="3-1-安装Hexo">3.1 安装Hexo</h2>
-<p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="3-2-初始化Hexo">3.2 初始化Hexo</h2>
-<p>仍在该目录下右键 Git Bash Here，输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></tbody></table></figure>
-<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></tbody></table></figure>
-<p>输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></tbody></table></figure>
-<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>
-打开浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br>
-<img src="/images/20201006-1/12.webp" alt="图 12"></p>
-<h2 id="3-3-配置-Hexo">3.3 配置 Hexo</h2>
-<p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>
-修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
-<p>并安装插件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></tbody></table></figure>
-<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>
-此时访问博客地址就和本地预览服务一样了。<br>
-<img src="/images/20201006-1/13.webp" alt="图 13"></p>
-<h2 id="3-4-写第一篇博文">3.4 写第一篇博文</h2>
-<p>定位到 Hexo 根目录，执行命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo new <span class="string">'my-first-blog'</span></span><br></pre></td></tr></tbody></table></figure>
-<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></tbody></table></figure>
-<p>#4 美化主题</p>
-<h2 id="4-1-下载-Next-主题">4.1 下载 Next 主题</h2>
-<p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>
-使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="4-2-启用主题">4.2 启用主题</h2>
-<p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></tbody></table></figure>
-<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></tbody></table></figure>
-<p>使用浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> ，检查站点是否正确运行。<br>
-当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br>
-<img src="/images/20201006-1/14.webp" alt="图 14"><br>
-执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
-<ul>
-<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a></li>
-</ul>
-<blockquote class="blockquote-center">
+    <title>欢迎来到刘广睿的思维实验室</title>
+    <url>/archives/27b4c228.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>开始耕耘你的网上花园吧！</p>
+            <p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>！</p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
+<p>这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能感兴趣，欢迎在<a href="https://liuguangrui.top/guestbook/">留言区</a>与我讨论相关问题，或者瞧瞧我的几个<a href="https://github.com/liuguangrui-hit">GitHub开源项目</a>。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个<a href="https://liuguangrui.top/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/Hexo/">Hexo分类</a>下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。希望您能在这里找到对您有用的信息，祝您玩的开心！</p>
+<a id="more"></a>
+<center>
+<div class="note warning">
+            <p>嘿！既然进来了就一起玩玩吧，你能抓住这只聪明的小猫吗？</p>
+          </div>
+</center>
+
+    <script src="/js/src/phaser.min.js"></script>
+    <script src="/js/src/catch-the-cat.js"></script>
+    <div id="catch-the-cat"></div>
+	
+    <script>
+      window.game = new CatchTheCatGame({
+        w: 16,
+        h: 11,
+        r: 20,
+        backgroundColor: 0xffffff,
+        parent: 'catch-the-cat',
+        statusBarAlign: 'center',
+        credit: 'github.com/liuguangrui-hit'
+      });
+    </script>
+]]></content>
+  </entry>
+  <entry>
+    <title>《长夜难明》读书笔记</title>
+    <url>/archives/a19fb9aa.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>长夜难明，但总有人持灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h1>1 人物介绍</h1>
+<h1>2 故事梗概</h1>
+<h1>3 个人感悟</h1>
 <hr>
 <h1>参考</h1>
-<ul>
-<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
-<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
-</ul>
 ]]></content>
       <categories>
-        <category>工具教程</category>
-        <category>Hexo</category>
+        <category>读书笔记</category>
+        <category>中国文学</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>Next</tag>
+        <tag>中国文学</tag>
+        <tag>紫金陈</tag>
       </tags>
   </entry>
   <entry>
-    <title>人工智能内生安全——对抗攻击</title>
-    <url>/archives/929f209b.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br>
-<img src="/images/20201008-2/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>
-目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
-<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
-<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
-<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
-<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br>
-<img src="/images/20201008-2/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>
-在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br>
-<img src="/images/20201008-2/3.webp" alt="边界样本更容易被对抗攻击"><br>
-用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
-<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>
-其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br>
-<img src="/images/20201008-2/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
-<div class="note danger">
-            <p>基于梯度的对抗攻击</p>
-          </div>
-<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
-<div class="note danger">
-            <p>基于优化的对抗攻击</p>
-          </div>
-<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
-<div class="note danger">
-            <p>置信度降低攻击</p>
-          </div>
-<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
-<div class="note danger">
-            <p>无目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
-<div class="note danger">
-            <p>有目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
-<h1>3 防御方案</h1>
-<p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
-<div class="note success">
-            <p>对抗训练技术</p>
-          </div>
-<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
-<div class="note success">
-            <p>梯度隐藏</p>
-          </div>
-<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
-<div class="note success">
-            <p>模型随机化</p>
-          </div>
-<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
-<div class="note success">
-            <p>样本去噪</p>
-          </div>
-<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
+    <title>Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN 研读报告</title>
+    <url>/archives/a88540ce.html</url>
+    <content><![CDATA[<p>近年来，机器学习算法被用于检测未知恶意软件。相对的攻击者也想尽办法攻击这种新的防御系统。恶意软件制作者通常无法访问机器学习模型的详细结构与参数，因此他们只能执行黑盒攻击。本文提出了一种基于生成对抗网络（GAN）的算法——MalGAN，该算法能使恶意软件绕过黑盒机器学习检测。其使用替代检测器配合黑盒模型训练GAN，通过最大程度减少替代检测器对对抗样本的恶意预测概率，生成可绕过黑盒模型的对抗样本。本课题由北京大学机器感知与智能教育部重点实验室<a href="https://eecs.pku.edu.cn/info/1505/6634.htm">谭营</a>团队研究完成。</p>
+<h1>1 课题创新点</h1>
+<h1>2 方案设计</h1>
+<h1>2.1 系统环境</h1>
+<p>本文所指的黑盒环境：由于基于机器学习的恶意软件检测算法通常托管在云端，因此对于攻击者（恶意软件制作者）而言机器学习算法是黑盒算法，即不知道检测系统使用的分类器种类及其具体参数。然而攻击者可以通过精心构造的测试样例检测出机器学习算法使用的特征。例如，如果恶意软件使用目录表中某DLL或调用某API的特征，则攻击者可以修改恶意软件DLL内容或调用API内容，并将修改后的样本输入检测器，如果检测器判别类别发生改变，那么可以判定机器学习算法使用了该特征。因此本文假设攻击者知道恶意软件机器学习算法使用的特征，但是对机器学习模型一无所知。</p>
+<h2 id="2-2-体系结构">2.2 体系结构</h2>
+<p>Malware 系统架构如图 1 所示。假设恶意软件制作者仅知道黑盒模型使用的特征，并可从检测器中获取软件检测结果。整个模型包含生成器、黑盒模型检测器以及替代检测器，生成器与替代检测器都是前馈神经网络，使用特征均为API二进制特征信息，即是否调用该API，调用值为1，反之为0。</p>
+<p><img src="/images/20201024-1/1.webp" alt="图 1: Malware 系统架构"></p>
+<ul>
+<li>生成器：</li>
+</ul>
+<ol>
+<li>生成器输入为恶意软件特征向量m和噪音向量z的串联。m是M维二元向量，对应每个每个API调用情况。z为Z维向量，其中Z为超参数。z的每个元素取值都是从[0,1)之间的均匀分布中采样的随机数。其作用是允许单个恶意软件生成多种对抗样本。</li>
+<li>输入通过权重为 $ \theta _ g $ 的多层前馈神经网络。</li>
+<li>输出层有M个神经元，最后一层使用sigmod激活函数，将输出限制在 (0,1) 范围内。并根据原始是否大于0.5来进行二值化转换。</li>
+<li>为了不影响恶意软件功能，在生成对抗样本时只进行添加不想关功能操作，不进行任何功能删除操作。</li>
+</ol>
+<ul>
+<li>生成器损失函数：</li>
+</ul>
+<p>\begin{equation}<br>
+L_D = - E_{x \in BB_{Benign}}log(1-D_{\theta_d}(x)) - E_{x \in BB_Malware}log D_{\theta_d}(x)<br>
+\label{D_Loss}<br>
+\end{equation}</p>
+<ul>
+<li>辨别器：</li>
+</ul>
+<ol>
+<li>由于攻击者对黑盒模型内部信息一无所知，所以通过替代检测器拟合黑盒检测器，并通过其提供的梯度信息生成训练器。</li>
+<li>替代检测器（辨别器）同样是权重为 $ \theta _ g $ 的多层前馈神经网络。</li>
+<li>输入为对抗样本和良性样本的混合。注意其样本标签不使用原始样本标签而是黑盒检测器的标签。</li>
+</ol>
+<ul>
+<li>辨别器损失函数：</li>
+</ul>
+<p>\begin{equation}<br>
+L_G = E_{m \in S_Malware,z \sim p_{uniform[0,1)}}log D_{\theta _d}(G _{\theta_g} (m,z))<br>
+\label{G_Loss}<br>
+\end{equation}</p>
+<h2 id="2-3-MalGAN-训练算法">2.3 MalGAN 训练算法</h2>
+<h1>3 实验</h1>
+<h2 id="3-1-实验配置">3.1 实验配置</h2>
+<ul>
+<li>实验数据：自恶意程序贡献网站<a href="https://malwr.com">malwr.com</a>下载18万个程序，其中恶意程序占比约30%。分割数据80%作为训练集，其余20%作为测试集。</li>
+<li>特征选取：基于160个系统级API调用情况，为每一个程序构造一个160维的二进制特征向量。<br>
+目标分类器：随机森立（RF），逻辑回归（LR），决策树（DT），支持向量机（SVM），多层感知器（MLP）以及投票机制的集成学习。</li>
+</ul>
+<h2 id="3-2-实验结果">3.2 实验结果</h2>
+<ul>
+<li>目标黑盒分类器与MalGAN使用相同训练集：对抗样本的TPR降到1%以下。</li>
+</ul>
+<p><img src="/images/20201024-1/2.webp" alt="图 2: 目标黑盒分类器与MalGAN使用相同训练集对抗样本真阳性率"></p>
+<ul>
+<li>目标黑盒分类器与MalGAN使用不同训练集：对抗样本的TPR降到3%以下。</li>
+</ul>
+<p><img src="/images/20201024-1/3.webp" alt="图 3: 目标黑盒分类器与MalGAN使用不同训练集对抗样本真阳性率"></p>
+<ul>
+<li>生成对抗网络收敛速度</li>
+</ul>
+<p><img src="/images/20201024-1/4.webp" alt="图 4: 训练集和验证集的真阳性率随时间变化情况"></p>
+<h1>可改进</h1>
+<p>本工作假设攻击者可以探知目标黑盒分类器使用的样本特征，但实际上探知API特征是一个很复杂、耗时的工作，怎样将这项工作自动化的快速完成有待进一步的研究。</p>
 <hr>
 <h1>参考</h1>
 <ul>
-<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&amp;wfr=spider&amp;for=pc">神经网络中的对抗攻击与对抗样本</a></li>
-<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
+<li><a href="https://arxiv.org/abs/1702.05983">Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN</a></li>
 </ul>
 ]]></content>
       <categories>
         <category>科研总结</category>
-        <category>人工智能</category>
+        <category>论文研读报告</category>
       </categories>
       <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
         <tag>对抗攻击</tag>
+        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
-    <title>人工智能内生安全——数据投毒</title>
-    <url>/archives/e598100d.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br>
-<img src="/images/20201008-3/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
-<div class="note danger">
-            <p>反馈化武器</p>
-          </div>
-<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br>
-<img src="/images/20201008-3/2.webp" alt="反馈化武器"></p>
-<div class="note danger">
-            <p>模型偏斜攻击</p>
-          </div>
-<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br>
-<img src="/images/20201008-3/3.webp" alt="模型偏斜"></p>
-<div class="note danger">
-            <p>后门攻击</p>
-          </div>
-<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br>
-<img src="/images/20201008-3/4.webp" alt="后门攻击"></p>
-<h1>3 防御方案</h1>
-<p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
-<div class="note success">
-            <p>均匀采样</p>
-          </div>
-<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
-<div class="note success">
-            <p>构建标准数据集</p>
-          </div>
-<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
-<div class="note success">
-            <p>集成学习技术</p>
-          </div>
-<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
+    <title>Generating Adversarial Examples with Adversarial Networks 研读报告</title>
+    <url>/archives/ae4e8225.html</url>
+    <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东公司与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
+<h1>1 课题创新点</h1>
+<ul>
+<li>生成不仅视觉上逼真，而且还能误导目标模型的对抗样本。</li>
+<li>使用前馈神经网络生成对抗样本，比基于优化的方法有更高的攻击成功率。</li>
+<li>通过查询信息动态提炼模型，可产生对黑盒DNN的对抗样本。</li>
+</ul>
+<h1>2 方案设计</h1>
+<h2 id="2-1-问题定义">2.1 问题定义</h2>
+<p>$ X $: 特征空间$ X \subseteq R^n $<br><br>
+$ n $: 特征数量<br><br>
+$ (x_i,y_i) $: 训练集中第 $ i $ 个样本<br><br>
+$ x_i $: 特征向量 $ x_i \in X $, 服从未知分布 $ x_i \sim P_{data} $ <br><br>
+$ y_i $: 样本真实类别标签 $ y_i \in Y $, 其中$ \left | Y \right | 表示可能的输出分类数量 $ <br></p>
+<span class="label default">学习系统</span>旨在从样本空间 $ X $ 域到分类输出 $ Y $ 集合中学习分类器 $ f: X \rightarrow Y $ <br><br>
+<span class="label default">对抗攻击</span>旨在对于给定样本 $ x $, 生成对抗样本 $ x_A $，其分类 $ f(x_A) \neq y $ （无目标攻击），其中 $ y $ 为样本x的真实类别标签；或者 $ f(x_A)=t $ （有目标攻击），其中 $ t $ 为目标类别。<br>
+<p>就 $ L_2 $ 或其他距离度量而言，$ x_A $ 还应接近原始样本 $ x $</p>
+<h2 id="2-2-结构框架">2.2 结构框架</h2>
+<p><img src="/images/20201023-1/1.webp" alt="图1：AdvGAN结构框架"><br>
+AdvGAN结构框架如图1所示，其主要由三部分组成：生成器 $ G $、描述器 $ D $ 和目标神经网络 $ f $。首先生成器 $ G $ 根据输入的原始样本 $ x $ 计算出对抗扰动 $ G(x) $。然后分别将原始样本 $ x $ 和对抗样本 $ x+G(x) $ 输入判别器$ D $，训练判别器 $ D $ 使其可区分原始数据和生成的数据（$ D $ 的目的是促进生成的对抗样本无法与原始样本类别区分开来）。<br>
+为了可以欺骗目标分类器 $ f $，将 $ x+G(x) $ 输入 $ f $ 中，在白盒环境下输出分类器损失 $ L_{adv} $，表示输出类别与目标类别 $ t $ 的距离（有目标攻击）；或表示输出类别与原始类别 $ y $ 的相反数（无目标攻击）。<br><br>
+则对抗损失可以交叉熵表示为：</p>
+<p>\begin{equation}<br>
+L_{GAN} = E_x log D(x) + E_x log (1-D(x+G(x)))<br>
+\label{G_Loss}<br>
+\end{equation}</p>
+<p>欺骗目标神经网络损失可表示为：</p>
+<p>\begin{equation}<br>
+L_{adv}^{f} = E_x l_f (x+G(x),t)<br>
+\label{f_Loss}<br>
+\end{equation}</p>
+<p>其中f表示目标神经网络使用的损失函数（比如交叉熵损失）<br>
+另增加一正则项损失，为约束对抗扰动，避免扰动过大：</p>
+<p>\begin{equation}<br>
+L_{hinge} = E_x max(0,||G(x)||_2 - c)<br>
+\label{hinge_Loss}<br>
+\end{equation}</p>
+<p>其中 $ c $ 为用户设定的约束值，其也可以稳定GAN的训练过程。<br><br>
+最终整体目标损失可表示为：</p>
+<p>\begin{equation}<br>
+L=L_{adv}^{f} + \alpha L_{GAN} + \beta L_{hinge}<br>
+\label{Full_Loss}<br>
+\end{equation}</p>
+<p>其中 $ \alpha $ 与 $ \beta $ 控制每一项的重要程度。$ L_{GAN} $ 鼓励对抗样本从视觉上与原始数据相似，而 $ L_{adv}^{f} $ 旨在生成高攻击成功率的对抗样本。最后通过最大最小值算法计算 $ arg \ min_G \ max_D \ L $ 得到 $ G $ 与 $ D $。<br><br>
+一旦在目标模型中将生成器 $ G $ 训练好，之后就可以对任意输入添加扰动以生成对抗样本，且无需再访问目标神经网络。</p>
+<h2 id="2-3-黑盒攻击">2.3 黑盒攻击</h2>
+<span class="label default">静态蒸馏法</span>优化黑盒模型 $ b(x) $ 与蒸馏模型 $ f(x) $ 的交叉熵，得到一个功能与黑盒模型功能相似的蒸馏模型。将蒸馏模型作为目标神经网络训练对抗样本。
+<p>\begin{equation}<br>
+arg \ \underset{f}{min} \ E_x \ H(f(x),b(x))<br>
+\label{Static_Distillation}<br>
+\end{equation}</p>
+<span class="label default">动态蒸馏法</span>由于静态蒸馏方案无法确定蒸馏模型与原模型的差距，故提出动态蒸馏方案，联合训练蒸馏模型 $ f $ 与生成器 $ G $。具体分为两步：
+<ol>
+<li>固定 $ f_{i-1} $ 更新 $ G_i $：<br></li>
+</ol>
+<p>\begin{equation}<br>
+G_i,D_i = arg \ min_G \ max_D \ L_{adv}^{f_i-1} + \alpha L_{GAN} + \beta L_{hinge}<br>
+\label{Dynamic_Distillation_1}<br>
+\end{equation}</p>
+<ol start="2">
+<li>固定 $ G_i $ 更新 $ f_i $:<br></li>
+</ol>
+<p>\begin{equation}<br>
+f_i = arg \ min_f \ E_x \ H(f(x),b(x)) + E_x \ H(f(x+G(x)),b(x+G(x)))<br>
+\label{Dynamic_Distillation_2}<br>
+\end{equation}</p>
+<h1>3 实验</h1>
+<h2 id="3-1-实验配置">3.1 实验配置</h2>
+<ul>
+<li>实验数据；MINTSI, CIFAR-10, NIPS 2017 DEV数据集</li>
+<li>测试环境：半白盒测试，黑盒测试</li>
+<li>对比攻击算法：梯度法(FGSM), 优化法(Opt.), 迁移攻击(Trans.)</li>
+<li>对比防御算法：对抗训练(Adv.), 整体对抗训练(Ens.) ,迭代对抗训练(Iter.Adv)</li>
+</ul>
+<h2 id="3-2-攻击测试">3.2 攻击测试</h2>
+<ol>
+<li>AdvGAN在运行时间、有目标攻击和黑盒攻击等方面存在优势:<br>
+<img src="/images/20201023-1/2.webp" alt="表1：AdvGAN对比其他对抗攻击算法优势"></li>
+<li>AdvGAN在不同环境下（原始数据集p、半白盒攻击w、黑盒攻击-动态整理b-D、黑盒攻击-静态蒸馏b-S）的攻击成功率:<br>
+<img src="/images/20201023-1/3.webp" alt="表2：AdvGAN对比其他对抗攻击算法优势"></li>
+<li>AdvGAN在MINIS和CIFAR-10数据集上攻击效果图：<br>
+<img src="/images/20201023-1/4.webp" alt="图2：AdvGAN在MINIS数据集上攻击效果图"><br>
+<img src="/images/20201023-1/5.webp" alt="图3：AdvGAN在CIFAR-10数据集上攻击效果图"></li>
+<li>AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率：<br>
+<img src="/images/20201023-1/6.webp" alt="表3：AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率"></li>
+<li>AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率：<br>
+<img src="/images/20201023-1/7.webp" alt="表4：AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率"></li>
+<li>白盒环境中不同攻击算法的MadryLab公共模型准确性对比：<br>
+<img src="/images/20201023-1/8.webp" alt="表5：白盒环境中不同攻击算法的MadryLab公共模型准确性对比"></li>
+<li>AdvGAN在高分辨率对抗样本生成效果（NIPS 2017 DEV数据集）：<br>
+<img src="/images/20201023-1/9.webp" alt="图4：AdvGAN在高分辨率对抗样本生成效果"></li>
+</ol>
 <hr>
 <h1>参考</h1>
 <ul>
-<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
-<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
+<li><a href="https://arxiv.org/abs/1801.02610v5">Generating Adversarial Examples with Adversarial Networks</a></li>
 </ul>
 ]]></content>
       <categories>
         <category>科研总结</category>
-        <category>人工智能</category>
+        <category>论文研读报告</category>
       </categories>
       <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>数据投毒</tag>
+        <tag>对抗攻击</tag>
+        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
-    <title>人工智能内生安全——模型窃取</title>
-    <url>/archives/7bfc85ae.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br>
-<img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>
-机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br>
-<img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
-<div class="note danger">
-            <p>模型萃取攻击</p>
-          </div>
-<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
-<div class="note danger">
-            <p>成员推断攻击</p>
-          </div>
-<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
-<div class="note danger">
-            <p>模型逆向攻击</p>
-          </div>
-<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
-<h1>3 防御方案</h1>
-<p>目前比较有效的防御方案是模型水印和联邦学习。</p>
-<div class="note success">
-            <p>模型水印技术</p>
-          </div>
-<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
-<div class="note success">
-            <p>联邦学习技术</p>
-          </div>
-<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
+    <title>《罪与罚》读书笔记</title>
+    <url>/archives/af8ce812.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<p>如果你是第一次接触陀思妥耶夫斯基的作品，我强烈推荐最先读这本《罪与罚》。作为一部俄罗斯的长篇小说，《罪与罚》绝对不会让你感到一丝的无聊或因人名引起的阅读障碍。这本书每一章环环相扣，从最开始就将读者引入主角疯狂的谋杀计划，然后一步一步实现计划，又紧张刺激的逃离警察追捕，最后主角因自己的“超人”哲学理论崩塌而夜不能寐，陷入幻想与自责的深渊。这本书不仅讨论了深刻而丰富的社会学理论，同时通过高超的情节安排与严密的逻辑框架讲述了一个引人入胜故事。<br>
+<img src="/images/20201020-1/1.webp" alt="图 1"></p>
+<h1>1 人物介绍</h1>
+<ul>
+<li>
+<span class="label default">拉斯柯尔尼科夫</span><br>
+</li>
+</ul>
+<p>拉斯柯尔尼科夫（罗佳、罗季卡）是一名贫穷的法律系大学生，经常典当家物，换得钱财以勉强度日。然而他却有远大的抱负，并且富有思想。在受到当时社会风气的影响下，又了解了拿破仑的生平之后，他产生了所谓“超人”的思想。罗佳认为贪婪的阿廖娜太太有罪，是社会的虱子，并应亲自执行“超人”的权利，对阿廖娜进行制裁。但其实他同时也是因为已经交不起房租，急需钱财，才去杀人越货。在高尚与卑鄙的双重思维下，罗佳谋划并实施了对阿廖娜的谋杀。罗佳是一个矛盾个体，他既是慷慨、善良的人道主义者，在一次火灾中舍身求出一位素不相识的孩子。同时冷酷无情、麻木不仁，在谋杀阿廖娜和后来应付司法调查时残忍、阴险到了失去人性的地步。</p>
+<ul>
+<li>
+<span class="label default">阿廖娜·伊凡诺夫娜</span><br>
+</li>
+</ul>
+<p>阿廖娜·伊凡诺夫娜是一位掌管当铺又经常放高利贷的老太婆。她为人吝啬又贪婪，毫无同情心，熟练于利用当地学生周期性资金短缺、急用钱的特点，只付极少的代价来收购学生们典当的物品。</p>
+<ul>
+<li>
+<span class="label default">丽莎维塔·伊凡诺夫娜</span><br>
+</li>
+</ul>
+<p>丽莎维塔·伊凡诺夫娜是阿廖娜·伊凡诺夫娜的妹妹，她为人真诚善良，但却受尽姐姐阿廖娜的欺凌。她无意间闯进罗佳的杀人现场，由于过度惊吓，她即没有反抗也没有喊叫，但依然被更为惊慌的罗佳用斧头劈死。丽莎维塔的死动摇了罗佳的信念，开始怀疑自我，陷入自责的深渊。</p>
+<ul>
+<li>
+<span class="label default">索尼娅</span><br>
+</li>
+</ul>
+<p>女孩索尼娅是一名妓女，曾经与与丽莎维塔认识。由于职业问题，她在社会中受人歧视，可是罗佳却对她如常人一样尊敬，并多次给予她帮助。因此索尼娅深深的爱上了罗佳。即便在罗佳向她坦白是自己杀死了伊凡诺夫娜姐妹后，受到打击的她依旧深深爱着罗佳。她在明白了罗佳每天魂不守舍，夜不能寐的原因后，规劝罗佳去自首，去赎罪，去获得新生。她愿意陪着罗佳一同受罚，一同被钉上十字架。最终索尼娅成功感化了罗佳，让罗佳到警局自首。</p>
+<h1>2 故事梗概</h1>
+<p>贫穷的大学生罗佳，因无力付学费而辍学蜗居在租来的斗室之中，浑浑噩噩，过着温饱不定的日子。他希望得到一些金钱，但又受不了去做工资低廉的工作，更不愿意向家人寻求帮助，让自己的现状被家里人知道。于是，他每天都在痛苦与无尽的臆想中度过。他维持性命的唯一途径，就是到放高利贷的阿廖娜太太那里典当物品换区少的可怜的资金，然后买点面包和酒。罗佳生性高傲，在一次次被阿廖娜无理的剥削后，他逐渐产生了对阿廖娜的杀意，而在听到许多人对阿廖娜心有怨愤时，又进一步认为自己站在了大众的一方。他发表了一篇阐述“超人”理论思想的论文，即被选中的非凡人物为了新世纪的生长，有超越现行社会规范的权利。<br>
+<img src="/images/20201020-1/2.webp" alt="图 2"><br>
+罗佳的母亲来信说罗佳的妹妹杜尼娅即将嫁给一个有钱人卢任。而他们也即将启程前来彼得堡，并表示以后罗佳可以和卢任一起工作，从此一家人团聚，过上幸福的生活。信中母亲还说，她用养老金担保到一笔现金，会提前送来给罗佳使用。然而罗佳却从信中读出，卢任不是一个可以值得信任的人，他知道平时善良温柔的妹妹这次是为了让罗佳过上好日子，而将自己出卖给了一个她并不爱的人。这种因为贫穷而带来的悲剧，让罗佳进一步陷入到极度的痛苦纠结中。而这进一步强化了罗佳内心中对阿廖娜的杀意。<br>
+<img src="/images/20201020-1/3.webp" alt="图 3"><br>
+多日以来，罗佳正因为食不果腹、营养不良，导致身体极差，脾气变得阴阳不定。他的世界昏昏沉沉，有时整日睡觉不出门，有时又到街上闲逛一整天。在有了谋杀阿廖娜的想法后，他总会有意无意的到阿廖娜太太那边去，关注所有关于她的消息。有一天，罗佳终于鼓起勇气从院子里拿了一把斧子，走进老妇人家里。将老妇人与无意间闯进杀人现场的丽莎维塔一并杀害，从她的房间里取走了钱袋和一些首饰，仓皇而逃。他本以为抢夺了阿廖娜太太的钱财，就有机会重新开始，而杀害一个放高利贷的老太婆，并不会给社会带来多大的损失。反而因为她本来就是一个遭到众人忌恨的人，自己的行为会得到他人的理解。然而在杀害两人后，尤其是因为杀死了无辜的丽莎廖娜后，罗佳开始了无尽的自我怀疑，陷入迷茫与被揭露的幻想中。他把抢来的钱财放在陌生的院子里，压在石头底下隐藏，并不打算使用。将母亲寄给他的三十卢布用来帮助他人，不顾自己身无分文。他甚至向向警察打听案件进展，对警察说出自己对案件真相的“猜想”。在自首与继续隐藏之间犹豫不决。<br>
+<img src="/images/20201020-1/4.webp" alt="图 4"><br>
+罗佳的母亲和妹妹来到彼得堡，罗佳此前见到了卢任，证实了自己的想法。卢任吝啬而自大，对杜尼娅毫无爱意，罗佳立志要阻断这场婚事。罗佳与妓女索尼娅的相识，又让他逐渐找回人性。但是在对索尼娅坦白是他杀死了伊凡诺夫娜姐妹时，被罗佳妹妹的另一个追随者偷听到了秘密。同时警官几乎猜出了真正的杀人凶手，但是由于没有证据，只能不断试探罗佳，试图逼迫他自首。许多事情缠绕在一起，让罗佳的精神更加脆弱，多次处于崩溃的边缘。罗佳在经历了长时间的精神折磨后，被妓女索尼娅感动，接受索尼娅的规劝，走进警察局自首。最终因为罗佳平生做了很多善事，同时警方发现罗佳抢了钱却分文不动，又用自己的钱帮助他人，结合他发表的论文，他被法官判定为精神病患者，罗佳只是被送到西伯利亚服八年劳役。然而事实上，罗佳在进入劳改营后，思维又回归最初的冷静。他又拾起了“超人”哲学的理念，重新解释了自己的行为。他对阿廖娜的死没有丝毫悔意，唯一让罗佳自责的只是在惊慌中杀死了无辜善良的丽莎维塔。索尼娅一路同他到西伯利亚，陪他改造，两人最终相爱，开始走进真正的新生活。<br>
+<img src="/images/20201020-1/5.webp" alt="图 5"></p>
+<h1>3 个人感悟</h1>
+<p>《罪与罚》的故事情节很简单，从表面上看，就是一个杀人犯杀人后因良心谴责而自首的故事。但是书中对主角罗佳杀人前后的思想变化进行了详尽的分析：他为什么要杀人？为什么抢了钱不用，反而开始用自己的钱帮助他人？为什么要和警察透漏自己杀人的想法，想要自首又犹豫不决？以及他对“超人”理论的思索与讨论。对这样一个在外界看起来是真的像一个神经病一样的杀人犯的内心想法进行了细致入微的描写与分析。<br>
+罗佳的杀人原因，也是他提出的超人主义哲学，即人类社会有两种人，一种是凡人，一种是非凡的人。凡人会遵守世俗的法律，而非凡的人，他们能凌驾于法律之上，为了更高崇的目的而清除一些必要的障碍。他们被称为伟人，他们被称为英雄。凡人可以通过跨越某条界限变成非凡的人，这里在俄语中一语双关，俄语“罪 (Преступле́ние)”一词就是“跨越界限”的意思。而罗佳想做凯撒，想做拿破仑。凯撒、拿破仑，他们都是伟大的谋杀者,他们双手沾上了无数的鲜血，他们的内心却没有丝毫的动摇，而我们称他们为英雄。杀死阿廖娜，并不是谋杀，而是罗佳的一次实验。阿廖娜是这次实验的小白鼠。而丽莎维塔，是这次实验的附属牺牲品。<br>
+书中不止有罗佳的超人逻辑这一种哲学理论，其实有多种理论在相互碰撞，诸如：</p>
+<span class="label info">超人主义哲学（书中代表人物罗佳）</span>：社会中是有一部分人可以为非作歹、不受法律约束。人分为两种，一种是不平凡的人，一种是平凡的人。伟大的人物通常都是罪犯，为了美好的未来，可以任意践踏平凡人的利益。平凡的人维持世界，不平凡的人推进世界。<br>
+<span class="label info">功利主义哲学（书中代表人物卢任）</span>：先利己再利他，唯有利己才能利他。为个人发展就是为大家发展，所有人都秉持这种观念，最终能导致福利的普遍化。<br>
+<span class="label info">进步主义哲学（书中代表人物列别贾特尼科夫）</span>：这种观点会用抽象的理论批判传统的一切，认为传统是对个体的束缚。比如认为婚姻是政府对个人的约束，一个人想和任何人在任何时候在一起或分开都应该是被允许的。<br>
+<span class="label info">虚无主义哲学（书中代表人物斯维里加洛夫）</span>：人生没有终极意义，当下的快乐就是一切。如果人生本身是荒谬的、空虚的，那么人生中任何事都没有意义。自杀是虚无主义的必然结果。
+<p><img src="/images/20201020-1/6.webp" alt="图 6"><br>
+如果读俄文原版，你会发现书中用了大量的一语双关，并且几乎每个人的名字都有着象征意义。比如主角拉斯柯尔尼科夫（Raskol’nikov）中的“Raskol”意为“分裂”。<br>
+最后从立意上来看，《罪与罚》是一本反乌托邦小说。陀思妥耶夫斯基构造这种情节不是为了检验超人哲学想法对不对。而是通过描写一个杀人者的内心冲突来映射整个人类社会的发展规律，对超人哲学的观点进行反思。它是对理想主义者的一个警钟。理想，并非建立在乌托邦之上，它是精神世界里的一个抽象概念。任何试图实现这概念的理想主义者，都不能忽视人的价值。任何试图以牺牲少数人的生命去实现理想的行为，虽然不能否认它的价值，但都值得警惕。因为抽象的概念，永远不及具体生动的人更值得我们珍惜。</p>
+<h1>4 好句摘抄</h1>
+<blockquote>
+<p>大家都杀人，在世界上，现在杀人，过去也杀人。血像瀑布一样地流，像香槟一样地流。为了这，有人被钉上十字架，被冠以罪名离开人世。有人却在神殿里被戴上桂冠，以后又被称作人类的恩主。</p>
+</blockquote>
+<blockquote>
+<p>人这种卑鄙的东西，什么都会习惯的。</p>
+</blockquote>
+<blockquote>
+<p>有时，一个人遇上强盗，整整半小时感到死亡的恐惧，最后，刀架到脖子上，反倒什么都不怕了。</p>
+</blockquote>
+<blockquote>
+<p>世界上没有什么比直言不讳更难，也没有什么比阿谀奉承更容易的了。直言不讳，即使其中只有百分之一的音调是假的，那么立刻就会产生不和谐，随之而来的是争吵。而阿谀奉承，即使从头至尾全部音调都是虚假的，可还是让人高兴，听着不会觉得不愉快，哪怕这愉快有点儿肉麻，可还是感到愉快。而且不管阿谀奉承多么肉麻，其中却至少有一半让人觉得好像是真实的。</p>
+</blockquote>
+<blockquote>
+<p>先生，贫穷不是罪恶，这是真理。我知道，就像嗜酒不是美德一样，这更是真理。可是赤贫却是罪恶！贫穷的时候，您还能保证自己天生感情的高尚气度，但是在赤贫、穷到一无所有的情况下，却是无论什么时候、什么人都做不到的。为了赤贫，人们甚至不是用棍子赶走，而是拿扫帚把他从人类社会里清扫出去，让他受更大的屈辱。而且这是公正的，因为在赤贫的情况下，我自己首先就准备凌虐自己，于是我找到了酒。</p>
+</blockquote>
+<blockquote>
+<p>要知道，女人就是这样，爱你也是她，害你也是她，两者并行不悖。</p>
+</blockquote>
+<blockquote>
+<p>谁最会欺骗自己，谁就能过得最快活。</p>
+</blockquote>
+<blockquote>
+<p>胡扯是一切生物中只有人类才享有的唯一特权。通过胡扯，可以得到真理！</p>
+</blockquote>
+<blockquote>
+<p>犯罪是对社会组织的不正常现象的抗议。</p>
+</blockquote>
+<blockquote>
+<p>现实主义者不会害怕他们的研究结果。</p>
+</blockquote>
+<blockquote>
+<p>人们最害怕什么呢？他们最害怕迈出新的一步，最害怕自己新的想法。</p>
+</blockquote>
+<blockquote>
+<p>一百个疑点也绝不能构成一件证据。</p>
+</blockquote>
+<blockquote>
+<p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
+</blockquote>
+<blockquote>
+<p>那时魔鬼引诱我杀死了一只虱子，但是后来它又告诉我，我没有去权利走那条路，因为我也不过就是个虱子，和所有其余人一样。</p>
+</blockquote>
+<blockquote>
+<p>只要能活着，活着，活着！不管怎样活着，只要活着就好！多么正确的真理！谁要是为此把人叫做卑鄙的东西，那么他才是最卑鄙的。</p>
+</blockquote>
 <hr>
 <h1>参考</h1>
 <ul>
-<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
-<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
+<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5">罪与罚- 维基百科</a></li>
+<li><a href="https://ilibrary.ru/text/69/index.html">罪与罚- 俄文原版</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
+        <category>读书笔记</category>
+        <category>俄罗斯文学</category>
       </categories>
       <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>模型窃取</tag>
+        <tag>俄罗斯文学</tag>
+        <tag>陀思妥耶夫斯基</tag>
       </tags>
   </entry>
   <entry>
@@ -423,421 +497,6 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
         <tag>对抗攻击</tag>
         <tag>网络安全</tag>
         <tag>入侵检测系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>欢迎来到刘广睿的思维实验室</title>
-    <url>/archives/27b4c228.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>欢迎来到<a href="https://liuguangrui.top/">刘广睿的思维实验室</a>！</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<p>这里充满了奇特的思想和有趣的点子。如果你对网络安全或者人工智能感兴趣，欢迎在<a href="https://liuguangrui.top/guestbook/">留言区</a>与我讨论相关问题，或者瞧瞧我的几个<a href="https://github.com/liuguangrui-hit">GitHub开源项目</a>。同时我们也可以交流一切关于存在主义的哲学思想。另外任何关于博客搭建的问题可以在任意一个<a href="https://liuguangrui.top/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/Hexo/">Hexo分类</a>下的文章下留言，我将尽快进行回复。您可以在<a href="https://liuguangrui.top/about/">关于</a>页面了解更多我的信息。希望您能在这里找到对您有用的信息，祝您玩的开心！</p>
-<a id="more"></a>
-<center>
-<div class="note warning">
-            <p>嘿！既然进来了就一起玩玩吧，你能抓住这只聪明的小猫吗？</p>
-          </div>
-</center>
-
-    <script src="/js/src/phaser.min.js"></script>
-    <script src="/js/src/catch-the-cat.js"></script>
-    <div id="catch-the-cat"></div>
-	
-    <script>
-      window.game = new CatchTheCatGame({
-        w: 16,
-        h: 11,
-        r: 20,
-        backgroundColor: 0xffffff,
-        parent: 'catch-the-cat',
-        statusBarAlign: 'center',
-        credit: 'github.com/liuguangrui-hit'
-      });
-    </script>
-]]></content>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——背景介绍</title>
-    <url>/archives/b967121.html</url>
-    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
-<h1>1 工业界应用现状</h1>
-<p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br>
-<img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>
-在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br>
-<img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>
-谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>
-对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
-<h1>2 学术界研究现状</h1>
-<p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br>
-<img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br>
-<img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>
-但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br>
-<img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>
-由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
-<ul>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a>
-</li>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a>
-</li>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
-</li>
-</ul>
-<h1>3 推荐书目</h1>
-<h2 id="最后推荐四本与人工智能内生安全相关的书籍。人工智能安全推荐书目《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；《Adversarial-Machine-Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；《Interpretable-Machine-Learning》是一本工程性很强的关于可解释机器学习的书，此书完整电子版免费阅读，并有对应的GitHub开源项目；《Attacking-Artificial-Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。">最后推荐四本与人工智能内生安全相关的书籍。<br>
-<img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>
-《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>
-《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>
-《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>
-《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</h2>
-<h1>参考</h1>
-<ul>
-<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
-<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《罪与罚》读书笔记</title>
-    <url>/archives/af8ce812.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<p>如果你是第一次接触陀思妥耶夫斯基的作品，我强烈推荐最先读这本《罪与罚》。作为一部俄罗斯的长篇小说，《罪与罚》绝对不会让你感到一丝的无聊或因人名引起的阅读障碍。这本书每一章环环相扣，从最开始就将读者引入主角疯狂的谋杀计划，然后一步一步实现计划，又紧张刺激的逃离警察追捕，最后主角因自己的“超人”哲学理论崩塌而夜不能寐，陷入幻想与自责的深渊。这本书不仅讨论了深刻而丰富的社会学理论，同时通过高超的情节安排与严密的逻辑框架讲述了一个引人入胜故事。<br>
-<img src="/images/20201020-1/1.webp" alt="图 1"></p>
-<h1>1 人物介绍</h1>
-<ul>
-<li>
-<span class="label default">拉斯柯尔尼科夫</span><br>
-</li>
-</ul>
-<p>拉斯柯尔尼科夫（罗佳、罗季卡）是一名贫穷的法律系大学生，经常典当家物，换得钱财以勉强度日。然而他却有远大的抱负，并且富有思想。在受到当时社会风气的影响下，又了解了拿破仑的生平之后，他产生了所谓“超人”的思想。罗佳认为贪婪的阿廖娜太太有罪，是社会的虱子，并应亲自执行“超人”的权利，对阿廖娜进行制裁。但其实他同时也是因为已经交不起房租，急需钱财，才去杀人越货。在高尚与卑鄙的双重思维下，罗佳谋划并实施了对阿廖娜的谋杀。罗佳是一个矛盾个体，他既是慷慨、善良的人道主义者，在一次火灾中舍身求出一位素不相识的孩子。同时冷酷无情、麻木不仁，在谋杀阿廖娜和后来应付司法调查时残忍、阴险到了失去人性的地步。</p>
-<ul>
-<li>
-<span class="label default">阿廖娜·伊凡诺夫娜</span><br>
-</li>
-</ul>
-<p>阿廖娜·伊凡诺夫娜是一位掌管当铺又经常放高利贷的老太婆。她为人吝啬又贪婪，毫无同情心，熟练于利用当地学生周期性资金短缺、急用钱的特点，只付极少的代价来收购学生们典当的物品。</p>
-<ul>
-<li>
-<span class="label default">丽莎维塔·伊凡诺夫娜</span><br>
-</li>
-</ul>
-<p>丽莎维塔·伊凡诺夫娜是阿廖娜·伊凡诺夫娜的妹妹，她为人真诚善良，但却受尽姐姐阿廖娜的欺凌。她无意间闯进罗佳的杀人现场，由于过度惊吓，她即没有反抗也没有喊叫，但依然被更为惊慌的罗佳用斧头劈死。丽莎维塔的死动摇了罗佳的信念，开始怀疑自我，陷入自责的深渊。</p>
-<ul>
-<li>
-<span class="label default">索尼娅</span><br>
-</li>
-</ul>
-<p>女孩索尼娅是一名妓女，曾经与与丽莎维塔认识。由于职业问题，她在社会中受人歧视，可是罗佳却对她如常人一样尊敬，并多次给予她帮助。因此索尼娅深深的爱上了罗佳。即便在罗佳向她坦白是自己杀死了伊凡诺夫娜姐妹后，受到打击的她依旧深深爱着罗佳。她在明白了罗佳每天魂不守舍，夜不能寐的原因后，规劝罗佳去自首，去赎罪，去获得新生。她愿意陪着罗佳一同受罚，一同被钉上十字架。最终索尼娅成功感化了罗佳，让罗佳到警局自首。</p>
-<h1>2 故事梗概</h1>
-<p>贫穷的大学生罗佳，因无力付学费而辍学蜗居在租来的斗室之中，浑浑噩噩，过着温饱不定的日子。他希望得到一些金钱，但又受不了去做工资低廉的工作，更不愿意向家人寻求帮助，让自己的现状被家里人知道。于是，他每天都在痛苦与无尽的臆想中度过。他维持性命的唯一途径，就是到放高利贷的阿廖娜太太那里典当物品换区少的可怜的资金，然后买点面包和酒。罗佳生性高傲，在一次次被阿廖娜无理的剥削后，他逐渐产生了对阿廖娜的杀意，而在听到许多人对阿廖娜心有怨愤时，又进一步认为自己站在了大众的一方。他发表了一篇阐述“超人”理论思想的论文，即被选中的非凡人物为了新世纪的生长，有超越现行社会规范的权利。<br>
-<img src="/images/20201020-1/2.webp" alt="图 2"><br>
-罗佳的母亲来信说罗佳的妹妹杜尼娅即将嫁给一个有钱人卢任。而他们也即将启程前来彼得堡，并表示以后罗佳可以和卢任一起工作，从此一家人团聚，过上幸福的生活。信中母亲还说，她用养老金担保到一笔现金，会提前送来给罗佳使用。然而罗佳却从信中读出，卢任不是一个可以值得信任的人，他知道平时善良温柔的妹妹这次是为了让罗佳过上好日子，而将自己出卖给了一个她并不爱的人。这种因为贫穷而带来的悲剧，让罗佳进一步陷入到极度的痛苦纠结中。而这进一步强化了罗佳内心中对阿廖娜的杀意。<br>
-<img src="/images/20201020-1/3.webp" alt="图 3"><br>
-多日以来，罗佳正因为食不果腹、营养不良，导致身体极差，脾气变得阴阳不定。他的世界昏昏沉沉，有时整日睡觉不出门，有时又到街上闲逛一整天。在有了谋杀阿廖娜的想法后，他总会有意无意的到阿廖娜太太那边去，关注所有关于她的消息。有一天，罗佳终于鼓起勇气从院子里拿了一把斧子，走进老妇人家里。将老妇人与无意间闯进杀人现场的丽莎维塔一并杀害，从她的房间里取走了钱袋和一些首饰，仓皇而逃。他本以为抢夺了阿廖娜太太的钱财，就有机会重新开始，而杀害一个放高利贷的老太婆，并不会给社会带来多大的损失。反而因为她本来就是一个遭到众人忌恨的人，自己的行为会得到他人的理解。然而在杀害两人后，尤其是因为杀死了无辜的丽莎廖娜后，罗佳开始了无尽的自我怀疑，陷入迷茫与被揭露的幻想中。他把抢来的钱财放在陌生的院子里，压在石头底下隐藏，并不打算使用。将母亲寄给他的三十卢布用来帮助他人，不顾自己身无分文。他甚至向向警察打听案件进展，对警察说出自己对案件真相的“猜想”。在自首与继续隐藏之间犹豫不决。<br>
-<img src="/images/20201020-1/4.webp" alt="图 4"><br>
-罗佳的母亲和妹妹来到彼得堡，罗佳此前见到了卢任，证实了自己的想法。卢任吝啬而自大，对杜尼娅毫无爱意，罗佳立志要阻断这场婚事。罗佳与妓女索尼娅的相识，又让他逐渐找回人性。但是在对索尼娅坦白是他杀死了伊凡诺夫娜姐妹时，被罗佳妹妹的另一个追随者偷听到了秘密。同时警官几乎猜出了真正的杀人凶手，但是由于没有证据，只能不断试探罗佳，试图逼迫他自首。许多事情缠绕在一起，让罗佳的精神更加脆弱，多次处于崩溃的边缘。罗佳在经历了长时间的精神折磨后，被妓女索尼娅感动，接受索尼娅的规劝，走进警察局自首。最终因为罗佳平生做了很多善事，同时警方发现罗佳抢了钱却分文不动，又用自己的钱帮助他人，结合他发表的论文，他被法官判定为精神病患者，罗佳只是被送到西伯利亚服八年劳役。然而事实上，罗佳在进入劳改营后，思维又回归最初的冷静。他又拾起了“超人”哲学的理念，重新解释了自己的行为。他对阿廖娜的死没有丝毫悔意，唯一让罗佳自责的只是在惊慌中杀死了无辜善良的丽莎维塔。索尼娅一路同他到西伯利亚，陪他改造，两人最终相爱，开始走进真正的新生活。<br>
-<img src="/images/20201020-1/5.webp" alt="图 5"></p>
-<h1>3 个人感悟</h1>
-<p>《罪与罚》的故事情节很简单，从表面上看，就是一个杀人犯杀人后因良心谴责而自首的故事。但是书中对主角罗佳杀人前后的思想变化进行了详尽的分析：他为什么要杀人？为什么抢了钱不用，反而开始用自己的钱帮助他人？为什么要和警察透漏自己杀人的想法，想要自首又犹豫不决？以及他对“超人”理论的思索与讨论。对这样一个在外界看起来是真的像一个神经病一样的杀人犯的内心想法进行了细致入微的描写与分析。<br>
-罗佳的杀人原因，也是他提出的超人主义哲学，即人类社会有两种人，一种是凡人，一种是非凡的人。凡人会遵守世俗的法律，而非凡的人，他们能凌驾于法律之上，为了更高崇的目的而清除一些必要的障碍。他们被称为伟人，他们被称为英雄。凡人可以通过跨越某条界限变成非凡的人，这里在俄语中一语双关，俄语“罪 (Преступле́ние)”一词就是“跨越界限”的意思。而罗佳想做凯撒，想做拿破仑。凯撒、拿破仑，他们都是伟大的谋杀者,他们双手沾上了无数的鲜血，他们的内心却没有丝毫的动摇，而我们称他们为英雄。杀死阿廖娜，并不是谋杀，而是罗佳的一次实验。阿廖娜是这次实验的小白鼠。而丽莎维塔，是这次实验的附属牺牲品。<br>
-书中不止有罗佳的超人逻辑这一种哲学理论，其实有多种理论在相互碰撞，诸如：</p>
-<span class="label info">超人主义哲学（书中代表人物罗佳）</span>：社会中是有一部分人可以为非作歹、不受法律约束。人分为两种，一种是不平凡的人，一种是平凡的人。伟大的人物通常都是罪犯，为了美好的未来，可以任意践踏平凡人的利益。平凡的人维持世界，不平凡的人推进世界。<br>
-<span class="label info">功利主义哲学（书中代表人物卢任）</span>：先利己再利他，唯有利己才能利他。为个人发展就是为大家发展，所有人都秉持这种观念，最终能导致福利的普遍化。<br>
-<span class="label info">进步主义哲学（书中代表人物列别贾特尼科夫）</span>：这种观点会用抽象的理论批判传统的一切，认为传统是对个体的束缚。比如认为婚姻是政府对个人的约束，一个人想和任何人在任何时候在一起或分开都应该是被允许的。<br>
-<span class="label info">虚无主义哲学（书中代表人物斯维里加洛夫）</span>：人生没有终极意义，当下的快乐就是一切。如果人生本身是荒谬的、空虚的，那么人生中任何事都没有意义。自杀是虚无主义的必然结果。
-<p><img src="/images/20201020-1/6.webp" alt="图 6"><br>
-如果读俄文原版，你会发现书中用了大量的一语双关，并且几乎每个人的名字都有着象征意义。比如主角拉斯柯尔尼科夫（Raskol’nikov）中的“Raskol”意为“分裂”。<br>
-最后从立意上来看，《罪与罚》是一本反乌托邦小说。陀思妥耶夫斯基构造这种情节不是为了检验超人哲学想法对不对。而是通过描写一个杀人者的内心冲突来映射整个人类社会的发展规律，对超人哲学的观点进行反思。它是对理想主义者的一个警钟。理想，并非建立在乌托邦之上，它是精神世界里的一个抽象概念。任何试图实现这概念的理想主义者，都不能忽视人的价值。任何试图以牺牲少数人的生命去实现理想的行为，虽然不能否认它的价值，但都值得警惕。因为抽象的概念，永远不及具体生动的人更值得我们珍惜。</p>
-<h1>4 好句摘抄</h1>
-<blockquote>
-<p>大家都杀人，在世界上，现在杀人，过去也杀人。血像瀑布一样地流，像香槟一样地流。为了这，有人被钉上十字架，被冠以罪名离开人世。有人却在神殿里被戴上桂冠，以后又被称作人类的恩主。</p>
-</blockquote>
-<blockquote>
-<p>人这种卑鄙的东西，什么都会习惯的。</p>
-</blockquote>
-<blockquote>
-<p>有时，一个人遇上强盗，整整半小时感到死亡的恐惧，最后，刀架到脖子上，反倒什么都不怕了。</p>
-</blockquote>
-<blockquote>
-<p>世界上没有什么比直言不讳更难，也没有什么比阿谀奉承更容易的了。直言不讳，即使其中只有百分之一的音调是假的，那么立刻就会产生不和谐，随之而来的是争吵。而阿谀奉承，即使从头至尾全部音调都是虚假的，可还是让人高兴，听着不会觉得不愉快，哪怕这愉快有点儿肉麻，可还是感到愉快。而且不管阿谀奉承多么肉麻，其中却至少有一半让人觉得好像是真实的。</p>
-</blockquote>
-<blockquote>
-<p>先生，贫穷不是罪恶，这是真理。我知道，就像嗜酒不是美德一样，这更是真理。可是赤贫却是罪恶！贫穷的时候，您还能保证自己天生感情的高尚气度，但是在赤贫、穷到一无所有的情况下，却是无论什么时候、什么人都做不到的。为了赤贫，人们甚至不是用棍子赶走，而是拿扫帚把他从人类社会里清扫出去，让他受更大的屈辱。而且这是公正的，因为在赤贫的情况下，我自己首先就准备凌虐自己，于是我找到了酒。</p>
-</blockquote>
-<blockquote>
-<p>要知道，女人就是这样，爱你也是她，害你也是她，两者并行不悖。</p>
-</blockquote>
-<blockquote>
-<p>谁最会欺骗自己，谁就能过得最快活。</p>
-</blockquote>
-<blockquote>
-<p>胡扯是一切生物中只有人类才享有的唯一特权。通过胡扯，可以得到真理！</p>
-</blockquote>
-<blockquote>
-<p>犯罪是对社会组织的不正常现象的抗议。</p>
-</blockquote>
-<blockquote>
-<p>现实主义者不会害怕他们的研究结果。</p>
-</blockquote>
-<blockquote>
-<p>人们最害怕什么呢？他们最害怕迈出新的一步，最害怕自己新的想法。</p>
-</blockquote>
-<blockquote>
-<p>一百个疑点也绝不能构成一件证据。</p>
-</blockquote>
-<blockquote>
-<p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
-</blockquote>
-<blockquote>
-<p>那时魔鬼引诱我杀死了一只虱子，但是后来它又告诉我，我没有去权利走那条路，因为我也不过就是个虱子，和所有其余人一样。</p>
-</blockquote>
-<blockquote>
-<p>只要能活着，活着，活着！不管怎样活着，只要活着就好！多么正确的真理！谁要是为此把人叫做卑鄙的东西，那么他才是最卑鄙的。</p>
-</blockquote>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5">罪与罚- 维基百科</a></li>
-<li><a href="https://ilibrary.ru/text/69/index.html">罪与罚- 俄文原版</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-        <category>俄罗斯文学</category>
-      </categories>
-      <tags>
-        <tag>俄罗斯文学</tag>
-        <tag>陀思妥耶夫斯基</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Generating Adversarial Examples with Adversarial Networks 研读报告</title>
-    <url>/archives/ae4e8225.html</url>
-    <content><![CDATA[<p>研究发现深度神经网络（DNN）容易受到对抗性样攻击。对抗样本指在神经网络的输入中添加精心构造的微小扰动，这种对抗样本会导致DNN错误。虽然已经提出了多种产生对抗样本的方案，但如何高效的在黑盒环境下产生对抗样本，仍然需要更深入的研究。本文借助生成对抗网络（GAN），通过学习并将对抗样本分布逼近目标类别样本分布，以达到高准确率、高效快速的批量产生对抗样本的效果。本工作由 <a href="http://www-personal.umich.edu/~xiaocw/">Chaowei Xiao</a> 在京东公司与加州大学伯克利分校合作完成，论文发表于<a href="https://www.ijcai-18.org/">IJCAI2018</a>。</p>
-<h1>1 课题创新点</h1>
-<ul>
-<li>生成不仅视觉上逼真，而且还能误导目标模型的对抗样本。</li>
-<li>使用前馈神经网络生成对抗样本，比基于优化的方法有更高的攻击成功率。</li>
-<li>通过查询信息动态提炼模型，可产生对黑盒DNN的对抗样本。</li>
-</ul>
-<h1>2 方案设计</h1>
-<h2 id="2-1-问题定义">2.1 问题定义</h2>
-<p>$ X $: 特征空间$ X \subseteq R^n $<br><br>
-$ n $: 特征数量<br><br>
-$ (x_i,y_i) $: 训练集中第 $ i $ 个样本<br><br>
-$ x_i $: 特征向量 $ x_i \in X $, 服从未知分布 $ x_i \sim P_{data} $ <br><br>
-$ y_i $: 样本真实类别标签 $ y_i \in Y $, 其中$ \left | Y \right | 表示可能的输出分类数量 $ <br></p>
-<span class="label default">学习系统</span>旨在从样本空间 $ X $ 域到分类输出 $ Y $ 集合中学习分类器 $ f: X \rightarrow Y $ <br><br>
-<span class="label default">对抗攻击</span>旨在对于给定样本 $ x $, 生成对抗样本 $ x_A $，其分类 $ f(x_A) \neq y $ （无目标攻击），其中 $ y $ 为样本x的真实类别标签；或者 $ f(x_A)=t $ （有目标攻击），其中 $ t $ 为目标类别。<br>
-<p>就 $ L_2 $ 或其他距离度量而言，$ x_A $ 还应接近原始样本 $ x $</p>
-<h2 id="2-2-结构框架">2.2 结构框架</h2>
-<p><img src="/images/20201023-1/1.webp" alt="图1：AdvGAN结构框架"><br>
-AdvGAN结构框架如图1所示，其主要由三部分组成：生成器 $ G $、描述器 $ D $ 和目标神经网络 $ f $。首先生成器 $ G $ 根据输入的原始样本 $ x $ 计算出对抗扰动 $ G(x) $。然后分别将原始样本 $ x $ 和对抗样本 $ x+G(x) $ 输入判别器$ D $，训练判别器 $ D $ 使其可区分原始数据和生成的数据（$ D $ 的目的是促进生成的对抗样本无法与原始样本类别区分开来）。<br>
-为了可以欺骗目标分类器 $ f $，将 $ x+G(x) $ 输入 $ f $ 中，在白盒环境下输出分类器损失 $ L_{adv} $，表示输出类别与目标类别 $ t $ 的距离（有目标攻击）；或表示输出类别与原始类别 $ y $ 的相反数（无目标攻击）。<br><br>
-则对抗损失可以交叉熵表示为：</p>
-<p>\begin{equation}<br>
-L_{GAN} = E_x log D(x) + E_x log (1-D(x+G(x)))<br>
-\label{G_Loss}<br>
-\end{equation}</p>
-<p>欺骗目标神经网络损失可表示为：</p>
-<p>\begin{equation}<br>
-L_{adv}^{f} = E_x l_f (x+G(x),t)<br>
-\label{f_Loss}<br>
-\end{equation}</p>
-<p>其中f表示目标神经网络使用的损失函数（比如交叉熵损失）<br>
-另增加一正则项损失，为约束对抗扰动，避免扰动过大：</p>
-<p>\begin{equation}<br>
-L_{hinge} = E_x max(0,||G(x)||_2 - c)<br>
-\label{hinge_Loss}<br>
-\end{equation}</p>
-<p>其中 $ c $ 为用户设定的约束值，其也可以稳定GAN的训练过程。<br><br>
-最终整体目标损失可表示为：</p>
-<p>\begin{equation}<br>
-L=L_{adv}^{f} + \alpha L_{GAN} + \beta L_{hinge}<br>
-\label{Full_Loss}<br>
-\end{equation}</p>
-<p>其中 $ \alpha $ 与 $ \beta $ 控制每一项的重要程度。$ L_{GAN} $ 鼓励对抗样本从视觉上与原始数据相似，而 $ L_{adv}^{f} $ 旨在生成高攻击成功率的对抗样本。最后通过最大最小值算法计算 $ arg \ min_G \ max_D \ L $ 得到 $ G $ 与 $ D $。<br><br>
-一旦在目标模型中将生成器 $ G $ 训练好，之后就可以对任意输入添加扰动以生成对抗样本，且无需再访问目标神经网络。</p>
-<h2 id="2-3-黑盒攻击">2.3 黑盒攻击</h2>
-<span class="label default">静态蒸馏法</span>优化黑盒模型 $ b(x) $ 与蒸馏模型 $ f(x) $ 的交叉熵，得到一个功能与黑盒模型功能相似的蒸馏模型。将蒸馏模型作为目标神经网络训练对抗样本。
-<p>\begin{equation}<br>
-arg \ \underset{f}{min} \ E_x \ H(f(x),b(x))<br>
-\label{Static_Distillation}<br>
-\end{equation}</p>
-<span class="label default">动态蒸馏法</span>由于静态蒸馏方案无法确定蒸馏模型与原模型的差距，故提出动态蒸馏方案，联合训练蒸馏模型 $ f $ 与生成器 $ G $。具体分为两步：
-<ol>
-<li>固定 $ f_{i-1} $ 更新 $ G_i $：<br></li>
-</ol>
-<p>\begin{equation}<br>
-G_i,D_i = arg \ min_G \ max_D \ L_{adv}^{f_i-1} + \alpha L_{GAN} + \beta L_{hinge}<br>
-\label{Dynamic_Distillation_1}<br>
-\end{equation}</p>
-<ol start="2">
-<li>固定 $ G_i $ 更新 $ f_i $:<br></li>
-</ol>
-<p>\begin{equation}<br>
-f_i = arg \ min_f \ E_x \ H(f(x),b(x)) + E_x \ H(f(x+G(x)),b(x+G(x)))<br>
-\label{Dynamic_Distillation_2}<br>
-\end{equation}</p>
-<h1>3 实验</h1>
-<h2 id="3-1-实验配置">3.1 实验配置</h2>
-<ul>
-<li>实验数据；MINTSI, CIFAR-10, NIPS 2017 DEV数据集</li>
-<li>测试环境：半白盒测试，黑盒测试</li>
-<li>对比攻击算法：梯度法(FGSM), 优化法(Opt.), 迁移攻击(Trans.)</li>
-<li>对比防御算法：对抗训练(Adv.), 整体对抗训练(Ens.) ,迭代对抗训练(Iter.Adv)</li>
-</ul>
-<h2 id="3-2-攻击测试">3.2 攻击测试</h2>
-<ol>
-<li>AdvGAN在运行时间、有目标攻击和黑盒攻击等方面存在优势:<br>
-<img src="/images/20201023-1/2.webp" alt="表1：AdvGAN对比其他对抗攻击算法优势"></li>
-<li>AdvGAN在不同环境下（原始数据集p、半白盒攻击w、黑盒攻击-动态整理b-D、黑盒攻击-静态蒸馏b-S）的攻击成功率:<br>
-<img src="/images/20201023-1/3.webp" alt="表2：AdvGAN对比其他对抗攻击算法优势"></li>
-<li>AdvGAN在MINIS和CIFAR-10数据集上攻击效果图：<br>
-<img src="/images/20201023-1/4.webp" alt="图2：AdvGAN在MINIS数据集上攻击效果图"><br>
-<img src="/images/20201023-1/5.webp" alt="图3：AdvGAN在CIFAR-10数据集上攻击效果图"></li>
-<li>AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率：<br>
-<img src="/images/20201023-1/6.webp" alt="表3：AdvGAN半白盒环境下在各对抗输入对御法案的攻击成功率"></li>
-<li>AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率：<br>
-<img src="/images/20201023-1/7.webp" alt="表4：AdvGAN黑盒环境下在各对抗输入对御法案的攻击成功率"></li>
-<li>白盒环境中不同攻击算法的MadryLab公共模型准确性对比：<br>
-<img src="/images/20201023-1/8.webp" alt="表5：白盒环境中不同攻击算法的MadryLab公共模型准确性对比"></li>
-<li>AdvGAN在高分辨率对抗样本生成效果（NIPS 2017 DEV数据集）：<br>
-<img src="/images/20201023-1/9.webp" alt="图4：AdvGAN在高分辨率对抗样本生成效果"></li>
-</ol>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://arxiv.org/abs/1801.02610v5">Generating Adversarial Examples with Adversarial Networks</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>论文研读报告</category>
-      </categories>
-      <tags>
-        <tag>对抗攻击</tag>
-        <tag>生成对抗网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《长夜难明》读书笔记</title>
-    <url>/archives/a19fb9aa.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>长夜难明，但总有人持灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<blockquote>
-<p>男人鄙夷地看着人群，轻蔑地笑了：“人们已经想不起来第一次闯红灯的时间了，有了第一次，就会有第二次、第三次……</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-        <category>中国文学</category>
-      </categories>
-      <tags>
-        <tag>中国文学</tag>
-        <tag>紫金陈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN 研读报告</title>
-    <url>/archives/a88540ce.html</url>
-    <content><![CDATA[<p>近年来，机器学习算法被用于检测未知恶意软件。相对的攻击者也想尽办法攻击这种新的防御系统。恶意软件制作者通常无法访问机器学习模型的详细结构与参数，因此他们只能执行黑盒攻击。本文提出了一种基于生成对抗网络（GAN）的算法——MalGAN，该算法能使恶意软件绕过黑盒机器学习检测。其使用替代检测器配合黑盒模型训练GAN，通过最大程度减少替代检测器对对抗样本的恶意预测概率，生成可绕过黑盒模型的对抗样本。本课题由北京大学机器感知与智能教育部重点实验室<a href="https://eecs.pku.edu.cn/info/1505/6634.htm">谭营</a>团队研究完成。</p>
-<h1>1 课题创新点</h1>
-<h1>2 方案设计</h1>
-<h1>2.1 系统环境</h1>
-<p>本文所指的黑盒环境：由于基于机器学习的恶意软件检测算法通常托管在云端，因此对于攻击者（恶意软件制作者）而言机器学习算法是黑盒算法，即不知道检测系统使用的分类器种类及其具体参数。然而攻击者可以通过精心构造的测试样例检测出机器学习算法使用的特征。例如，如果恶意软件使用目录表中某DLL或调用某API的特征，则攻击者可以修改恶意软件DLL内容或调用API内容，并将修改后的样本输入检测器，如果检测器判别类别发生改变，那么可以判定机器学习算法使用了该特征。因此本文假设攻击者知道恶意软件机器学习算法使用的特征，但是对机器学习模型一无所知。</p>
-<h2 id="2-2-体系结构">2.2 体系结构</h2>
-<p>Malware 系统架构如图 1 所示。假设恶意软件制作者仅知道黑盒模型使用的特征，并可从检测器中获取软件检测结果。整个模型包含生成器、黑盒模型检测器以及替代检测器，生成器与替代检测器都是前馈神经网络，使用特征均为API二进制特征信息，即是否调用该API，调用值为1，反之为0。</p>
-<p><img src="/images/20201024-1/1.webp" alt="图 1: Malware 系统架构"></p>
-<ul>
-<li>生成器：</li>
-</ul>
-<ol>
-<li>生成器输入为恶意软件特征向量m和噪音向量z的串联。m是M维二元向量，对应每个每个API调用情况。z为Z维向量，其中Z为超参数。z的每个元素取值都是从[0,1)之间的均匀分布中采样的随机数。其作用是允许单个恶意软件生成多种对抗样本。</li>
-<li>输入通过权重为 $ \theta _ g $ 的多层前馈神经网络。</li>
-<li>输出层有M个神经元，最后一层使用sigmod激活函数，将输出限制在 (0,1) 范围内。并根据原始是否大于0.5来进行二值化转换。</li>
-<li>为了不影响恶意软件功能，在生成对抗样本时只进行添加不想关功能操作，不进行任何功能删除操作。</li>
-</ol>
-<ul>
-<li>生成器损失函数：</li>
-</ul>
-<p>\begin{equation}<br>
-L_D = - E_{x \in BB_{Benign}}log(1-D_{\theta_d}(x)) - E_{x \in BB_Malware}log D_{\theta_d}(x)<br>
-\label{D_Loss}<br>
-\end{equation}</p>
-<ul>
-<li>辨别器：</li>
-</ul>
-<ol>
-<li>由于攻击者对黑盒模型内部信息一无所知，所以通过替代检测器拟合黑盒检测器，并通过其提供的梯度信息生成训练器。</li>
-<li>替代检测器（辨别器）同样是权重为 $ \theta _ g $ 的多层前馈神经网络。</li>
-<li>输入为对抗样本和良性样本的混合。注意其样本标签不使用原始样本标签而是黑盒检测器的标签。</li>
-</ol>
-<ul>
-<li>辨别器损失函数：</li>
-</ul>
-<p>\begin{equation}<br>
-L_G = E_{m \in S_Malware,z \sim p_{uniform[0,1)}}log D_{\theta _d}(G _{\theta_g} (m,z))<br>
-\label{G_Loss}<br>
-\end{equation}</p>
-<h2 id="2-3-MalGAN-训练算法">2.3 MalGAN 训练算法</h2>
-<h1>3 实验</h1>
-<h2 id="3-1-实验配置">3.1 实验配置</h2>
-<ul>
-<li>实验数据：自恶意程序贡献网站<a href="https://malwr.com">malwr.com</a>下载18万个程序，其中恶意程序占比约30%。分割数据80%作为训练集，其余20%作为测试集。</li>
-<li>特征选取：基于160个系统级API调用情况，为每一个程序构造一个160维的二进制特征向量。<br>
-目标分类器：随机森立（RF），逻辑回归（LR），决策树（DT），支持向量机（SVM），多层感知器（MLP）以及投票机制的集成学习。</li>
-</ul>
-<h2 id="3-2-实验结果">3.2 实验结果</h2>
-<ul>
-<li>目标黑盒分类器与MalGAN使用相同训练集：对抗样本的TPR降到1%以下。</li>
-</ul>
-<p><img src="/images/20201024-1/2.webp" alt="图 2: 目标黑盒分类器与MalGAN使用相同训练集对抗样本真阳性率"></p>
-<ul>
-<li>目标黑盒分类器与MalGAN使用不同训练集：对抗样本的TPR降到3%以下。</li>
-</ul>
-<p><img src="/images/20201024-1/3.webp" alt="图 3: 目标黑盒分类器与MalGAN使用不同训练集对抗样本真阳性率"></p>
-<ul>
-<li>生成对抗网络收敛速度</li>
-</ul>
-<p><img src="/images/20201024-1/4.webp" alt="图 4: 训练集和验证集的真阳性率随时间变化情况"></p>
-<h1>可改进</h1>
-<p>本工作假设攻击者可以探知目标黑盒分类器使用的样本特征，但实际上探知API特征是一个很复杂、耗时的工作，怎样将这项工作自动化的快速完成有待进一步的研究。</p>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://arxiv.org/abs/1702.05983">Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>论文研读报告</category>
-      </categories>
-      <tags>
-        <tag>对抗攻击</tag>
-        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1007,6 +666,349 @@ L_G = E_{m \in S_Malware,z \sim p_{uniform[0,1)}}log D_{\theta _d}(G _{\theta_g}
       <tags>
         <tag>俄罗斯文学</tag>
         <tag>陀思妥耶夫斯基</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——模型窃取</title>
+    <url>/archives/7bfc85ae.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br>
+<img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>
+机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br>
+<img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
+<div class="note danger">
+            <p>模型萃取攻击</p>
+          </div>
+<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
+<div class="note danger">
+            <p>成员推断攻击</p>
+          </div>
+<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
+<div class="note danger">
+            <p>模型逆向攻击</p>
+          </div>
+<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
+<h1>3 防御方案</h1>
+<p>目前比较有效的防御方案是模型水印和联邦学习。</p>
+<div class="note success">
+            <p>模型水印技术</p>
+          </div>
+<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
+<div class="note success">
+            <p>联邦学习技术</p>
+          </div>
+<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
+<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>模型窃取</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——数据投毒</title>
+    <url>/archives/e598100d.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br>
+<img src="/images/20201008-3/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
+<div class="note danger">
+            <p>反馈化武器</p>
+          </div>
+<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br>
+<img src="/images/20201008-3/2.webp" alt="反馈化武器"></p>
+<div class="note danger">
+            <p>模型偏斜攻击</p>
+          </div>
+<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br>
+<img src="/images/20201008-3/3.webp" alt="模型偏斜"></p>
+<div class="note danger">
+            <p>后门攻击</p>
+          </div>
+<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br>
+<img src="/images/20201008-3/4.webp" alt="后门攻击"></p>
+<h1>3 防御方案</h1>
+<p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
+<div class="note success">
+            <p>均匀采样</p>
+          </div>
+<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
+<div class="note success">
+            <p>构建标准数据集</p>
+          </div>
+<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
+<div class="note success">
+            <p>集成学习技术</p>
+          </div>
+<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
+<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>数据投毒</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——对抗攻击</title>
+    <url>/archives/929f209b.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br>
+<img src="/images/20201008-2/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>
+目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
+<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
+<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
+<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
+<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br>
+<img src="/images/20201008-2/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>
+在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br>
+<img src="/images/20201008-2/3.webp" alt="边界样本更容易被对抗攻击"><br>
+用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
+<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>
+其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br>
+<img src="/images/20201008-2/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
+<div class="note danger">
+            <p>基于梯度的对抗攻击</p>
+          </div>
+<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
+<div class="note danger">
+            <p>基于优化的对抗攻击</p>
+          </div>
+<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
+<div class="note danger">
+            <p>置信度降低攻击</p>
+          </div>
+<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
+<div class="note danger">
+            <p>无目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
+<div class="note danger">
+            <p>有目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
+<h1>3 防御方案</h1>
+<p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
+<div class="note success">
+            <p>对抗训练技术</p>
+          </div>
+<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
+<div class="note success">
+            <p>梯度隐藏</p>
+          </div>
+<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
+<div class="note success">
+            <p>模型随机化</p>
+          </div>
+<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
+<div class="note success">
+            <p>样本去噪</p>
+          </div>
+<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&amp;wfr=spider&amp;for=pc">神经网络中的对抗攻击与对抗样本</a></li>
+<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>对抗攻击</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——背景介绍</title>
+    <url>/archives/b967121.html</url>
+    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
+<h1>1 工业界应用现状</h1>
+<p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br>
+<img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>
+在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br>
+<img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>
+谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>
+对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
+<h1>2 学术界研究现状</h1>
+<p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br>
+<img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br>
+<img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>
+但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br>
+<img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>
+由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
+<ul>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a>
+</li>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a>
+</li>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
+</li>
+</ul>
+<h1>3 推荐书目</h1>
+<h2 id="最后推荐四本与人工智能内生安全相关的书籍。人工智能安全推荐书目《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；《Adversarial-Machine-Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；《Interpretable-Machine-Learning》是一本工程性很强的关于可解释机器学习的书，此书完整电子版免费阅读，并有对应的GitHub开源项目；《Attacking-Artificial-Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。">最后推荐四本与人工智能内生安全相关的书籍。<br>
+<img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>
+《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>
+《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>
+《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>
+《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</h2>
+<h1>参考</h1>
+<ul>
+<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
+<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 搭建个人博客教程</title>
+    <url>/archives/1085c2b.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h1>1 准备工作</h1>
+<h2 id="1-1-注册-GitHub-账号">1.1 注册 GitHub 账号</h2>
+<p>访问 <a href="https://github.com">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br>
+<img src="/images/20201006-1/1.webp" alt="图 1"></p>
+<h2 id="1-2-安装-Node-js-和-nmp">1.2 安装 Node.js 和 nmp</h2>
+<p>访问 <a href="https://nodejs.org">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br>
+<img src="/images/20201006-1/2.webp" alt="图 2"></p>
+<h2 id="1-3-安装-Git-for-Windows">1.3 安装 Git for Windows</h2>
+<p>访问 <a href="https://gitforwindows.org">Git</a> 官网安装 Git for Windows。<br>
+<img src="/images/20201006-1/3.webp" alt="图 3"></p>
+<h1>2 搭建 GitHub 博客</h1>
+<h2 id="2-1-创建-GitHub-仓库">2.1 创建 GitHub 仓库</h2>
+<p>新建一个 Repositories, 存放博客项目文件。<br>
+<img src="/images/20201006-1/4.webp" alt="图 4"><br>
+新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br>
+<img src="/images/20201006-1/5.webp" alt="图 5"><br>
+跳转到该库界面，选择 Settings。<br>
+<img src="/images/20201006-1/6.webp" alt="图 6"><br>
+进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br>
+<img src="/images/20201006-1/7.webp" alt="图 7"><br>
+选择一个博客主题，然后点击 Select theme。<br>
+<img src="/images/20201006-1/8.webp" alt="图片 8"><br>
+到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br>
+<img src="/images/20201006-1/9.webp" alt="图 9"></p>
+<h2 id="2-2-配置-SSH-Key">2.2 配置 SSH Key</h2>
+<p>在 Windows 菜单里搜索启动 Git Bash，设置 <a href="http://user.name">user.name</a> 和 user.email 的配置信息：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"你的 GitHub 用户名"</span></span><br><span class="line">git config --global user.email <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>生产SSH秘钥文件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后直接三个回车即可，默认不需要设置密码。<br>
+找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br>
+<img src="/images/20201006-1/10.webp" alt="图 10"><br>
+打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>
+新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br>
+<img src="/images/20201006-1/11.webp" alt="图 11"><br>
+启动 Git Bash 输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果提示：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></tbody></table></figure>
+<p>输入 <span class="label default">yes</span>，然后会看到：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></tbody></table></figure>
+<p>看到这个信息说明 SSH 已配置成功！</p>
+<h1>3 使用Hexo写博客</h1>
+<h2 id="3-1-安装Hexo">3.1 安装Hexo</h2>
+<p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="3-2-初始化Hexo">3.2 初始化Hexo</h2>
+<p>仍在该目录下右键 Git Bash Here，输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></tbody></table></figure>
+<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></tbody></table></figure>
+<p>输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></tbody></table></figure>
+<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>
+打开浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br>
+<img src="/images/20201006-1/12.webp" alt="图 12"></p>
+<h2 id="3-3-配置-Hexo">3.3 配置 Hexo</h2>
+<p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>
+修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
+<p>并安装插件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></tbody></table></figure>
+<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>
+此时访问博客地址就和本地预览服务一样了。<br>
+<img src="/images/20201006-1/13.webp" alt="图 13"></p>
+<h2 id="3-4-写第一篇博文">3.4 写第一篇博文</h2>
+<p>定位到 Hexo 根目录，执行命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo new <span class="string">'my-first-blog'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></tbody></table></figure>
+<p>#4 美化主题</p>
+<h2 id="4-1-下载-Next-主题">4.1 下载 Next 主题</h2>
+<p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>
+使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="4-2-启用主题">4.2 启用主题</h2>
+<p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></tbody></table></figure>
+<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></tbody></table></figure>
+<p>使用浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> ，检查站点是否正确运行。<br>
+当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br>
+<img src="/images/20201006-1/14.webp" alt="图 14"><br>
+执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
+<ul>
+<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a></li>
+</ul>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>开始耕耘你的网上花园吧！</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具教程</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
       </tags>
   </entry>
 </search>
