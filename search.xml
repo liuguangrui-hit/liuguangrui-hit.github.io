@@ -39,7 +39,7 @@
     <url>/archives/a19fb9aa.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>长夜难明，但总有人持灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
+            <p>长夜难明，但总有人燃灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
@@ -101,7 +101,7 @@ L_G = E_{m \in S_Malware,z \sim p_{uniform[0,1)}}log D_{\theta _d}(G _{\theta_g}
 \label{G_Loss}<br>
 \end{equation}</p>
 <h2 id="2-3-MalGAN-训练算法">2.3 MalGAN 训练算法</h2>
-<p>![图 2: MalGAN 训练算法]</p>
+<p><img src="/images/20201024-1/2.webp" alt="图 2: MalGAN 训练算法"></p>
 <h1>3 实验</h1>
 <h2 id="3-1-实验配置">3.1 实验配置</h2>
 <ul>
@@ -113,15 +113,15 @@ L_G = E_{m \in S_Malware,z \sim p_{uniform[0,1)}}log D_{\theta _d}(G _{\theta_g}
 <ul>
 <li>目标黑盒分类器与MalGAN使用相同训练集：对抗样本的TPR降到1%以下。</li>
 </ul>
-<p><img src="/images/20201024-1/2.webp" alt="图 3: 目标黑盒分类器与MalGAN使用相同训练集对抗样本真阳性率"></p>
+<p><img src="/images/20201024-1/3.webp" alt="图 3: 目标黑盒分类器与MalGAN使用相同训练集对抗样本真阳性率"></p>
 <ul>
 <li>目标黑盒分类器与MalGAN使用不同训练集：对抗样本的TPR降到3%以下。</li>
 </ul>
-<p><img src="/images/20201024-1/3.webp" alt="图 4: 目标黑盒分类器与MalGAN使用不同训练集对抗样本真阳性率"></p>
+<p><img src="/images/20201024-1/4.webp" alt="图 4: 目标黑盒分类器与MalGAN使用不同训练集对抗样本真阳性率"></p>
 <ul>
 <li>生成对抗网络收敛速度</li>
 </ul>
-<p><img src="/images/20201024-1/4.webp" alt="图 5: 训练集和验证集的真阳性率随时间变化情况"></p>
+<p><img src="/images/20201024-1/5.webp" alt="图 5: 训练集和验证集的真阳性率随时间变化情况"></p>
 <h1>可改进</h1>
 <p>本工作假设攻击者可以探知目标黑盒分类器使用的样本特征，但实际上探知API特征是一个很复杂、耗时的工作，怎样将这项工作自动化的快速完成有待进一步的研究。</p>
 <hr>
@@ -428,10 +428,10 @@ C’(f^*)&lt;h \label{anomaly_threshold}<br>
 <img src="/images/20201012-1/2.webp" alt="图2：特征空间中的攻击步骤"><br>
 其中对抗样本特征使用生成对抗网络（GAN）计算产生，其损失函数为：</p>
 <p>\begin{equation}<br>
-\hat{t}\in M_s(t) \label{lG}<br>
+l_G = E_{f \in F_{mal, z \sim p_z(z)}}[logD(G(f,z)) + L(f,G(f,z))]  \label{lG}<br>
 \end{equation}</p>
 <p>\begin{equation}<br>
-\hat{t}\in M_s(t) \label{lD}<br>
+L_D = -E_{f \in F_{ben}}log(1-D(f)) - E_{f \in F_{gen}}logD(f) \label{lD}<br>
 \end{equation}</p>
 <h1>4 实验</h1>
 <h2 id="4-1-实验配置">4.1 实验配置</h2>
