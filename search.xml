@@ -877,12 +877,13 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
 </li>
 </ul>
 <h1>3 推荐书目</h1>
-<h2 id="最后推荐四本与人工智能内生安全相关的书籍。人工智能安全推荐书目《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；《Adversarial-Machine-Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；《Interpretable-Machine-Learning》是一本工程性很强的关于可解释机器学习的书，此书完整电子版免费阅读，并有对应的GitHub开源项目；《Attacking-Artificial-Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。">最后推荐四本与人工智能内生安全相关的书籍。<br>
+<p>最后推荐四本与人工智能内生安全相关的书籍。<br>
 <img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>
 《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>
 《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>
 《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>
-《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</h2>
+《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</p>
+<hr>
 <h1>参考</h1>
 <ul>
 <li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
