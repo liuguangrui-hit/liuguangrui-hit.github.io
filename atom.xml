@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2021-03-17T06:09:32.874Z</updated>
+  <updated>2021-03-17T09:28:35.695Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -21,12 +21,12 @@
     <link href="https://liuguangrui.top/archives/92fdf3b8.html"/>
     <id>https://liuguangrui.top/archives/92fdf3b8.html</id>
     <published>2021-03-17T03:14:25.000Z</published>
-    <updated>2021-03-17T06:09:32.874Z</updated>
+    <updated>2021-03-17T09:28:35.695Z</updated>
     
-    <content type="html"><![CDATA[<h1>摘要</h1><p>世界正在变得越来越数字化和互联化，保护我们的数字设备已经不再是一个简单的问题。自上世纪80年代提出入侵检测系统（IDS）的概念以来，他一直是网络安全的一个重要组成部分。传统IDS系统依赖于特征匹配规则与启发式算法，然而随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。</p><p>ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</p><h1>1. 引言</h1>]]></content>
+    <content type="html"><![CDATA[<h1>摘要</h1><p>世界正在变得越来越数字化和互联化，保护我们的数字设备已经不再是一个简单的问题。自上世纪80年代提出入侵检测系统（IDS）的概念以来，他一直是网络安全的一个重要组成部分。传统IDS系统依赖于特征匹配规则与启发式算法，然而随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。</p><p>ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</p><h1>1. 引言</h1><p>将机器学习技术引入安全领域并不罕见，而IDS负责监督通过主机的流量（HIDS）或检测网络本身（NIDS）。2008至2018年期间，关于在IDS设置机器学习算法的相关研究爆发式上升。然而研究表明机器学习（包括深度学习）系统并不是完美的，对手可以在训练阶段和测试阶段对机器学习系统进行攻击，前者我们称为中毒攻击，而后者则称为逃逸攻击。尽管在图像领域已经对上述几种攻击进行了研究，但网络安全领域的研究仍有巨大的漏洞。</p><p>针对中毒攻击主要采取异常检测和鲁棒学习的防御手段，而针对对抗攻击的防御手段较多，包括对抗训练、梯度隐藏、输入修正、检测干扰、加入额外NULL类以及形式化方法。上述方法并非都适用于IDS。</p><p>这篇文章的动机是做出首个关于IDS对抗攻击和防御的调研。目前已经有一些关于IDS分类器本身的调研，但没有站在IDS对手角度的调研。值得注意的是由于基于机器学习的IDS的对抗攻击和防御是一个新颖的话题，我们有时被迫跳出纯粹的ML-IDS，回顾基于传统规则库和统计法的攻击和防御技术。对于IDS对抗攻击的防御措施目前缺乏相关研究，我们希望在不就的将来，这些淋雨得到补充。</p><h1>2. 入侵检测系统与机器学习</h1><h2 id="2-1-IDS历史简介">2.1 IDS历史简介</h2><p>从1980年James Anderson’s发表了一篇具有开创性意义的论文《Computer Security Threat Monitoring and Surveillance》开始，IDS的概念已经存在了近40年。文中Anderson为政府组织介绍了审计追踪的概念，以及如何使用它们来跟踪滥用和恶意用户的行为。它的出现致使几乎所有操作系统的审计子系统得到巨大的改进，并未IDS的可能性播下种子。</p><p>IDSs的下一个里程碑式发展来自Dorothy Denning博士，她也是在从事一个政府项目时试图根据用户的行为活动创建用户档案，以分析政府大型机器的审计追踪记录。1984年，她协助开发了第一个入侵检测模型——Intrusion Detection Expert System (IDES)，并在同年将模型发布，为随后的IDS工作奠定了基础。</p><p>商业化IDSs发展始于20世纪90年代初。Haystack Labs的Stalker是第一款推出的商业HIDS。其它商业IDS还有SAIC的Computer Misuse Detection System (CMDS) 以及Air Force’s Cryptologic Support Center的Automated Security Measurement System (ASIM)。1994年，ASIM项目转型为一家商业公司(the Wheel Group)并发布了第一款商业NIDS——NetRanger。</p><h2 id="2-2-IDS的分类">2.2 IDS的分类</h2><p>讨论IDSs要从两个重要维度——部署位置和检测目标。从前者说，可以将IDSs部署在单个主机上(称为HIDS)，也可以部署在网络本身上，监督不同节点之间的数据包流(称为NIDS)。如上所述，HIDS是首先被发明和部署的，而NIDS是最近才开发出来的。</p><p><img src="/images/20210317-1/1.webp" alt="图 1: 一个含有HIDS和NIDS的网络典型结构图"></p><p>当然，每种方法都有其优点和缺陷。例如HIDS可以单独安装于各个主机上，并有效的判断主机的损坏程度。另一方面，NIDS是一种整体检测方案，可以节省安装时间和成本，通常被认为是抵御外部入侵的首选方案。如今许多组织将两者结合起来使用。</p><p>IDSs的第二各重要维度四它们的运作方式。广义的说，IDS分为基于特征和基于异常两种。与反病毒领域类似，基于特征的IDS专注于查找已知的威胁，特征是有效的指纹，允许IDS快速扫描数据包，并确定它是否携带有害信息。而基于异常的IDS专注于检测未知威胁，他们通常比基于特征的系统更复杂，最近已经发展到使用机器学习，因此它是本次调研的重点。</p><h2 id="2-3-IDSs中的机器学习">2.3 IDSs中的机器学习</h2><p>2002年 Mahoney 和 Chan 最早尝试将机器学习整合到IDSs中。他们的系统通过应用层的数据链接学习协议词汇表，以检测未知攻击。</p><p>基于机器学习的IDSs有多种特征。例如IDS社会中最受欢迎的数据集之一KDD-99和它的后代NSL-KDD有多达41个可供建模的特征。不同工作使用不同数量的特征，使用不同的预处理方法。其它方法依赖于端到端的学习(通常是深度学习)，可以免去人工的特征预处理。</p><p><img src="/images/20210317-1/2.webp" alt="图 2: KDD-99和NSL-KDD特征表"></p><p>在过往的工作中，几乎所有类型的机器学习算法都已经运用于IDS中。其中最完整的一项调研由Hindy等人完成。在比较了超过80个使用机器学习的IDS工作后得出结论：最受欢迎的算法是人造神经网络(19%), SVM(14.4%), k-means(11.7%), 决策树(9.0%), 贝叶斯网络(9.0%), 模糊逻辑(7.2%), 以及kNNs(5.4%)。详细情况见图3(2008至2018年发表的有关IDSs文章中97.3%是基于机器学习的)。</p><p><img src="/images/20210317-1/2.webp" alt="图 3: IDS中使用的算法"></p><p>尽管有许多有关ML-IDSs的研究，但实际部署方面却存在明显的差距。Sommer 和 Paxson 对这一问题进行了深入研究，得出了以下五个关键因素：</p>]]></content>
     
     
-    <summary type="html">中文译名“调查：面向NIDS的对抗攻击与防御”。本调查由Ilja Moisejevs整理完成，文章发表于IJEA2019。随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</summary>
+    <summary type="html">中文译名“调研：面向NIDS的对抗攻击与防御”。本调查由Ilja Moisejevs整理完成，文章发表于IJEA2019。随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调研报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</summary>
     
     
     
@@ -35,11 +35,15 @@
     <category term="论文研读报告" scheme="https://liuguangrui.top/categories/%E7%A7%91%E7%A0%94%E6%80%BB%E7%BB%93/%E8%AE%BA%E6%96%87%E7%A0%94%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
     
     
-    <category term="数据投毒" scheme="https://liuguangrui.top/tags/%E6%95%B0%E6%8D%AE%E6%8A%95%E6%AF%92/"/>
-    
     <category term="对抗攻击" scheme="https://liuguangrui.top/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/"/>
     
-    <category term="NIDS" scheme="https://liuguangrui.top/tags/NIDS/"/>
+    <category term="入侵检测系统" scheme="https://liuguangrui.top/tags/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="机器学习" scheme="https://liuguangrui.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="逃逸攻击" scheme="https://liuguangrui.top/tags/%E9%80%83%E9%80%B8%E6%94%BB%E5%87%BB/"/>
+    
+    <category term="投毒攻击" scheme="https://liuguangrui.top/tags/%E6%8A%95%E6%AF%92%E6%94%BB%E5%87%BB/"/>
     
   </entry>
   
