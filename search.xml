@@ -35,6 +35,41 @@
 ]]></content>
   </entry>
   <entry>
+    <title>多目标优化问题——多旅行商问题与背包问题的组合优化</title>
+    <url>/archives/9661bd10.html</url>
+    <content><![CDATA[<h1>多目标优化问题——多旅行商问题与背包问题的组合优化</h1>
+<ul>
+<li>描述:</li>
+</ul>
+<ol>
+<li>地图上有始发站点(终点站点)$ A_1,A_2,\cdots,A_n $与中转站点$ B_1,B_2,\cdots,B_m $.已知任意$ A $点到任意$ B $点的距离$ A_iB_j $以及任意$ B $点之间的距离$ B_iB_j $.<br></li>
+<li>每个$ A $点的最大卸货载重为 $ W_{A_i} $ ,每个$ B $点的货物载重为$ W_{B_i} $,所有货物保质期为$ t $。<br></li>
+<li>现有$ k $辆车$ X_1,X_2,\cdots,X_k $以速度$ V $由$ A_{X_{i}^{sta}} $点出发经过若干$ B $点后到达$ A_{X_{i}^{end}} $点,车辆每经过一个$ B $点时增加该站点货物载重,到达$ A_{X_{i}^{end}} $后立即重新出发.期间保证每个$ B $点在$ T $时间内有车经过,且车辆到达$ A_{X_{i}^{end}} $点时总载重不大于$ W_{A_{X_{i}^{end}}} $且无货物过期。</li>
+</ol>
+<ul>
+<li>输入:</li>
+</ul>
+<ol>
+<li>距离矩阵$ A_iB_j $，距离矩阵$ B_iB_j $.</li>
+<li>最大卸货载重$ W_{A_i} $，货物载重$ W_{B_i} $，货物保质期$ t $.</li>
+<li>车速$ V $，有限时间$ T $.</li>
+</ol>
+<ul>
+<li>输出:</li>
+</ul>
+<ol>
+<li>最少车数量$ k $.</li>
+<li>每辆车最短行驶路线.</li>
+</ol>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《长夜难明》读书笔记</title>
     <url>/archives/a19fb9aa.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
