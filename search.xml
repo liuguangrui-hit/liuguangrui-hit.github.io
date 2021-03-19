@@ -35,6 +35,23 @@
 ]]></content>
   </entry>
   <entry>
+    <title>The Threat of Adversarial Attacks Against Machine Learning in Network Security: A Survey 研读报告</title>
+    <url>/archives/9863deb2.html</url>
+    <content><![CDATA[<h1>摘要</h1>
+<p>机器学习算法使许多决策系统执行更快、更准确、更高效。然而相比其她领域，机器学习在网络安全中的应用面临更多的主动对抗动机的威胁。因为机器学习在网络安全中的应用(如恶意软件检测、入侵检测和垃圾邮件过滤)本身就是对抗性的。这可以被视为攻击者和防御者之间的一场军备竞赛，对手不断探测机器学习系统，并将其输入设计为可绕过系统，诱导系统做出错误预测的样本。在本项调查中，我们首先将机器学习从技术、任务和深度角度分类。然后介绍了机器学习在网络安全应用中的类别。接下来我们研究了网络安全中针对机器学习的各种对抗性攻击，并介绍了网络安全中对抗性攻击的两种分类方法。首先，我们根据网络安全应用的分类对网络安全中的对抗攻击进行划分。其次，我们将网络安全中的对抗攻击从问题空间与特征空间两个维度进行划分。然后我们分析了针对基于机器学习的网络安全应用程序上的对抗攻击的各种防御方案。最后，我们总结了一个对抗风险网格图，使用此图评估了几种针对应用于网络安全的机器学习的对抗攻击。我们还确定了每个攻击分类在网格图中的位置。</p>
+<h1>1 引言</h1>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
+      </categories>
+      <tags>
+        <tag>网络安全</tag>
+        <tag>机器学习</tag>
+        <tag>对抗样本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey 研读报告</title>
     <url>/archives/92fdf3b8.html</url>
     <content><![CDATA[<h1>摘要</h1>
@@ -184,6 +201,11 @@
 <p>数值是我们这一代的趋势，随着越来越多的电子设备上线，整个世界变成了一台大型计算机，因此网络安全变得更加重要。传统的安全方法如特征匹配或启发式算法已经不能很好的进行扩展，并逐渐被更加自动化的技术(如机器学习)所取代。</p>
 <p>在这项调研中，我们研究了机器学习在入侵检测系统中的作用。简要概述了IDSs的历史遗迹机器学习是如何进入这个领域的。我们重点研究了攻击者会如何利用ML-IDS本身的特点，遗迹如何使他们对此类攻击具有鲁棒性。</p>
 <p>我们对我来保持谨慎乐观的态度，我们相信机器学习的安全性会在包括网络安全在内各方面有持续的进步。然而我们也知晓在面向IDS的对抗攻击领域，特别是防御方面还有很多工作等待完善。</p>
+<hr>
+<h1>参考文献</h1>
+<ul>
+<li><a href="http://www.cscjournals.org/manuscript/Journals/IJAE/Volume8/Issue3/IJAE-186.pdf">Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>科研总结</category>
