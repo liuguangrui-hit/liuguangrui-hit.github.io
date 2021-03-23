@@ -35,6 +35,21 @@
 ]]></content>
   </entry>
   <entry>
+    <title>对抗项目</title>
+    <url>/archives/86839ebd.html</url>
+    <content><![CDATA[<h1>Related Work</h1>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+      </categories>
+      <tags>
+        <tag>对抗攻击</tag>
+        <tag>入侵检测系统</tag>
+        <tag>机器学习</tag>
+        <tag>回避攻击</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>The Threat of Adversarial Attacks Against Machine Learning in Network Security: A Survey 研读报告</title>
     <url>/archives/9863deb2.html</url>
     <content><![CDATA[<h1>摘要</h1>
@@ -58,7 +73,13 @@
   <entry>
     <title>Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey 研读报告</title>
     <url>/archives/92fdf3b8.html</url>
-    <content><![CDATA[<h1>摘要</h1>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>中文译名“调研：面向NIDS的对抗攻击与防御”。本调查由<a href="https://laptrinhx.com/author/ilja-moisejevs">Ilja Moisejevs</a>整理完成，文章与2019年发表于IJAE2019。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h1>摘要</h1>
 <p>世界正在变得越来越数字化和互联化，保护我们的数字设备已经不再是一个简单的问题。自上世纪80年代提出入侵检测系统（IDS）的概念以来，他一直是网络安全的一个重要组成部分。传统IDS系统依赖于特征匹配规则与启发式算法，然而随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。</p>
 <p>ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</p>
 <h1>1. 引言</h1>
