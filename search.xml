@@ -35,9 +35,86 @@
 ]]></content>
   </entry>
   <entry>
+    <title>A fully scalable big data framework for Botnet detection based on network traffic analysis 研读报告</title>
+    <url>/archives/820ee20f.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>中文译名“可扩展的僵尸网络流量检测大数据框架”。本工作由S.H. Mousavi等人完成，于2019年发表于Information Sciences。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h1>Abstract</h1>
+<p>传统僵尸网络检测方法受限于系统可接受的网络带宽，无法满足Gbps级的网络需求。因此在数据收集、存储、特征提取和分析方面都存在瓶颈。本文提出了一个可扩展的大数据框架，可对僵尸网络检测系统中每个组件进行扩展。框架可用于任何僵尸网络检测方法，包括统计方法、机器学习方法和基于图的方法。实验结果表明本框架可在一个真实网络环境中实现5Gbps的吞吐量和5000万个IP地址访问。框架运行时间随着输入数据的增长呈对数上升。</p>
+<h1>1. Introduction</h1>
+<p>当前互联网应用的规模快速增长，网络安全威胁加剧，这使传统网络安全方法逐渐失效。如今僵尸网络是最严重的网络安全威胁之一，每个僵尸网络由分布在整个互联网上的受感染主机网组成。每个感染主机(Bots)都由僵尸网络的管理者(Botmaster)通过代理软件控制，两者之间的通信被称为命令与控制通道(C&amp;C通道)。</p>
+<h1>2. Related word</h1>
+<p>可扩展性是僵尸网络检测方法面临的重要挑战之一，但目前没有工作实现了在高速网络带宽的可扩展性，即同时实现数据处理与存储的可伸缩性。</p>
+<h1>3. Proposed scalable big data framework for botnet detection Scalability(可扩展的僵尸网络检测框架)</h1>
+<p>在检测僵尸网络的整体过程中，即从网络嗅探到数据收集到特征提取最后到部署分析算法(如机器学习、基于图的分析、基于统计的分析等)都必须考虑数据量的可伸缩性。图1显示了该框架的总体架构，该框架可以从被监控的网关手机数据，进行被动分析。也可以部署在大型ISP或拥有大量网络用户的企业级组织。<br>
+<img src="/images/20210324-1/1.webp" alt="图 1: 僵尸网络检测框架"></p>
+<h2 id="3-1-网络流量处理模块">3.1 网络流量处理模块</h2>
+<p>该模块对网络流量进行处理，根据需求从接受到的流量中提取原始网络数据。这里配置了一些常用的僵尸网络检测数据获取工具，包括DNS流量提取器、Http流量提取器以及NetFlow流量提取器。所有工具必须以符合整体处理流程的速度处理数据，并且每个工具并行处理输入的流量。这个模块中的工具可以选取一些常见的并行网络流量处理工具，如PFring[1]与Nprobe<a href="Norobe%E6%98%AF%E4%B8%80%E7%A7%8D%E6%8E%A2%E9%92%88%E5%9E%8B%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7">2</a>。另外如Napatech[3]等专为高速网络流量开发的高性能硬件也可于此模块部署。</p>
+<h2 id="3-2-可伸缩的队列模块">3.2 可伸缩的队列模块</h2>
+<p>第二个模块任务是同步数据的生产者和消费者。由于有许多数据生产者和消费者并行处理原始数据，因此该模块提供了一个分布式队列系统来进行协调。在此模块的协助下，即使后续模块没有准备好或发生拥塞，框架的可用性也不会受到影响。网络上可能分布着许多数据生产者传感器，每个传感器只处理整个网络的一部分，并将原始数据发送到一个队列系统中。此模块将在一个列队中聚合所有原始数据，并为下一个模块中的并行处理提供基础设施。这个模块可以使用Apache Kafka[4]和Redis[5]等分布式队列系统。</p>
+<h2 id="3-3-流处理模块">3.3 流处理模块</h2>
+<p>队列模块就像一个枢纽模块，不需要任何处理就可以接收和保存原始数据。而流处理模块需要将所有接收到的数据统一处理并存储在一个可伸缩的数据结构中。其主要有一下两个任务：首先，它需要处理接收到的数据，然后进行清理和解析，最后将它们存储在一个可扩展的大数据存储系统中(如HDFS)。其次，它需要根据检测方法提取特征，为后续的分析模块做准备。</p>
+<h2 id="3-4-大数据平台">3.4 大数据平台</h2>
+<p>检测APT和复杂僵尸网络需要在大时间窗口中存储和处理网络行为。因此我们选取Hadoop平台进行数据存储与处理，Hadoop本身具有可扩展性。值得注意的是，数据存储格式和压缩方案对其它模块性能有很大影响，通常大数据处理的瓶颈是I/O和数据从硬盘到主存的传输速度。数据压缩可以有效降低主存与磁盘之间的数据交换。</p>
+<h2 id="3-5-分析模块">3.5 分析模块</h2>
+<p>根据输入数据选择最佳的存储格式与压缩方法，将预处理并格式化后的数据存储在可扩展的大数据平台上。分析模块还要为各种不同的僵尸网络检测方法提供工具与基础设施。</p>
+<h1>4. Experimental setup and results</h1>
+<p>采用Bilge等人提出的Disclosure模型[6]测试评估本框架。改模型是使用基于NetFlow特征的机器学习算法检测C&amp;C服务器，具体步骤如下：</p>
+<ol>
+<li>环境部署</li>
+<li>收集并导入NetFlow数据</li>
+<li>基于特征的检测算法</li>
+<li>基于特征的NetFlow</li>
+<li>基于hive和用户自定义功能提取特征</li>
+<li>准备训练和测试数据集</li>
+<li>使用SparkML部署机器学习算法</li>
+</ol>
+<h1>5. Experimental results</h1>
+<p>实验主要目的是评估框架可伸缩性以及在C&amp;C服务器检测中的效果。实验验证本框架在数据收集、存储、特征提取和机器学习算法四个阶段都可以提供可扩展性，并且发现了网络检测最复杂的阶段是特征提取。</p>
+<h1>6. Conclusions</h1>
+<p>近年来，随着网络规模和僵尸网络复杂性的增长，僵尸网络检测安全策略的可扩展性称为主要挑战。目前为止，已发表的研究还没有提出有效的解决大型网络的可伸缩性部署的解决方案。本文为此问题提出了一个完整的策略框架，但也存在缺点。框架安装需要充足的计算资源，小型企业负担不起，云服务提供商为大数据部署提供计算基础设施或许称为可能。</p>
+<h1>References</h1>
+<ul>
+<li>[1] S. Gallenmüller , P. Emmerich , F. Wohlfart , D. Raumer , G. Carle , Comparison of frameworks for high-performance packet IO, in: Architectures for Net- working and Communications Systems (ANCS), 2015 ACM/IEEE Symposium on, IEEE, 2015, pp. 29–38 .</li>
+<li>[2] L. Deri , N. SpA , nProbe: an open source netflow probe for gigabit networks, in: TERENA Networking Conference, 2003 .</li>
+<li>[3] Napatech, Zero Packet Loss, 2016, <a href="http://www.napatech.com/">http://www.napatech.com/</a> .</li>
+<li>[4] N. Garg , Apache Kafka, Packt Publishing Ltd, 2013 .</li>
+<li>[5] J.L. Carlson , Redis in Action, Manning Publications Co., 2013 .</li>
+<li>[6] L. Bilge , D. Balzarotti , W. Robertson , E. Kirda , C. Kruegel , Disclosure: detecting botnet command and control servers through large-scale netflow anal- ysis, in: Proceedings of the 28th Annual Computer Security Applications Conference, ACM, 2012, pp. 129–138 .</li>
+<li>[7] <a href="https://www.sciencedirect.com/science/article/pii/S0020025519309703">A fully scalable big data framework for Botnet detection based on network traffic analysis</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>僵尸网络检测</tag>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+        <tag>可扩展性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>对抗项目</title>
     <url>/archives/86839ebd.html</url>
     <content><![CDATA[<h1>Related Work</h1>
+<p>针对传统网络入侵检测系统的逃逸攻击已经有了比较全面的研究[]，传统入侵检测系统主要分为基于特征的[]和基于异常的[]。然而随着网络的复杂化和数据量的增加，传统IDS已经无法满足需求，基于机器学习的入侵检测系统逐渐称为主流。这也意味着过去的攻击方式已经不再可行，新的攻击方式主要基于机器学习本身的特点，对抗性。</p>
+<p>其它领域的对抗攻击已经有了比较全面的研究。图像，音频，视频，文本，恶意软件。然而网络入侵检测系统与上述领域都有所不同。</p>
+<p>白盒攻击(WhiteBox)：白盒指的是那种详细理解目标机器学习模型内部结构的攻击者。通常涉及一下方面：模型架构、模型权重、训练样本(或训练数据分布)。<br>
+黑盒攻击(BlackBox)：黑盒指的是不具备上述知识的攻击者类型。黑盒攻击者执行攻击时，除了分类器的输出外没有更多的访问权限。如果他们只从分类器输出接收到类别标签，则称为硬标签攻击。如果他们同时获得了分类器的分类置信度，则称为置信攻击。<br>
+灰盒攻击(GrayBox)：灰盒或许是三者中最含糊不清的一种。它指的是位于白盒与黑盒中间的攻击者。这样的攻击者能够查询模型，并得到输出。他也可能知道模型的特征空间和模型训练集的样本分布。</p>
+<p>特征空间和问题空间</p>
+<p>无穷范式</p>
+<p>目前所做的基于黑盒环境下的研究事实上还存在很多不切实际的假设，[]例如假设了攻击者已知目标ML-NIDS的特征，或需要先使用模型萃取技术反复人工探测/猜测模型特征。我们致力于完成一个基于问题空间的自动化黑盒对抗样本生成器。</p>
+<p>为解决这一问题，我们选取的特征就必须包含所有的可能特征，也就是说尽可能的不丢弃任何原始流量信息，即可逆特征。</p>
+<p>对传统NIDS的逃逸性能</p>
 ]]></content>
       <categories>
         <category>科研总结</category>
