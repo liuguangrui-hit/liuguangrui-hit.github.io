@@ -59,11 +59,11 @@
 <h2 id="3-3-流处理模块">3.3 流处理模块</h2>
 <p>队列模块就像一个枢纽模块，不需要任何处理就可以接收和保存原始数据。而流处理模块需要将所有接收到的数据统一处理并存储在一个可伸缩的数据结构中。其主要有一下两个任务：首先，它需要处理接收到的数据，然后进行清理和解析，最后将它们存储在一个可扩展的大数据存储系统中(如HDFS)。其次，它需要根据检测方法提取特征，为后续的分析模块做准备。</p>
 <h2 id="3-4-大数据平台">3.4 大数据平台</h2>
-<p>检测APT和复杂僵尸网络需要在大时间窗口中存储和处理网络行为。因此我们选取Hadoop平台进行数据存储与处理，Hadoop本身具有可扩展性。值得注意的是，数据存储格式和压缩方案对其它模块性能有很大影响，通常大数据处理的瓶颈是I/O和数据从硬盘到主存的传输速度。数据压缩可以有效降低主存与磁盘之间的数据交换。</p>
+<p>检测APT和复杂僵尸网络需要在大时间窗口中存储和处理网络行为。因此我们选取Hadoop平台进行数据存储与处理，Hadoop本身具有可扩展性。值得注意的是，数据存储格式和压缩方案对其它模块性能有很大影响，通常大数据处理的瓶颈是I/O和数据从硬盘到主存的传输速度。数据压缩可以有效降低主存与磁盘之间的数据交换。由于僵尸网络流量都是结构化数据，需要进行多次聚合和统计操作，因此这里选择柱状存储格式。Apache Parquet可实现结构化、柱状存储并支持多种压缩编解码器[6]。在这种架构下，可能有许多消费者进程，其中每个进程都处理输入记录的一部分，并将预处理和解析后的数据存储到HDFS parquet文件中。</p>
 <h2 id="3-5-分析模块">3.5 分析模块</h2>
 <p>根据输入数据选择最佳的存储格式与压缩方法，将预处理并格式化后的数据存储在可扩展的大数据平台上。分析模块还要为各种不同的僵尸网络检测方法提供工具与基础设施。</p>
 <h1>4. Experimental setup and results</h1>
-<p>采用Bilge等人提出的Disclosure模型[6]测试评估本框架。改模型是使用基于NetFlow特征的机器学习算法检测C&amp;C服务器，具体步骤如下：</p>
+<p>采用Bilge等人提出的Disclosure模型[7]测试评估本框架。改模型是使用基于NetFlow特征的机器学习算法检测C&amp;C服务器，具体步骤如下：</p>
 <ol>
 <li>环境部署</li>
 <li>收集并导入NetFlow数据</li>
@@ -84,8 +84,9 @@
 <li>[3] Napatech, Zero Packet Loss, 2016, <a href="http://www.napatech.com/">http://www.napatech.com/</a> .</li>
 <li>[4] N. Garg , Apache Kafka, Packt Publishing Ltd, 2013 .</li>
 <li>[5] J.L. Carlson , Redis in Action, Manning Publications Co., 2013 .</li>
-<li>[6] L. Bilge , D. Balzarotti , W. Robertson , E. Kirda , C. Kruegel , Disclosure: detecting botnet command and control servers through large-scale netflow anal- ysis, in: Proceedings of the 28th Annual Computer Security Applications Conference, ACM, 2012, pp. 129–138 .</li>
-<li>[7] <a href="https://www.sciencedirect.com/science/article/pii/S0020025519309703">A fully scalable big data framework for Botnet detection based on network traffic analysis</a></li>
+<li>[6] D. Vohra , Apache parquet, in: Practical Hadoop Ecosystem, Springer, 2016, pp. 325–335 .</li>
+<li>[7] L. Bilge , D. Balzarotti , W. Robertson , E. Kirda , C. Kruegel , Disclosure: detecting botnet command and control servers through large-scale netflow anal- ysis, in: Proceedings of the 28th Annual Computer Security Applications Conference, ACM, 2012, pp. 129–138 .</li>
+<li>[8] <a href="https://www.sciencedirect.com/science/article/pii/S0020025519309703">A fully scalable big data framework for Botnet detection based on network traffic analysis</a></li>
 </ul>
 ]]></content>
       <categories>
