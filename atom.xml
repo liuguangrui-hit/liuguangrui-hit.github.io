@@ -6,7 +6,7 @@
   <link href="https://liuguangrui.top/atom.xml" rel="self"/>
   
   <link href="https://liuguangrui.top/"/>
-  <updated>2021-06-04T14:18:17.176Z</updated>
+  <updated>2021-06-04T14:16:39.066Z</updated>
   <id>https://liuguangrui.top/</id>
   
   <author>
@@ -15,19 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>20210415-2</title>
-    <link href="https://liuguangrui.top/archives/ba50aa7c.html"/>
-    <id>https://liuguangrui.top/archives/ba50aa7c.html</id>
-    <published>2021-06-04T14:18:17.000Z</published>
-    <updated>2021-06-04T14:18:17.176Z</updated>
-    
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>生成对抗网络原理解析与损失函数推导</title>
