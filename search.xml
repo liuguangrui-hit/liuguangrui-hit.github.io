@@ -1,6 +1,483 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo 搭建个人博客教程</title>
+    <url>/archives/1085c2b.html</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h1>1 准备工作</h1>
+<h2 id="1-1-注册-GitHub-账号">1.1 注册 GitHub 账号</h2>
+<p>访问 <a href="https://github.com">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br>
+<img src="/images/20201006-1/1.webp" alt="图 1"></p>
+<h2 id="1-2-安装-Node-js-和-nmp">1.2 安装 Node.js 和 nmp</h2>
+<p>访问 <a href="https://nodejs.org">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br>
+<img src="/images/20201006-1/2.webp" alt="图 2"></p>
+<h2 id="1-3-安装-Git-for-Windows">1.3 安装 Git for Windows</h2>
+<p>访问 <a href="https://gitforwindows.org">Git</a> 官网安装 Git for Windows。<br>
+<img src="/images/20201006-1/3.webp" alt="图 3"></p>
+<h1>2 搭建 GitHub 博客</h1>
+<h2 id="2-1-创建-GitHub-仓库">2.1 创建 GitHub 仓库</h2>
+<p>新建一个 Repositories, 存放博客项目文件。<br>
+<img src="/images/20201006-1/4.webp" alt="图 4"><br>
+新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br>
+<img src="/images/20201006-1/5.webp" alt="图 5"><br>
+跳转到该库界面，选择 Settings。<br>
+<img src="/images/20201006-1/6.webp" alt="图 6"><br>
+进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br>
+<img src="/images/20201006-1/7.webp" alt="图 7"><br>
+选择一个博客主题，然后点击 Select theme。<br>
+<img src="/images/20201006-1/8.webp" alt="图片 8"><br>
+到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br>
+<img src="/images/20201006-1/9.webp" alt="图 9"></p>
+<h2 id="2-2-配置-SSH-Key">2.2 配置 SSH Key</h2>
+<p>在 Windows 菜单里搜索启动 Git Bash，设置 <a href="http://user.name">user.name</a> 和 user.email 的配置信息：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"你的 GitHub 用户名"</span></span><br><span class="line">git config --global user.email <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>生产SSH秘钥文件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后直接三个回车即可，默认不需要设置密码。<br>
+找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br>
+<img src="/images/20201006-1/10.webp" alt="图 10"><br>
+打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>
+新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br>
+<img src="/images/20201006-1/11.webp" alt="图 11"><br>
+启动 Git Bash 输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果提示：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></tbody></table></figure>
+<p>输入 <span class="label default">yes</span>，然后会看到：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></tbody></table></figure>
+<p>看到这个信息说明 SSH 已配置成功！</p>
+<h1>3 使用Hexo写博客</h1>
+<h2 id="3-1-安装Hexo">3.1 安装Hexo</h2>
+<p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="3-2-初始化Hexo">3.2 初始化Hexo</h2>
+<p>仍在该目录下右键 Git Bash Here，输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></tbody></table></figure>
+<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></tbody></table></figure>
+<p>输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></tbody></table></figure>
+<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>
+打开浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br>
+<img src="/images/20201006-1/12.webp" alt="图 12"></p>
+<h2 id="3-3-配置-Hexo">3.3 配置 Hexo</h2>
+<p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>
+修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
+<p>并安装插件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></tbody></table></figure>
+<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>
+此时访问博客地址就和本地预览服务一样了。<br>
+<img src="/images/20201006-1/13.webp" alt="图 13"></p>
+<h2 id="3-4-写第一篇博文">3.4 写第一篇博文</h2>
+<p>定位到 Hexo 根目录，执行命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo new <span class="string">'my-first-blog'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></tbody></table></figure>
+<p>#4 美化主题</p>
+<h2 id="4-1-下载-Next-主题">4.1 下载 Next 主题</h2>
+<p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>
+使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="4-2-启用主题">4.2 启用主题</h2>
+<p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></tbody></table></figure>
+<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></tbody></table></figure>
+<p>使用浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> ，检查站点是否正确运行。<br>
+当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br>
+<img src="/images/20201006-1/14.webp" alt="图 14"><br>
+执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
+<ul>
+<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a></li>
+</ul>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>开始耕耘你的网上花园吧！</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具教程</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——对抗攻击</title>
+    <url>/archives/929f209b.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br>
+<img src="/images/20201008-2/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>
+目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
+<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
+<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
+<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
+<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br>
+<img src="/images/20201008-2/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>
+在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br>
+<img src="/images/20201008-2/3.webp" alt="边界样本更容易被对抗攻击"><br>
+用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
+<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>
+其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br>
+<img src="/images/20201008-2/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
+<div class="note danger">
+            <p>基于梯度的对抗攻击</p>
+          </div>
+<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
+<div class="note danger">
+            <p>基于优化的对抗攻击</p>
+          </div>
+<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
+<div class="note danger">
+            <p>置信度降低攻击</p>
+          </div>
+<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
+<div class="note danger">
+            <p>无目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
+<div class="note danger">
+            <p>有目标攻击</p>
+          </div>
+<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
+<h1>3 防御方案</h1>
+<p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
+<div class="note success">
+            <p>对抗训练技术</p>
+          </div>
+<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
+<div class="note success">
+            <p>梯度隐藏</p>
+          </div>
+<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
+<div class="note success">
+            <p>模型随机化</p>
+          </div>
+<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
+<div class="note success">
+            <p>样本去噪</p>
+          </div>
+<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&amp;wfr=spider&amp;for=pc">神经网络中的对抗攻击与对抗样本</a></li>
+<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>对抗攻击</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——背景介绍</title>
+    <url>/archives/b967121.html</url>
+    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
+<h1>1 工业界应用现状</h1>
+<p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br>
+<img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>
+在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br>
+<img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>
+谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>
+对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
+<h1>2 学术界研究现状</h1>
+<p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br>
+<img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br>
+<img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>
+但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br>
+<img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>
+由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
+<ul>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a>
+</li>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a>
+</li>
+<li>
+<a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
+</li>
+</ul>
+<h1>3 推荐书目</h1>
+<p>最后推荐四本与人工智能内生安全相关的书籍。<br>
+<img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>
+《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>
+《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>
+《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>
+《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
+<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——模型窃取</title>
+    <url>/archives/7bfc85ae.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br>
+<img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>
+机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br>
+<img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
+<div class="note danger">
+            <p>模型萃取攻击</p>
+          </div>
+<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
+<div class="note danger">
+            <p>成员推断攻击</p>
+          </div>
+<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
+<div class="note danger">
+            <p>模型逆向攻击</p>
+          </div>
+<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
+<h1>3 防御方案</h1>
+<p>目前比较有效的防御方案是模型水印和联邦学习。</p>
+<div class="note success">
+            <p>模型水印技术</p>
+          </div>
+<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
+<div class="note success">
+            <p>联邦学习技术</p>
+          </div>
+<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
+<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>模型窃取</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能内生安全——数据投毒</title>
+    <url>/archives/e598100d.html</url>
+    <content><![CDATA[<h1>1 技术简介</h1>
+<p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br>
+<img src="/images/20201008-3/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
+<h1>2 攻击方案</h1>
+<p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
+<div class="note danger">
+            <p>反馈化武器</p>
+          </div>
+<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br>
+<img src="/images/20201008-3/2.webp" alt="反馈化武器"></p>
+<div class="note danger">
+            <p>模型偏斜攻击</p>
+          </div>
+<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br>
+<img src="/images/20201008-3/3.webp" alt="模型偏斜"></p>
+<div class="note danger">
+            <p>后门攻击</p>
+          </div>
+<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br>
+<img src="/images/20201008-3/4.webp" alt="后门攻击"></p>
+<h1>3 防御方案</h1>
+<p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
+<div class="note success">
+            <p>均匀采样</p>
+          </div>
+<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
+<div class="note success">
+            <p>构建标准数据集</p>
+          </div>
+<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
+<div class="note success">
+            <p>集成学习技术</p>
+          </div>
+<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
+<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>信息安全</tag>
+        <tag>数据投毒</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
+    <url>/archives/bebd9392.html</url>
+    <content><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际流量空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院<a href="http://www.insc.tsinghua.edu.cn/publish/wyy/10857/2018/20180410092237634446731/20180410092237634446731_.html">王之梁</a>团队研究完成。</p>
+<h1>1 课题创新点</h1>
+<ul>
+<li>实用性：在不修改流量功能的前提下，以有限知识自动诱变恶意流量。</li>
+<li>通用性：此方案可攻击任何机器学习分类器（与模型无关）。</li>
+<li>可解释：提出一种基于特征的机器学习解释方法，衡量目标系统抵御此类攻击的鲁棒性。</li>
+</ul>
+<h1>2 方案设计</h1>
+<h2 id="2-1-目标系统">2.1 目标系统</h2>
+<p>基于非有效载荷的NIDS：指在NIDS的检测未对流量的有效载荷进行检查。大多数ML-NIDS都属于此类，其原因是因为对于加密流量来说，检查有效载荷非常困难。逃避使用异常检测实现对流量有效载荷进行检测的工作已经比较完善。基于非有效载荷的NIDS更注重于检查DDos、Dos、扫描、爆破和僵尸网络等基于迭代的攻击。</p>
+<h2 id="2-2-实现方法">2.2 实现方法</h2>
+<p>为规避黑盒ML-NIDS检测，课题定制了一个双层优化模型。第一层模型使用生成对抗网络（GAN）计算恶意流量在目标分类器中的最优对抗样本特征；第二层模型使用粒子群优化算法，在不修改流量功能的前提下，以有限知识自动有百年恶意流量，提取特征相似的最佳流量突变体。<br>
+<img src="/images/20201012-1/1.webp" alt="图1：NIDS攻击检测逃避框架"></p>
+<h1>3 理论证明</h1>
+<h2 id="3-1-现有工作">3.1 现有工作</h2>
+<p>$ E(\cdot) $ 目标系统特征提取器：输入流量，输出特征向量。<br><br>
+$ C(\cdot) $ 目标系统分类器：输入特征，输出恶意概率信息的二元分类器。<br><br>
+$ t $：原始恶意流量。<br><br>
+$ \hat{t} $：变异恶意流量。<br><br>
+$ f $：$ t $ 的特征，即 $ E(t) $。<br><br>
+$ \hat{f} $：$ \hat{t} $ 的特征,即 $ E(\hat{t}) $。<br><br>
+现有工作重要集中于特征维度即，即在产生对抗样本时直接修改特征，而不考虑如何实现流量的变换。即解决优化问题：<br>
+\[ argmin_{\hat{f}}C(\hat{f}) \]<br>
+或者在白盒环境下研究如何对流量进行变形，即解决优化问题:<br>
+\[ argmin_{\hat{t}}C(E(\hat{t})) \]</p>
+<h2 id="3-2-目标问题">3.2 目标问题</h2>
+<p>实际灰盒攻击(PGA)：攻击者拥有与目标分类器相同的特征提取器。<br>
+实际黑盒攻击(PBA)：攻击者没有目标分类器的特征信息。<br>
+$ E’(\cdot) $ 代理特征提取器：对于PGA，$ E(\cdot) $=$ E’(\cdot) $；对于PBA，使用常用特征集模拟 $ E(\cdot) $。<br><br>
+$ C’(\cdot) $ <br>近似分类器：借助对 $ C(\cdot) $ 的输入输出测试，训练一个与 $ C(\cdot) $ 概率分布近似的二元分类器。<br><br>
+$ M(\cdot) $ 变异操作：输入$ t $，输出集合：<br>
+\[ \left \{ \hat{t}|t的所有变异流量集合 \right \} \]<br>
+$ M_{s}(\cdot) $ 安全变异操作：输入$ t $，输出集合：<br>
+\[ \left \{ \hat{t}|t的所有安全变异流量集合，即变异可以保留恶意流量t的恶意功能 \right \} \]<br>
+则目标优化模型为：<br>
+\begin{equation} argmin_{\hat{t}}\ C’(E’(\hat{t}))\quad s.t.\ \hat{t}\in M_s(t) \label{evasion_attack} \end{equation}</p>
+<h2 id="3-3双层优化模型">3.3双层优化模型</h2>
+<p>虽然公式\eqref{evasion_attack}非常直观，但却很难解决。所以将其转化为双层优化模型解决。<br>
+$ f^* $：良性样本特征。<br><br>
+$ L(\cdot,\cdot) $ 距离度量函数：输入两个特征$ \hat{f} $, $ f^* $，输出两个特征之间的距离。距离越近$ \hat{f} $被误分类于良性的可能性越大。<br><br>
+$ h $ ：目标分类器异常阈值，即 $ C’(f^*)&lt;h $ 时 $ f^* $ 被分类于良性。</p>
+<p>\begin{equation}<br>
+argmin_{\hat{t}}\ L(E’(\hat{t}),f^*) \label{traffic_adversarial}<br>
+\end{equation}</p>
+<p>\begin{equation}<br>
+s.t.\quad f^*=argmin_{f^*}\ L(f^*,E’(t)) \label{feature_adversarial}<br>
+\end{equation}</p>
+<p>\begin{equation}<br>
+C’(f^*)&lt;h \label{anomaly_threshold}<br>
+\end{equation}</p>
+<p>\begin{equation}<br>
+\hat{t}\in M_s(t) \label{safe_mutation}<br>
+\end{equation}</p>
+<p>先在公式\eqref{anomaly_threshold}的限制下通过公式\eqref{feature_adversarial}计算 $ f^* $ ，即对抗样本特征。然后使用得出的结果 $ f^* $ 在公式\eqref{safe_mutation}的限制下通过公式\eqref{traffic_adversarial}计算 $ \hat{t} $<br>
+从拓扑角度解释双层模型，如图所示。先在原本分类良好的特征空间中（Construction），计算出对抗样本特征（Generation），然后将恶意流量靠近对抗样本特征（Mutation）。<br>
+<img src="/images/20201012-1/2.webp" alt="图2：特征空间中的攻击步骤"><br>
+其中对抗样本特征使用生成对抗网络（GAN）计算产生，其损失函数为：</p>
+<p>\begin{equation}<br>
+l_G = E_{f \in F_{mal, z \sim p_z(z)}}[logD(G(f,z)) + L(f,G(f,z))]  \label{lG}<br>
+\end{equation}</p>
+<p>\begin{equation}<br>
+L_D = -E_{f \in F_{ben}}log(1-D(f)) - E_{f \in F_{gen}}logD(f) \label{lD}<br>
+\end{equation}</p>
+<h1>4 实验</h1>
+<h2 id="4-1-实验配置">4.1 实验配置</h2>
+<p>使用六个攻击流量集与Kitsune等六个NIDS系统以及两个特征提取器测试课题提出的可解释行防御方案有效性。</p>
+<ul>
+<li>数据集：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数据集（样本数）</th>
+<th>攻击类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kitsune Dataset(40,000)</td>
+<td>Mirai Botnet, Fuzzing, SSDP DoS</td>
+</tr>
+<tr>
+<td>CIC IDS2017(40,000)</td>
+<td>Port Scan, Brute Force, DDoS</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>目标NIDS：<a href="https://github.com/ymirsky/Kitsune-py">Kitsune</a></li>
+<li>特征提取器：<br>
+AfterImage: 基于数据包，流量包本身<br>
+CI-CFlowMeter: 基于流，流量统计特性</li>
+<li>分类器<br>
+无监督模型：KitNET(Kitsune自带)<br>
+有监督模型：Logistics Regression (LR), Decision Tree (DT), Support Vector Machine (SVM), Multi-Layer Perceptron (MLP), Isolation Forest (IF)</li>
+</ul>
+<h2 id="4-2-实验结果">4.2 实验结果</h2>
+<p>本课题提出的方案比过往工作如随机化突变和白盒对抗方法（TWA）具有更强规避性。<br>
+<img src="/images/20201012-1/3.webp" alt="图3：规避率对比"><br>
+本课题提出的特征剔除方案比对抗训练和特征工程方案对模型加强效果更好。<br>
+<img src="/images/20201012-1/4.webp" alt="图4：防御表现"></p>
+<h1>5 贡献</h1>
+<ul>
+<li>总结了大部分最新的ML-NIDS中的常用功能，并介绍了一些流量突变运算符。这些运算符可以在不破坏流量恶意特征的前提下对流量进行变换。</li>
+<li>扩展了GAN将目标机器学习分类器视为黑盒的思想，从而可以规避除了深度神经网络（DNN）以外的任何机器学习模型。</li>
+<li>提出了一种特征空间解释机器学习的方法，有效检测NIDS的鲁棒性。通过量化攻击者对每个流量特征的可操作程度，提出一种通过删除安全评分较差特征的防御策略。</li>
+</ul>
+<h1>6 可改进</h1>
+<ul>
+<li>本课题先使用GAN网络计算出恶意流量在目标系统中的最佳对抗样本的特征然后使用粒子群优化算法将恶意流量逼近最佳特征。这种方法有效的解决了目前多数工作只停留在特征维度讨论NIDS的对抗样本，实际上没有真实攻击效果的问题。但本方案实质上仍是从特征角度进行对抗样本分析，只是在此之上增加了一项工序。这种先将最优特征确定然后令恶意样本逼近的算法会丢失大量可行对抗样本，这是因为不仅仅最优特征对抗样本可以绕过分类器，事实上还存在很多特征组合可以产生有效的（有真实世界可执行性的）对抗样本。</li>
+<li>本课题使用基于特征的机器学习可解释方法衡量目标系统低于对抗攻击的鲁棒性，并提出通过删除安全性较差的特征的防御策略。这种策略没有考虑删除的特征对目标分类器分类性能的影响，应该考虑更佳的防御方案，而不是直接删除特征这种硬性策略。</li>
+<li>只考虑非有效载荷判定。非有效载荷完全不会改变流量恶意行为吗？</li>
+<li>如何检测组合流量攻击？</li>
+</ul>
+<hr>
+<h1>参考</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2005.07519v2">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 原文</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
+      </categories>
+      <tags>
+        <tag>对抗攻击</tag>
+        <tag>网络安全</tag>
+        <tag>入侵检测系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>欢迎来到刘广睿的思维实验室</title>
     <url>/archives/27b4c228.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -35,674 +512,121 @@
 ]]></content>
   </entry>
   <entry>
-    <title>生成对抗网络原理解析与损失函数推导</title>
-    <url>/archives/d4e17af.html</url>
+    <title>《罪与罚》读书笔记</title>
+    <url>/archives/af8ce812.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>本文以最基本的概念讲解生成对抗网络的设计原理，基于信息论与概率论分析生成对抗网络损失函数的推导过程。文章有助于理解不限于生成对抗网络的其它深度学习损失函数推演思路，致力于使读者可以举一反三构造符合特定环境的生成对抗网络。</p>
+            <p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
-<h1>1 机器学习模型</h1>
-<p>机器学习模型可以实现如分类、聚类、回归、生成等许多功能，而要理解生成对抗网络（GAN）我们要先明白分类器和生成器的功能。</p>
-<span class="label info">分类器（Classifier）</span> 分类器模型可以通过学习一些样本的类别信息，然后便能对输入的未知类别样本进行分类。比如让机器看一些不同类别的动物图片并告诉它图片对应的动物类别，然后机器便可自己辨别新的图片是哪个类别，这就是分类器。<br>
-<span class="label info">生成器（Generatior）</span> 生成器模型可以通过学习一些样本，然后便能生成类似的样本。比如让机器看一些动物图片，然后机器便可自己生成动物图片，这就是生成器。
-<h1>2 生成对抗网络</h1>
-<h2 id="2-1-古典生成器模型缺陷">2.1 古典生成器模型缺陷</h2>
-<p>GAN是一种生成器，在它出现之前已经有了很多种类的生成器模型，比如玻尔兹曼机、变分自编码器等，这些模型多使用生成数据和真实数据之间的MSE值（mean square error）来判断模型的好坏，其判断依据可以简单理解为生成数据与真实数据之间的距离，距离越小则认为效果越好。但在使用时人们逐渐发现使用这种判断方式的生成器效果并不理想，尤其对于手写数字或小型图标等简单图像，MSE并不能有效反映生成图片的优劣。在图1中，我们认为左侧的数字“7”是好的生成图片，而右侧是差的生成图片，但两者MSE值相等。</p>
-<p><img src="/images/20210524-1/1.webp" alt="图1：左侧的数字“7”是好的生成图片，右侧是差的生成图片。"></p>
-<h2 id="2-2-生成对抗网络原理">2.2 生成对抗网络原理</h2>
-<p>2014年Ian Goodfellow提出了生成对抗网络模型，他从零和博弈中受到启发，令生成器（Generatior）与判别器（Discriminator）之间持续对抗，使两者能力不断增强。其中<span class="label info">判别器</span>是一种特殊的分类器，它是只有“是”或“否”两种输出的二元分类器。下面我们通过定性描述来直观理解一下GAN的构造。</p>
-<p>如图2所示，GAN由三部分组成：<span class="label info">生成</span>、<span class="label info">判别</span>和<span class="label info">对抗</span>。生成和判别是两个独立的模块，分别由生成器与判别器实现。而对抗指的是生成器与判别器的交替训练过程。<br>
-<img src="/images/20210524-1/2.webp" alt="图2：GAN基本结构"></p>
-<span class="label info">生成模块</span>：生成模块由生成器实现。负责依据随机向量产生样本，如图片、文字等。<br>
-<span class="label info">判别模块</span>：判别模块由判别器实现。负责判断接收到的样本是真实样本还是生成器生成的样本。<br>
-<span class="label info">对抗模块</span>：对抗模块构建生成模块与判别模块的关联，实现两者交替训练。<br>
-<p>训练过程分为两步：</p>
-<ul>
-<li>
-<span class="label success">Step1</span> 先让生成器产生一些假样本，和收集到的真实样本一起输入判别器，让判别器学习正确区分两者。
-</li>
-<li>
-<span class="label success">Step2</span> 当判别器能够熟练的判断现有数据后，再让生成器以生成能够欺骗判别器的假样本为目标，不断生成更好的假样本。<br>
-</li>
-</ul>
-<p>重复进行<span class="label success">Step1</span> 和<span class="label success">Step2</span> 可使生成器与判别器相互促进，生成器的目的是让产生的样本逼近真实类别样本以假乱真，判别器的目的是将真实样本与生成器生成的样本加以区分。所以生成器产生的样本会越来越真实，而判别器的判别能力也会越来越强，最终达到纳什均衡。当判别器对任何样本的预测概率都接近0.5，即无法分辨样本是真实的还是生成器生成的，就停止训练。GAN的最终目标是产生一个足够好的生成器，其可以通过输入的随机向量，生成能够以假乱真的样本。</p>
-<h1>3 信息论</h1>
-<h2 id="3-1-信息量">3.1 信息量</h2>
-<p>生成对抗网络要准确计算并生成以假乱真的样本，就需要用损失函数定量的分析生成器与判别器的性能优劣。机器学习的损失经常使用交叉熵来定义，生成对抗网络也同样使用交叉熵来定义损失。想理解生成对抗网络损失函数的本质，要从最基本的信息量讲起。信息量顾名思义即信息的数量，其大小通过事件发生概率的负对数衡量。为了便于理解，我们通过以下例子解释信息量的定义。假设我们听到了两件事，分别如下：</p>
-<ul>
-<li>
-<span class="label success">事件A</span>    巴西队进入了2022年世界杯决赛。
-</li>
-<li>
-<span class="label success">事件B</span>    中国队进入了2022年世界杯决赛。
-</li>
-</ul>
-<p>凭直觉来说，很显然<span class="label success">事件B</span>的信息量比<span class="label success">事件A</span> 要大。究其原因，是因为<span class="label success">事件A</span>发生的概率很大，而<span class="label success">事件B</span>发生的概率很小。当越不可能的事情发生了，我们获取到的信息量就越大。越可能发生的事情发生了，我们获取到的信息量就越小。由此可见，信息量应该和事件发生的概率有关。</p>
-<p>进一步的，必然事件是必然发生的，所以没有信息量。几乎不可能发生的事情一旦发生，则具有近乎无穷大的信息量。举例来说，<span class="label danger">我永远不会死</span>这句话信息量就近乎无穷，而<span class="label danger">我是我妈生的</span>这句话信息量就很低甚至为0。</p>
-<p>通过以上的分析，可以得到信息量与概率的关系如图3所示，设$ X $是一个离散型随机变量，其取值集合为$ \chi $，概率分布函数$ p(x)=P_r(X=x),x \in \chi $，则定义事件$X = x_0$的信息量为：</p>
-<p>\begin{equation}<br>
-I(x_0)=-log(p(x_0)) \label{amount_of_information}<br>
-\end{equation}</p>
-<p>其中$ p(x_0) $的取值范围是$ [0,1] $。</p>
-<p><img src="/images/20210524-1/3.webp" alt="图3：信息量与概率的关系"></p>
-<h2 id="3-2-熵">3.2 熵</h2>
-<p>熵是一种用来描述事物内在混乱程度的度量，混乱程度越大则熵越大，混乱程度越小则熵越小。在信息论中熵可以表示一个事件的自信息量，即事件包含多少信息。比如对于一个必然事件，它的所有状态都是确定不变的，不会产生任何混乱或变化，那么它的熵就是最小值0。一般的，对于某个事件，其有$ n  $种可能性，每一种可能性都有一个概率$ p(x_i) $，我们可以通过公式\eqref{amount_of_information}计算出每一种可能性的信息量，那么如何计算熵呢？下面我们来看一个更加典型的例子来进一步理解。</p>
-<p>假设你拿出了你的电脑，按下开关，会有三种可能性，下表列出了每一种可能的概率与其对应的信息量。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">序号</th>
-<th style="text-align:center">事件</th>
-<th style="text-align:center">概率</th>
-<th style="text-align:center">信息量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">A</td>
-<td style="text-align:center">电脑正常开机</td>
-<td style="text-align:center">0.7</td>
-<td style="text-align:center">$ -log(p(A))=0.36 $</td>
-</tr>
-<tr>
-<td style="text-align:center">B</td>
-<td style="text-align:center">电脑无法开机</td>
-<td style="text-align:center">0.2</td>
-<td style="text-align:center">$ -log(p(B))=1.61 $</td>
-</tr>
-<tr>
-<td style="text-align:center">C</td>
-<td style="text-align:center">电脑爆炸了</td>
-<td style="text-align:center">0.1</td>
-<td style="text-align:center">$ -log(p(C))=2.30 $</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注：文中的对数为均为自然对数</p>
-</blockquote>
-<p>我们有了所有可能性的信息量，而熵被定义为所有信息量的期望，以描述该事件的自信息量，即：</p>
-<p>\begin{equation}<br>
-H(X)=- \sum_{i=1}^np(x_i)log(p(x_i)) \label{entropy}<br>
-\end{equation}</p>
-<p>其中$ n $代表所有的$ n $种可能性，所以上面问题的结果就是：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(X) &amp;= - \left [ p(A)log(p(A))+p(B)log(p(B))+p( C)log(p( C))  \right ]\\ \nonumber<br>
-&amp;= 0.7 \times 0.36 + 0.2 \times 1.61 +0.1 \times 2.30\\ \nonumber<br>
-&amp;= 0.804<br>
-\end{align}</p>
-<p>值得一提的是，如投掷硬币这类比较特殊的问题，它只有两种可能，正面朝上或背面朝上，我们称之为<span class="label danger">0-1分布</span>问题（二项分布的特例）。对于这类问题，熵的计算方法可以简化为如下算式：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(X) &amp;=- \sum_{i=1}^np(x_i)log(p(x_i)) \\<br>
-&amp;= -p(x)log(p(x))-(1-p(x))log(1-p(x))\\ \label{binomial_distribution_entropy}<br>
-\end{align}</p>
-<h2 id="3-3-相对熵（KL散度）">3.3 相对熵（KL散度）</h2>
-<p>相对熵又称KL散度，如果我们对于同一个随机变量x有两个独立的概率分布$ P(x) $和$ Q(x) $，我们可以使用KL散度来衡量这两个分布的差异。具体来说，相对熵就是<span class="label danger">用$ P $来描述目标问题</span>相比<span class="label danger">用$ Q $来描述</span>，得到的信息增量。</p>
-<p>在机器学习中，$ P $往往用来表示样本的真实分布，比如$ [1,0,0] $表示当前样本属于第一类。$ Q $用来表示模型所预测的分布，比如$ [0.7,0.2,0.1]。 $<br>
-直观的理解就是如果我们用$ P $分布来描述样本，那么就非常完美。而用$ Q $分布来描述样本，虽然可以大致描述，但是不是那么的完美，信息量不足，需要额外的一些“信息增量”才能达到和$ P $一样完美的描述。如果我们通过对模型的反复训练使$ Q $也能完美的描述样本，那么就不再需要额外的“信息增量”，$ Q $等价于$ P $。可以看出，减小$ P $与$ Q $之间的差距，即降低相对熵就是机器学习在训练模型时要达到的目标。</p>
-<p>KL散度的公式推导基于使用不同的编码描述目标样本所产生的熵差，这里不详细推导，直接给出KL散度的计算公式：</p>
-<p>\begin{equation}<br>
-D_{KL}(p||q)=\sum_{i=1}^np(x_i)log(\frac{p(x_i)}{q(x_i)}) \label{kullback_leibler_divergence}<br>
-\end{equation}</p>
-<p>其中$ n $为事件的所有可能性。$ D_{KL} $的值越小，表示$ q $分布与$ p $分布越接近。</p>
-<h2 id="3-4-交叉熵">3.4 交叉熵</h2>
-<p>对公式\eqref{kullback_leibler_divergence}变形可以得到：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-D_{KL}(p||q) &amp;= \sum_{i=1}^np(x_i)log(p(x_i)) - \sum_{i=1}^np(x_i)log(q(x_i))\\ \nonumber<br>
-&amp;= -H(p(x)) + \left [ - \sum_{i=1}^np(x_i)log(q(x_i)) \right ]<br>
-\end{align}</p>
-<p>等式的前一部分恰好是$ p $的熵，而将等式的后一部分定义为交叉熵：</p>
-<p>\begin{equation}<br>
-H(p|q)=- \sum_{i=1}^np(x_i)log(q(x_i)) \label{cross_entropy}<br>
-\end{equation}</p>
-<p>在机器学习中，为了评估样本真实类别(label)和模型预测类别(predicts)之间的差距，我们使用KL散度来判定模型的优劣，即$ D_{KL}(y||\hat y) $，由于KL散度中的前一部分$ −H(y) $是样本类别在真实世界中的熵，其固定不变，故在优化过程中，只需要关注交叉熵就可以了。所以一般在机器学习中将模型的损失(loss)直接定义为交叉熵。这里的损失指的就是用<span class="label danger">模型预测分布</span>描述样本相较于<span class="label danger">样本真实分布</span>损失的信息量，优化损失函数（即交叉熵）使其最小化，便可令模型预测分布与样本真实分布尽可能的接近，使模型的预测能力增强。</p>
-<p>特殊的，当随机$ P $和$ Q $是都二项分布时，即$ P $和$ Q $只有两个状态$ 0 $或$ 1 $，那么它们的差异可以用二进制交叉熵表示。令$ p $为$ P $的状态$ 1 $的概率，则$ (1-p) $是$ P $的状态$ 0 $的概率，同理，令$ q $为$ Q $的状态$ 1 $的概率，$ (1-q) $为$ Q $的状态$ 0 $的概率，则$ P $与$ Q $之间交叉熵为：</p>
-<p>\begin{equation}<br>
-H(p|q)=-(plog(q)+(1-p)log(1-q)) \label{binomial_cross_entropy}<br>
-\end{equation}</p>
-<h1>4 损失函数</h1>
-<h2 id="4-1-分类模型损失函数">4.1 分类模型损失函数</h2>
-<p>这里我们只讨论单分类问题，即每一个样本只能属于一个类别，比如一张图片只能是猫或者是狗，不能既有猫又有狗。那么此类问题的机器学习模型计算某一个样本的损失一般的方法是：</p>
-<p>\begin{equation}<br>
-loss = - \sum_{i=1}^n  y_ilog(\hat{y_i}) \label{loss}<br>
-\end{equation}</p>
-<p>其中$ n $代表总类别数量。举例说明样本损失的计算方法，比如有如下样本：<br>
-<img src="/images/20210524-1/4.webp" alt="图4：猴子图片样本"><br>
-对应的标签和预测值如下表：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">*</th>
-<th style="text-align:center">猫</th>
-<th style="text-align:center">猴子</th>
-<th style="text-align:center">老鼠</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Label</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">Pred</td>
-<td style="text-align:center">0.3</td>
-<td style="text-align:center">0.6</td>
-<td style="text-align:center">0.1</td>
-</tr>
-</tbody>
-</table>
-<p>那么模型对该样本损失为：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-loss &amp;= -(0 \times log(0.3) + 1 \times log(0.6) + 0 \times log(0.1))\\ \nonumber<br>
-&amp;= -log(0.6)<br>
-\end{align}</p>
-<p>而对应一批样本（一个batch），则将其loss定义为其中所有样本loss的平均值（期望）：<br>
-\begin{equation}<br>
-batch\ loss = -\frac{1}{m} \sum_{j=1}^m \sum_{i=1}^n  y_ilog(\hat{y_i}) \label{batch_loss}<br>
-\end{equation}<br>
-其中$ m $为当前batch中的样本数。</p>
-<h2 id="4-2-GAN损失函数">4.2 GAN损失函数</h2>
-<p>2014由Ian Goodfellow首次提出的GAN损失函数为：<br>
-\begin{equation}<br>
-\min_G \max_D V(D,G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \label{GAN_loss}<br>
-\end{equation}</p>
-<p>看到这一长串公式可能让人很难理解，下面我们将详细讲解其推导过程。</p>
-<h3 id="4-2-1-判别器损失">4.2.1 判别器损失</h3>
-<p>在GAN中，判别器（Discriminator）的优化目标是缩小判别器输出$ D(x) $的概率分布$ D $与样本真实标签概Label率分布$ L $的差异。其中$ L $与$ D $均为二项分布，$ L $概率分布只有两个取值100%或0%，即$ 1 $和$ 0 $；而$ D $概率分布表示判别器认为样本为真的概率，它的取值为100% ~ 0%，即$ [0,1] $。</p>
-<p>那么，如果一个样本（一幅图片）$ x $是真实的（real），$ p $则为$ 1 $，$ q $为$ D(x_r) $，其交叉熵为：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(L|D_r) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
-&amp;= -(1 \times logD(x_r)+(1-1) \times log(1-D(x_r))\\<br>
-&amp;= -logD(x_r)  \label{discriminator_real_entropy}<br>
-\end{align}</p>
-<p>如果一个样本是生成器生成的，即为假的（fake），$ p $则为$ 0 $，$ q $为$ D(x_f) $，其交叉熵为：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(L|D_f) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
-&amp;= -(0 \times logD(x_f)+(1-0) \times log(1-D(x_f))\\<br>
-&amp;= -log(1-D(x_f))  \label{discriminator_fake_entropy}<br>
-\end{align}</p>
-<p>于是，对于一个同时含有真实样本（real）与生成器生成样本（fake）的样本集，其交叉熵的平均值（期望）为：</p>
-<p>\begin{equation}<br>
-H(L|D) = -\frac{1}{M}(\sum_{x_r}^M log(D(x_r)) + \sum_{x_f}^M log(1-D(x_f)))  \label{discriminator_entropy}<br>
-\end{equation}</p>
-<p>如上所述，判别器的优化目标是缩小$ D $与$ L $概率分布的差异，即最小化交叉熵。所以可以将判别器损失定义为</p>
-<p>\begin{equation}<br>
-Loss_D = H(L|D) = -(\frac{1}{M}\sum_{x_r}^M log(D(x_r)) + \frac{1}{M}\sum_{x_f}^M log(1-D(x_f)))  \label{discriminator_loss_1}<br>
-\end{equation}</p>
-<p>为便于计算与表示，可将等式转化为如下的等价形式，即讲整体的交叉熵期望转换为对真假样本交叉熵各自期望的和。</p>
-<p>\begin{equation}<br>
-Loss_D = E_{x_r} \left [ -log(D(x_r)) \right ] + E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{discriminator_loss_2}<br>
-\end{equation}</p>
-<p>其中$ x_f $特指生成器生成的假样本，一般使用$ G(z) $表示，$ z $为服从正太分布$ p(z) $的随机向量，而使用$ x $表示收集的样本集中的样本（图片）。则最终将判别器损失函数定义为：<br>
-\begin{equation}<br>
-Loss_D = - \lbrace E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \rbrace \label{discriminator_loss_3}<br>
-\end{equation}</p>
-<h3 id="4-2-2-生成器损失">4.2.2 生成器损失</h3>
-<p>生成器（Generator）的优化目标是让生成器的输出$ x_f $尽可能以假乱真，即判别器对生成器生成的样本判为$ 1 $（为真）的概率越高越好。</p>
-<p>那么，如果一个样本$ x $是真实的（real），$ p $则为$ 1 $，$ q $为$ D(x_r) $，其交叉熵为：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(L|D_r) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
-&amp;= -(1 \times logD(x_r)+(1-1) \times log(1-D(x_r))\\<br>
-&amp;= -logD(x_r)  \label{generator_real_entropy}<br>
-\end{align}</p>
-<p>事实上，生成器G不关心真实样本（real）的情况，它只考虑其生成的$ x_f $是否可以欺骗判别器。从公式\eqref{generator_real_entropy}中也可以看出，在训练生成器时，对于真实样本的交叉熵$ -logD(x_r) $为固定值，并不会因生成器的优劣而变化。</p>
-<p>如果一个样本是生成器生成的，即为假的（fake），$ p $则为$ 0 $，$ q $为$ D(x_f) $，其交叉熵为：</p>
-<p>\begin{align}<br>
-\nonumber<br>
-H(L|D_f) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
-&amp;= -(0 \times logD(x_f)+(1-0) \times log(1-D(x_f))\\<br>
-&amp;= -log(1-D(x_f))  \label{generator_fake_entropy}<br>
-\end{align}</p>
-<p>于是，对于一个同时含有真实样本（real）与生成器生成样本（fake）的样本集，其交叉熵的平均值（期望）为：</p>
-<p>\begin{equation}<br>
-H(L|D) = -\frac{1}{M}(\sum_{x_r}^M log(D(x_r)) + \sum_{x_f}^M log(1-D(x_f)))  \label{generator_entropy}<br>
-\end{equation}</p>
-<p>如上所述，生成器的优化目标让其的输出$ x_f $尽可能以假乱真，交叉熵公式\eqref{generator_entropy}代表了判别器鉴别假样本的能力。对于一个确定的假样本，交叉熵越小，意味着判别器对假样本的判别结果概率分布与生成器生成的假样本概率分布差距越小。而在判别器模型固定的情况下，如果这个交叉熵越大，则说明生成器生成的样本可以欺骗判别器，达到以假乱真的效果。所以，生成器的优化目标可以描述为在判别器模型固定的情况下最大化交叉熵，进而将判别器损失定义为：</p>
-<p>\begin{equation}<br>
-Loss_G = -H(L|D) = \frac{1}{M}\sum_{x_r}^M log(D(x_r)) + \frac{1}{M}\sum_{x_f}^M log(1-D(x_f))  \label{generator_loss_1}<br>
-\end{equation}</p>
-<p>为便于计算与表示，可将等式转化为如下的等价形式，即讲整体的交叉熵期望转换为对真假样本交叉熵各自期望的和。</p>
-<p>\begin{equation}<br>
-Loss_G = E_{x_r} \left [ -log(D(x_r)) \right ] + E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{generator_loss_2}<br>
-\end{equation}</p>
-<p>由于在训练生成器时，公式中$ E_{x_r} \left [ -log(D(x_r)) \right ] $为固定值，所以生成器损失可以简化为</p>
-<p>\begin{equation}<br>
-Loss_G =  E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{generator_loss_3}<br>
-\end{equation}</p>
-<p>其中$ x_f $特指生成器生成的假样本，一般使用$ G(z) $表示，$ z $为服从正太分布$ p(z) $的随机向量。则最终将生成器损失函数定义为：</p>
-<p>\begin{equation}<br>
-Loss_G = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \label{generator_loss_4}<br>
-\end{equation}</p>
-<h3 id="4-2-3-整体损失函数表示">4.2.3 整体损失函数表示</h3>
-<p>现在我们再来看Ian Goodfellow提出的GAN损失函数，就能比较好的理解了。</p>
-<p>\begin{equation}<br>
-\min_G \max_D V(D,G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
-\end{equation}</p>
-<p>如2.2所述，在训练GAN的过程中，我们会迭代训练判别器与生成器。具体来说，先固定生成器不动，将判别器训练到一定程度；然后固定判别器，再进一步训练生成器；然后固定生成器，训练判别器……</p>
-<p>对于判别器，在生成器固定不动的情况下，最大化优化函数：</p>
-<p>\begin{equation}<br>
-\max_D V(D) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
-\end{equation}</p>
-<p>其等价于优化（最小化）4.2.1中的判别器损失函数\eqref{discriminator_loss_3}：</p>
-<p>\begin{equation}<br>
-Loss_D = - \lbrace E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \rbrace \nonumber<br>
-\end{equation}</p>
-<p>对于生成器，在判别器固定不动的情况下，最小化优化函数：</p>
-<p>\begin{equation}<br>
-\min_G V(G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
-\end{equation}</p>
-<p>其中等式的前一项$ E_{x\sim p_{data}(x)} \left [ logD(x) \right ] $不会随着生成器的训练发生变化，即为一个常量，则优化函数可简化为：</p>
-<p>\begin{equation}<br>
-\min_G V(G) = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
-\end{equation}</p>
-<p>其等价于优化（最小化）4.2.2中的生成器损失函数\eqref{generator_loss_4}：<br>
-\begin{equation}<br>
-Loss_G = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \nonumber<br>
-\end{equation}</p>
-<h1>5 生成对抗的本质作用</h1>
-<p>相信通过上文你已经彻底理解了Ian Goodfellow提出的GAN原理与其损失函数定义。本节将解释GAN中生成器与判别器迭代训练时的具体关系，并说明生成器的本质作用。<br>
-<img src="/images/20210524-1/5.webp" alt="图5：GAN训练过程"><br>
-图5展示了GAN的训练过程，其中：</p>
-<ul>
-<li>蓝线：判别模型的分布$ D $（线中点为样本点，样本点越高，表示其为真实样本的概率越大）</li>
-<li>黑虚线：真实数据分布P$ (x) $</li>
-<li>绿实线：生成模型分布$ G $</li>
-<li>$ x $线：真实样本数据</li>
-<li>$ z $线：随机向量，一般为正太分布（G的输入）</li>
-</ul>
-<p>(a)为训练最初阶段。$ x $是真实样本数据，其始终服从黑虚线的概率分布（假设为正太分布）。随机向量$ z $通过生成器转变为样本。但由于初始状态的生成器效果差，无法有效拟合真实样本数据，即生成器模型分布（绿实现）的均值偏离真实数据分布（黑虚线）的均值。而初始状态的判别器效果同样较差，其分布有强烈波动（蓝线）。</p>
-<p>(b)过程首先固定生成器，训练判别器，使判别器可以准确的判断真样本x和假样本$ G(z) $。可以看到图中判别器（蓝线）在生成器分布（绿线）均值处的值明显下降，即判断其为真实样本的概率下降。</p>
-<p>(c) 过程固定判别器，训练生成器。生成器在得到判别器在原始G分布的均值处判真概率下降后，调整生成器的分布，使其均值避开判别模型分布概率较低的区域，进而使其分布逐渐靠近真实数据分布$ P(x) $。</p>
-<p>循环(b)(c)，最终使生成模型分布G完全拟合真实数据分布$ P(x) $，在这种情况下判别器对真实样本和生成的假样本输出的判真概率相同，即无法辨别生成器产生的假样本，此时训练结束。</p>
-<p>从结果上来看，生成器的作用是将随机向量$ z $映射到真实样本$ x $上。其通过不断与判别器对抗，尝试调整自身分布，最后将生成模型输出分布$ G $拟合为真实数据分布$ P(x) $。一般来讲，最后我们得到的生成器可以将符合某种分布的输入转换为目标分布的样本输出。</p>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-      </categories>
-      <tags>
-        <tag>生成对抗网路</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>A fully scalable big data framework for Botnet detection based on network traffic analysis 研读报告</title>
-    <url>/archives/820ee20f.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>中文译名“可扩展的僵尸网络流量检测大数据框架”。本工作由S.H. Mousavi等人完成，于2019年发表于Information Sciences。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<h1>Abstract</h1>
-<p>传统僵尸网络检测方法受限于系统可接受的网络带宽，无法满足Gbps级的网络需求。因此在数据收集、存储、特征提取和分析方面都存在瓶颈。本文提出了一个可扩展的大数据框架，可对僵尸网络检测系统中每个组件进行扩展。框架可用于任何僵尸网络检测方法，包括统计方法、机器学习方法和基于图的方法。实验结果表明本框架可在一个真实网络环境中实现5Gbps的吞吐量和5000万个IP地址访问。框架运行时间随着输入数据的增长呈对数上升。</p>
-<h1>1. Introduction</h1>
-<p>当前互联网应用的规模快速增长，网络安全威胁加剧，这使传统网络安全方法逐渐失效。如今僵尸网络是最严重的网络安全威胁之一，每个僵尸网络由分布在整个互联网上的受感染主机网组成。每个感染主机(Bots)都由僵尸网络的管理者(Botmaster)通过代理软件控制，两者之间的通信被称为命令与控制通道(C&amp;C通道)。</p>
-<h1>2. Related word</h1>
-<p>可扩展性是僵尸网络检测方法面临的重要挑战之一，但目前没有工作实现了在高速网络带宽的可扩展性，即同时实现数据处理与存储的可伸缩性。</p>
-<h1>3. Proposed scalable big data framework for botnet detection Scalability(可扩展的僵尸网络检测框架)</h1>
-<p>在检测僵尸网络的整体过程中，即从网络嗅探到数据收集到特征提取最后到部署分析算法(如机器学习、基于图的分析、基于统计的分析等)都必须考虑数据量的可伸缩性。图1显示了该框架的总体架构，该框架可以从被监控的网关手机数据，进行被动分析。也可以部署在大型ISP或拥有大量网络用户的企业级组织。<br>
-<img src="/images/20210324-1/1.webp" alt="图 1: 僵尸网络检测框架"></p>
-<h2 id="3-1-网络流量处理模块">3.1 网络流量处理模块</h2>
-<p>该模块对网络流量进行处理，根据需求从接受到的流量中提取原始网络数据。这里配置了一些常用的僵尸网络检测数据获取工具，包括DNS流量提取器、Http流量提取器以及NetFlow流量提取器。所有工具必须以符合整体处理流程的速度处理数据，并且每个工具并行处理输入的流量。这个模块中的工具可以选取一些常见的并行网络流量处理工具，如PFring[1]与Nprobe<a href="Norobe%E6%98%AF%E4%B8%80%E7%A7%8D%E6%8E%A2%E9%92%88%E5%9E%8B%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7">2</a>。另外如Napatech[3]等专为高速网络流量开发的高性能硬件也可于此模块部署。</p>
-<h2 id="3-2-可伸缩的队列模块">3.2 可伸缩的队列模块</h2>
-<p>第二个模块任务是同步数据的生产者和消费者。由于有许多数据生产者和消费者并行处理原始数据，因此该模块提供了一个分布式队列系统来进行协调。在此模块的协助下，即使后续模块没有准备好或发生拥塞，框架的可用性也不会受到影响。网络上可能分布着许多数据生产者传感器，每个传感器只处理整个网络的一部分，并将原始数据发送到一个队列系统中。此模块将在一个列队中聚合所有原始数据，并为下一个模块中的并行处理提供基础设施。这个模块可以使用Apache Kafka[4]和Redis[5]等分布式队列系统。</p>
-<h2 id="3-3-流处理模块">3.3 流处理模块</h2>
-<p>队列模块就像一个枢纽模块，不需要任何处理就可以接收和保存原始数据。而流处理模块需要将所有接收到的数据统一处理并存储在一个可伸缩的数据结构中。其主要有一下两个任务：首先，它需要处理接收到的数据，然后进行清理和解析，最后将它们存储在一个可扩展的大数据存储系统中(如HDFS)。其次，它需要根据检测方法提取特征，为后续的分析模块做准备。</p>
-<h2 id="3-4-大数据平台">3.4 大数据平台</h2>
-<p>检测APT和复杂僵尸网络需要在大时间窗口中存储和处理网络行为。因此我们选取Hadoop平台进行数据存储与处理，Hadoop本身具有可扩展性。值得注意的是，数据存储格式和压缩方案对其它模块性能有很大影响，通常大数据处理的瓶颈是I/O和数据从硬盘到主存的传输速度。数据压缩可以有效降低主存与磁盘之间的数据交换。由于僵尸网络流量都是结构化数据，需要进行多次聚合和统计操作，因此这里选择柱状存储格式。Apache Parquet可实现结构化、柱状存储并支持多种压缩编解码器[6]。在这种架构下，可能有许多消费者进程，其中每个进程都处理输入记录的一部分，并将预处理和解析后的数据存储到HDFS parquet文件中。</p>
-<h2 id="3-5-分析模块">3.5 分析模块</h2>
-<p>根据输入数据选择最佳的存储格式与压缩方法，将预处理并格式化后的数据存储在可扩展的大数据平台上。分析模块还要为各种不同的僵尸网络检测方法提供工具与基础设施。</p>
-<h1>4. Experimental setup and results</h1>
-<p>采用Bilge等人提出的Disclosure模型[7]测试评估本框架。改模型是使用基于NetFlow特征的机器学习算法检测C&amp;C服务器，具体步骤如下：</p>
-<ol>
-<li>环境部署</li>
-<li>收集并导入NetFlow数据</li>
-<li>基于特征的检测算法</li>
-<li>基于特征的NetFlow</li>
-<li>基于hive和用户自定义功能提取特征</li>
-<li>准备训练和测试数据集</li>
-<li>使用SparkML部署机器学习算法</li>
-</ol>
-<h1>5. Experimental results</h1>
-<p>实验主要目的是评估框架可伸缩性以及在C&amp;C服务器检测中的效果。实验验证本框架在数据收集、存储、特征提取和机器学习算法四个阶段都可以提供可扩展性，并且发现了网络检测最复杂的阶段是特征提取。</p>
-<h1>6. Conclusions</h1>
-<p>近年来，随着网络规模和僵尸网络复杂性的增长，僵尸网络检测安全策略的可扩展性称为主要挑战。目前为止，已发表的研究还没有提出有效的解决大型网络的可伸缩性部署的解决方案。本文为此问题提出了一个完整的策略框架，但也存在缺点。框架安装需要充足的计算资源，小型企业负担不起，云服务提供商为大数据部署提供计算基础设施或许称为可能。</p>
-<h1>References</h1>
-<ul>
-<li>[1] S. Gallenmüller , P. Emmerich , F. Wohlfart , D. Raumer , G. Carle , Comparison of frameworks for high-performance packet IO, in: Architectures for Net- working and Communications Systems (ANCS), 2015 ACM/IEEE Symposium on, IEEE, 2015, pp. 29–38 .</li>
-<li>[2] L. Deri , N. SpA , nProbe: an open source netflow probe for gigabit networks, in: TERENA Networking Conference, 2003 .</li>
-<li>[3] Napatech, Zero Packet Loss, 2016, <a href="http://www.napatech.com/">http://www.napatech.com/</a> .</li>
-<li>[4] N. Garg , Apache Kafka, Packt Publishing Ltd, 2013 .</li>
-<li>[5] J.L. Carlson , Redis in Action, Manning Publications Co., 2013 .</li>
-<li>[6] D. Vohra , Apache parquet, in: Practical Hadoop Ecosystem, Springer, 2016, pp. 325–335 .</li>
-<li>[7] L. Bilge , D. Balzarotti , W. Robertson , E. Kirda , C. Kruegel , Disclosure: detecting botnet command and control servers through large-scale netflow anal- ysis, in: Proceedings of the 28th Annual Computer Security Applications Conference, ACM, 2012, pp. 129–138 .</li>
-<li>[8] <a href="https://www.sciencedirect.com/science/article/pii/S0020025519309703">A fully scalable big data framework for Botnet detection based on network traffic analysis</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>论文研读报告</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>僵尸网络检测</tag>
-        <tag>大数据</tag>
-        <tag>分布式计算</tag>
-        <tag>Spark</tag>
-        <tag>可扩展性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>The Threat of Adversarial Attacks Against Machine Learning in Network Security: A Survey 研读报告</title>
-    <url>/archives/9863deb2.html</url>
-    <content><![CDATA[<h1>摘要</h1>
-<p>机器学习算法使许多决策系统执行更快、更准确、更高效。然而相比其她领域，机器学习在网络安全中的应用面临更多的主动对抗动机的威胁。因为机器学习在网络安全中的应用(如恶意软件检测、入侵检测和垃圾邮件过滤)本身就是对抗性的。这可以被视为攻击者和防御者之间的一场军备竞赛，对手不断探测机器学习系统，并将其输入设计为可绕过系统，诱导系统做出错误预测的样本。在本项调查中，我们首先将机器学习从技术、任务和深度角度分类。然后介绍了机器学习在网络安全应用中的类别。接下来我们研究了网络安全中针对机器学习的各种对抗性攻击，并介绍了网络安全中对抗性攻击的两种分类方法。首先，我们根据网络安全应用的分类对网络安全中的对抗攻击进行划分。其次，我们将网络安全中的对抗攻击从问题空间与特征空间两个维度进行划分。然后我们分析了针对基于机器学习的网络安全应用程序上的对抗攻击的各种防御方案。最后，我们总结了一个对抗风险网格图，使用此图评估了几种针对应用于网络安全的机器学习的对抗攻击。我们还确定了每个攻击分类在网格图中的位置。</p>
-<h1>简介</h1>
-<p>设计者在设计机器学习算法时更注重准确率和效率，这些模型的安全性和鲁棒性往往遭到忽视。研究证明对抗样本可以轻易欺骗机器学习系统。对抗样本是一种特制的输入，它可以导致机器学习模型对输入进行错误的分类。机器学习系统通常在两个阶段接收数据，分别是在训练阶段输入的训练数据和在预测阶段输入的测试数据。将网络安全领域的对抗攻击进行<span class="label info">问题空间</span>和<span class="label info">特征空间</span>两个维度的划分。基于机器学习任务和技术的判别自主性与指令自主性来评估网络安全中对抗攻击的风险。</p>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>论文研读报告</category>
-      </categories>
-      <tags>
-        <tag>网络安全</tag>
-        <tag>机器学习</tag>
-        <tag>对抗样本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey 研读报告</title>
-    <url>/archives/92fdf3b8.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>中文译名“调研：面向NIDS的对抗攻击与防御”。本调查由<a href="https://laptrinhx.com/author/ilja-moisejevs">Ilja Moisejevs</a>整理完成，文章与2019年发表于IJAE2019。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<h1>摘要</h1>
-<p>世界正在变得越来越数字化和互联化，保护我们的数字设备已经不再是一个简单的问题。自上世纪80年代提出入侵检测系统（IDS）的概念以来，他一直是网络安全的一个重要组成部分。传统IDS系统依赖于特征匹配规则与启发式算法，然而随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。</p>
-<p>ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</p>
-<h1>1. 引言</h1>
-<p>将机器学习技术引入安全领域并不罕见，而IDS负责监督通过主机的流量（HIDS）或检测网络本身（NIDS）。2008至2018年期间，关于在IDS设置机器学习算法的相关研究爆发式上升。然而研究表明机器学习（包括深度学习）系统并不是完美的，对手可以在训练阶段和测试阶段对机器学习系统进行攻击，前者我们称为中毒攻击，而后者则称为回避攻击。尽管在图像领域已经对上述几种攻击进行了研究，但网络安全领域的研究仍有巨大的漏洞。</p>
-<p>针对中毒攻击主要采取异常检测和鲁棒学习的防御手段，而针对对抗攻击的防御手段较多，包括对抗训练、梯度隐藏、输入修正、检测干扰、加入额外NULL类以及形式化方法。上述方法并非都适用于IDS。</p>
-<p>这篇文章的动机是做出首个关于IDS对抗攻击和防御的调研。目前已经有一些关于IDS分类器本身的调研，但没有站在IDS对手角度的调研。值得注意的是由于基于机器学习的IDS的对抗攻击和防御是一个新颖的话题，我们有时被迫跳出纯粹的ML-IDS，回顾基于传统规则库和统计法的攻击和防御技术。对于IDS对抗攻击的防御措施目前缺乏相关研究，我们希望在不就的将来，这些淋雨得到补充。</p>
-<h1>2. 入侵检测系统与机器学习</h1>
-<h2 id="2-1-IDS历史简介">2.1 IDS历史简介</h2>
-<p>从1980年James Anderson发表了一篇具有开创性意义的论文《Computer Security Threat Monitoring and Surveillance》开始，IDS的概念已经存在了近40年。文中Anderson为政府组织介绍了审计追踪的概念，以及如何使用它们来跟踪滥用和恶意用户的行为。它的出现致使几乎所有操作系统的审计子系统得到巨大的改进，并未IDS的可能性播下种子。</p>
-<p>IDSs的下一个里程碑式发展来自Dorothy Denning博士，她也是在从事一个政府项目时试图根据用户的行为活动创建用户档案，以分析政府大型机器的审计追踪记录。1984年，她协助开发了第一个入侵检测模型——Intrusion Detection Expert System (IDES)，并在同年将模型发布，为随后的IDS工作奠定了基础。</p>
-<p>商业化IDSs发展始于20世纪90年代初。Haystack Labs的Stalker是第一款推出的商业HIDS。其它商业IDS还有SAIC的Computer Misuse Detection System (CMDS) 以及Air Force’s Cryptologic Support Center的Automated Security Measurement System (ASIM)。1994年，ASIM项目转型为一家商业公司(the Wheel Group)并发布了第一款商业NIDS——NetRanger。</p>
-<h2 id="2-2-IDS的分类">2.2 IDS的分类</h2>
-<p>讨论IDSs要从两个重要维度——部署位置和检测目标。从前者说，可以将IDSs部署在单个主机上(称为HIDS)，也可以部署在网络本身上，监督不同节点之间的数据包流(称为NIDS)。如上所述，HIDS是首先被发明和部署的，而NIDS是最近才开发出来的。</p>
-<p><img src="/images/20210317-1/1.webp" alt="图 1: 一个含有HIDS和NIDS的网络典型结构图"></p>
-<p>当然，每种方法都有其优点和缺陷。例如HIDS可以单独安装于各个主机上，并有效的判断主机的损坏程度。另一方面，NIDS是一种整体检测方案，可以节省安装时间和成本，通常被认为是抵御外部入侵的首选方案。如今许多组织将两者结合起来使用。</p>
-<p>IDSs的第二各重要维度四它们的运作方式。广义的说，IDS分为基于特征和基于异常两种。与反病毒领域类似，基于特征的IDS专注于查找已知的威胁，特征是有效的指纹，允许IDS快速扫描数据包，并确定它是否携带有害信息。而基于异常的IDS专注于检测未知威胁，他们通常比基于特征的系统更复杂，最近已经发展到使用机器学习，因此它是本次调研的重点。</p>
-<h2 id="2-3-IDSs中的机器学习">2.3 IDSs中的机器学习</h2>
-<p>2002年 Mahoney 和 Chan 最早尝试将机器学习整合到IDSs中。他们的系统通过应用层的数据链接学习协议词汇表，以检测未知攻击。</p>
-<p>基于机器学习的IDSs有多种特征。例如IDS社会中最受欢迎的数据集之一KDD-99和它的后代NSL-KDD有多达41个可供建模的特征。不同工作使用不同数量的特征，使用不同的预处理方法。其它方法依赖于端到端的学习(通常是深度学习)，可以免去人工的特征预处理。</p>
-<p><img src="/images/20210317-1/2.webp" alt="图 2: KDD-99和NSL-KDD特征表"></p>
-<p>在过往的工作中，几乎所有类型的机器学习算法都已经运用于IDS中。其中最完整的一项调研由Hindy等人完成。在比较了超过80个使用机器学习的IDS工作后得出结论：最受欢迎的算法是人造神经网络(19%), SVM(14.4%), k-means(11.7%), 决策树(9.0%), 贝叶斯网络(9.0%), 模糊逻辑(7.2%), 以及kNNs(5.4%)。详细情况见图3(2008至2018年发表的有关IDSs文章中97.3%是基于机器学习的)。</p>
-<p><img src="/images/20210317-1/3.webp" alt="图 3: IDS中使用的算法"></p>
-<p>尽管有许多有关ML-IDSs的研究，但实际部署方面却存在明显的差距。Sommer 和 Paxson 对这一问题进行了深入研究，得出了以下五个关键因素：</p>
-<ol>
-<li>机器学习通常更擅长寻找相似点而不是异常点。即使异常检测可以看作是一个分类问题，但如果您正在寻找新的威胁，那么根据定义，您有一个未被充分表达的类别。</li>
-<li>IDS的误判成本非常高。假阳性(误报)的代价非常昂贵，而假阴性(漏报)则可能对系统造成严重的损害。</li>
-<li>机器学习判断结果和操作解释之间存在语义差异。一个“异常”并不一定意味着攻击，而且很难将恶意异常和良性异常区分开来。</li>
-<li>系统输入数据很容易变异。即使在单独网络中，诸如连接带宽的持续时间和应用程序的随机组合都会带来巨大的变化——在短时间内此现象更加严重。</li>
-<li>现实情况会妨碍系统评价。由于敏感性问题，获取拥有某种特殊功能的网络数据是最困难的，因此公开可用的数据集往往是合成的或者匿名的，而两者都不能代表实际生产网络的环境。</li>
-</ol>
-<h1>3 对抗机器学习的分类</h1>
-<p>针对机器学习的攻击也可以像其它安全领域一样，根据对手目标、时机、能力等因素对不同方法进行分组。</p>
-<p>我们借用CIA安全范式(机密性、完整性、可用性)来分析对手的目标。根据CIA范式，攻击者的目标可以是以下三种目标之一。</p>
-<ol>
-<li>
-<span class="label info">机密性(Confidentiality)</span>——获取敏感个人隐私信息，比如训练机器学习的数据集或者机器学习模型本身。
-</li>
-<li>
-<span class="label info">完整性(Integrity)</span>——违反机器学习系统的真实性，例如在不引起主机注意的情况下对输入进行错误的分类。
-</li>
-<li>
-<span class="label info">可用性(Availability)</span>——使机器学习系统完全崩溃。例如令IDSs瘫痪，从而使网络没有防御性能。
-</li>
-</ol>
-<p>时机是指攻击者在机器学习系统运行过程中执行攻击的位置。一般来说机器学习有两个步骤。首先，系统在已知的训练数据集上“训练”，试图学习隐藏在数据中的模式(监督学习)或者理解数据集中不同部分之间的关系(非监督学习)。然后，系统将进行测试，对输入的新数据(未知数据)进行预测。根据任务的不同，这些预测结果可以通过类别标签(分类)、连续变量(回归)和分配簇(聚类)表达。</p>
-<p><img src="/images/20210317-1/4.webp" alt="图 4: 机器学习系统执行的两个步骤"></p>
-<p>事实证明，面对对抗攻击，这两个步骤(训练和预测)都是脆弱的。在训练时进行的攻击旨在向训练池中诸如有害的、恶意的数据，使模型学习一些本不应该学习的内容。我们把这种攻击称为投毒攻击。</p>
-<p>在测试时进行攻击利用了机器学习系统普遍存在的一个有趣特性——它们很容易被精心设计的按特定方向加入扰动的输入所欺骗，我们称之为回避攻击。2013年，Szegedy等人在试图理解神经网络是如何“思考”时发现了这个漏洞。自此以后，有关对抗样本的研究指数级上升，图5可以看出社区对机器学习系统安全性和鲁棒性的兴趣变化。</p>
-<p><img src="/images/20210317-1/5.webp" alt="图 5: 在arxiv上发表的关于对抗机器学习的文章数量"></p>
-<p>另一种可以在测试期间执行的攻击类型是隐私攻击，这些攻击旨在从机器学习系统中提取信息，而不是直接影响其预测。</p>
-<p>结合攻击者的目标和时机，我们恶意得到如图6所示关系：</p>
-<p><img src="/images/20210317-1/6.webp" alt="图 6: 针对机器学习分类器的攻击类型总结"></p>
-<p>最后，能力是指攻击者对目标机器学习系统的认知水平。普遍来看认知水平有三种可能的层次：</p>
-<ol>
-<li>
-<span class="label info">白盒攻击(WhiteBox)</span>：白盒指的是那种详细理解目标机器学习模型内部结构的攻击者。通常涉及一下方面：模型架构、模型权重、训练样本(或训练数据分布)。
-</li>
-<li>
-<span class="label info">黑盒攻击(BlackBox)</span>：黑盒指的是不具备上述知识的攻击者类型。黑盒攻击者执行攻击时，除了分类器的输出外没有更多的访问权限。如果他们只从分类器输出接收到类别标签，则称为硬标签攻击。如果他们同时获得了分类器的分类置信度，则称为置信攻击。
-</li>
-<li>
-<span class="label info">灰盒攻击(GrayBox)</span>：灰盒或许是三者中最含糊不清的一种。它指的是位于白盒与黑盒中间的攻击者。这样的攻击者能够查询模型，并得到输出。他也可能知道模型的特征空间和模型训练集的样本分布。
-</li>
-</ol>
-<p>在这项调研中，我们将重点集中在回避攻击与中毒攻击上，我们忽略了针对IDSs的隐私攻击。我们也尝试记录攻击是在白盒还是黑盒情况下进行，因为这将极大地影响攻击的威力。</p>
-<h1>4 对入侵检测系统的攻击</h1>
-<p>正如在引言中所述，由于针对ML-IDS的对抗攻击研究较少，我们先回顾一下传统IDS的攻击，即基于特征/统计属性的攻击。此类攻击提供了以价值的历史背景。然后我们将讨论针对ML-IDS上的回避攻击，并在本节结束时回顾中毒攻击研究。</p>
-<h2 id="4-1-面向非机器学习IDS的回避攻击">4.1 面向非机器学习IDS的回避攻击</h2>
-<p>TCP/IP变形攻击(TCP/IP transformation attacks)是利用设计复杂的TCP/IP协议内容来阻止IDS正确执行的攻击。IDS受到的第一次严重攻击就是这种类型。</p>
-<p>Chung等人在1995年发起了第一次TCP/IP变形攻击(距离第一个商业IDS发布仅一年)。在这项具有开创性意义的工作中，作者展示了如何将恶意行为分布在几个会话中来逃避检测。</p>
-<p>Paxson是第一个对IDS回避攻击进行分类的人。他们总结了三种攻击方式：</p>
-<ol>
-<li>
-<span class="label info">过载攻击(Overload attack)</span>，这种攻击令监视器负载过大，使它无法接受所有数据并开始丢包。
-</li>
-<li>
-<span class="label info">崩溃攻击(Crash attack)</span>，这种攻击令监视器出现故障或者耗尽其资源使其停止工作。此类攻击比过载攻击要巧妙得多，但攻击者也需要做更多的工作来找出监视器中的漏洞。
-</li>
-<li>
-<span class="label info">掩蔽攻击(Subterfuge attack)</span>，这种攻击制作一种阻碍显示器正常读取的带有干扰的输入。例如在文本中插入“NUL”，并期待监视器会忽略其后面的字符。
-</li>
-</ol>
-<p>前两种攻击可以看作是DoS攻击的变体，而第三种是经典的回避型TCP/IP变形攻击。</p>
-<p>Ptacek 和 Newsham 提出了一种他们定义的TCP/IP变性攻击分类：</p>
-<ol>
-<li>
-<span class="label info">嵌入式攻击(Insertion attack)</span>: 因为IDS会接受所有数据包，而终端主机系统并不会。所以攻击者可以在数据包中“嵌入”只有IDS能看到的数据。例如可以将"\GET/cgi- bin/phf?"转换为"\GET/cgi-bin/pleasedontdetecttthisforme?"，并将"leasedontdetectt", "is" 以及 "orme?" 发送给IDS
-</li>
-<li>
-<span class="label info">回避攻击(Evasion attack)</span>: 与嵌入式攻击相反，这种方法攻击者要确保一些数据包没有到达IDS。还是以上面的例子来讲， 可以将"\GET/cgi- bin/phf?"拆分为"\GET/cgi-bin/p" 和 "hf?"。只要IDS只接受到其中一个就不会发现入侵。在IP层和TCP层都有许多不同的方法，这主要是由于TCP数据包的可重组属性。
-</li>
-<li>
-<span class="label info">拒绝服务攻击(DoS attack)</span>: DoS攻击可以通过资源耗尽等方法令IDS关机并使攻击顺利执行。
-</li>
-</ol>
-<p>作者对4个商业IDSs(WheelGroup’sNetRanger, InternetSecuritySystems’RealSecure, AbirNet’sWall-3, NetworkFlightRecorder’sNFR)进行测试，发现他们都容易受到攻击。他们的结论是，目前尚不清楚如何在部委IDS建立第二次保护的情况下修复已发现的漏洞。</p>
-<p>与Ptacek 和 Newsham相似，Handley等人也发现了IDS能看到与终端系统截然不同的网络，而这可以被攻击者利用。他们讨论了有关网络拓扑差异的问题并深入到协议实现级别进行研究，总结了攻击者可以如何利用IP分片、TTL和IP分片重组等网络属性执行恶意行为。</p>
-<p>下面介绍拟态攻击。在这类攻击中，攻击者首先制作一个恶意数据包，然后修改一部分数据包内容来“模仿”一个良性数据包。例如攻击者可能想要包含某个特定的字符串或函数达到恶意效果，但要使用与良性样本向关联的API调用来隐藏其有效负载的恶意性。</p>
-<p>Wagner 和 Soto 首次成功的对HIDS进行了模拟攻击。他们在白盒环境下访问一个隐藏的信息系统，获取系统内信息并手动篡改文件，同时避免被检测到。他们的攻击方法包括用自己的调用来替换系统调用，并插入大量无操作调用，以混淆真实的恶意活动。</p>
-<p>Tan 等人针对两个不同的基于系统调用的HIDS进行回避攻击。他们设计了几个模仿良性文件的带有漏洞的恶意版本，并逃避了检测。此外他们还演示了一种伪装攻击方法，即将严重的攻击行为伪装为另一种看起来不那么眼红的攻击，这种方法不仅提供了一种回避攻击的方案，还提出了利用另一种攻击转义系统注意力的新思路。</p>
-<p>接下来我们研究多态混合攻击。多态指的是恶意软件从一个实例转变为另一个实例，是一种规避特征检测的方案。而混合指的是恶意短剑通过复制良性实例的属性，来使自身看起来像是良性的。综上所述，多态混合是指不同版本的恶意流量与正常流量混合，以不被IDS检测到的方法。</p>
-<p>多态混合的思想由Fogla等人最先提出，作者对字节分布分类器发起一种多态混合攻击。它查看各种n-gram的出现频率，并判定该频率是否正常。他们的攻击分为三个步骤：</p>
-<ol>
-<li>根据目标网络内数据包的大小分布情况，确定正确的包尺寸，使其不被判定为异常。然后将他们的有效载荷分解为相应数量的数据包。</li>
-<li>设计一种字符替换算法，对有效载荷中的字符进行加密，使它们看起来无害。例如正常的网络流量为可打印字符，而恶意流量的有效载荷却含有不可打印字符。此算法将会修复这个问题。</li>
-<li>使用一些终端字节(terminal bytes)填充数据包，使他们可以与正常流量混合。</li>
-</ol>
-<p>作者表明他们的攻击成功回避了目标IDS(他们将纯多态攻击作为对比基线，由于没有混合操作，纯多态攻击被IDS判定为异常)。</p>
-<p>Kolesnikov 和 Lee 的工作中建立了一个"blender", 其可根据正常的网络情况输出可回避IDS检测的流量变体。他们也是通过一个替换表来实现这项功能，并成功的在4种不同的IDS上测试了他们的攻击。</p>
-<p>后续工作进一步形式化了多态混合的思想，并提出了一个自动生成此类攻击的框架。</p>
-<h2 id="4-2-面向基于机器学习的入侵检测系统的回避攻击">4.2 面向基于机器学习的入侵检测系统的回避攻击</h2>
-<p>我们首先讨论白盒攻击，如第三节所述，这些攻击者拥有对目标ML-IDS最高的认知水平——包括模型梯度。他们在攻击时可以直接优化模型的损失函数(通常是与训练相反的优化方向，即梯度上升)。相关方案多数是在图像识别领域发明的，因此我们会发现针对ML-IDS的攻击通常是直接从图像领域转录的。</p>
-<p>Huang等人分别对三种基于深度学习的IDS(MLP、CNN、LSTM)进行了白盒攻击。作者使用了在图像领域著名的对抗攻击算法FGSM和JSMA。其中FGSM造成的损害最为严重，它将LSTM的精度从98%降低到42%。</p>
-<p>Rigaki 和 Elragal 利用神经网络生成对抗样本攻击SVM、决策树和随机森林。他们也测试了FGSM和JSMA算法，但得出的结论是这种攻击方式会改变太多的特征，所以无法在现实情况复现。另一方面，JSMA对每个数据包只改变平均6%的特征就可以成功避开检测器。实验结果还表明，面对对抗攻击，使用随机森林的IDS健壮性最强。</p>
-<p>Clements等人从借助图像领域的FGSM、JSMA、C&amp;W、ENM 4种不同的攻击算法攻击基于深度学习的NIDS。他们执行了两组攻击，第一组针对完整性，第二组针对可用性，并成功的使用四种算法找到了对抗样本。其中最佳的生成算法为ENM。仅更改了1.38个特征就可以实现回避攻击。</p>
-<p>Wang 等人探讨了视觉领域的IDSs攻击。他们对NSL-KDD数据集实施了JSMA、FGSm、LL-FGSM、Random FGSM、DeepFool和C&amp;W攻击。最终发现JSMA可以以特征变更最少的条件产生有效的对抗样本，不过所有的算法在评估中都可以成功产生有效的对抗样本。</p>
-<p>现在我们讨论黑盒攻击。如第三节所述，黑盒攻击比白盒攻击的限制条件更多，攻击者通常只有很少的信息可以使用。然而这并不是说黑盒攻击不强大，图像领域的一些强力攻击都属于黑盒攻击。</p>
-<p>Rigaki and Garcia 对IDSs中的黑盒攻击进行了全面的研究。作者提出在C&amp;C期间修改流量来避免被入侵检测系统检测到。他们利用良性的Facebook流量训练了一个对抗生成网络(GAN)，并将其放在一个独立的服务器上，利用GAN事实修改恶意流量。经过400次训练，他们成功引导恶意流量以100%的通过率避开ML-IDS检测。值得一提的是，使用很少的数据(仅200个流量)就可以完成对GAN的训练。</p>
-<h2 id="4-3-IDSs上的投毒攻击">4.3 IDSs上的投毒攻击</h2>
-<p>Chung 和 Mok 是第一个尝试在IDSs上进行投毒攻击的人。作者开发了一种针对Autograph蠕虫的过敏性攻击。Autograph的工作流程分为两个阶段：1)根据行为特征发现网络中的可疑节点。2)观察可疑节点及其流量，并将其转化为阻断规则。而过敏攻击的流程为：1)使Autograph相信该节点为感染节点。2)Autograph学习了通过该节点的正常流量，并将此类流量定义为恶意流量。这是一种以可用性为目标的投毒攻击实例。</p>
-<p>Chung 和 Mok 尝试对基于特征的IDS进行投毒攻击，Nelson 和 Joseph 是第一个尝试对基于机器学习的IDS进行投毒的人。虽然他们的工作缺乏经验评估，但却得出了一个令人惊讶的积极结论：攻击者需要指数级的数据才能破坏机器学习算法。然而本文中作者使用了一个不现实的假设：分类器拥有一个无限的训练窗口(而不是滑动窗口)。更现实的情况是分类器根据不平衡的实时数据进行不断的调整。</p>
-<p>Rubinstein 等人他们通过向训练池中注入无意义数据((chaff)，令一个分类器中毒而使即将到来的DoS攻击避开检测。总体来说，作者能够仅通过插入10%的chaff实现令28%的DoS攻击回避检测。同时他们还研究了攻击者的知识水平与攻击时机对攻击成功的影响。</p>
-<p>Kloft and Laskov 尝试对基于质心的聚类算法的异常检测IDS进行投毒攻击。他们从准备好的数据中随机选择一个漏洞和一组正常的训练集，然后执行投毒攻击指导分类器中毒。实验发现，为了使分类器中毒，攻击者要控制35%的训练池(当攻击者能向训练池中加入任意的样本时)或5-15%的流量(当攻击者仅能改变一定数量的样本时)。</p>
-<p>最后，Biggio等人对一个IDS系统进行了3种不同的攻击，其中一种为后门投毒。每个网络数据包被认定为一个单独的样本，标记为正常(合法)或异常(恶意)，并用256维特征向量表示。他们假设攻击者知道系统使用的特征，但不能访问检测器本身(也不知道它是如何工作的——即黑盒场景)。注入的恶意样本模拟其它现有的网络流量(通过模拟相同的有效负载字节直方图)，这样他们就不会被检测到。</p>
-<p>我们希望在本节描述的总体图景是：在IDSs领域中，对抗性研究领域发展良好且活跃。这并不意外，因为IDSs是现代安全系统中最主要的组成部分之一，而重要的是我们需要考虑攻击者会如何利用它们。</p>
-<h1>5 入侵检测系统的防御</h1>
-<p>进入最后一个话题，讨论如何加强ML-IDS的安全性。与机器学习的其他领域(比如图像识别，自然语言处理、语音识别、甚至恶意软件分类)不同，IDSs的对抗性防御领域研究相当稀少。当然这也是因为在此方面的攻击也很少见。尽管如此，以下是我们对避免IDSs受到对抗性攻击的现有工作的总结，与攻击部分相同分为回避与投毒。</p>
-<h2 id="5-1-防御针对IDSs的对抗性回避攻击">5.1 防御针对IDSs的对抗性回避攻击</h2>
-<p>我们讨论的第一种防御类型是探测(detection)。如今大多数的网络蠕虫都是多态的，他们使用加密/解密器将shellcode隐藏。然而有些组件是不加密的——比如解密器。这种组件可以用来作为检测那些难以捉摸的蠕虫的特征。</p>
-<p>这一观点为Akritidis等人的研究奠定了基础。作者为IDS设计了一种启发式防御方案——对"sleds"(缓冲区溢出攻击的一个常见特征)进行检测。简单来说，“sleds"就是攻击者为实现恶意攻击，在有效载荷中所需要的一个NOP命令序列。尽管他们不是第一个提出通过检测"sleds"来实现防御的人，但他们的工作相比之前的研究有巨大的进步。他们实现了一个名为STRIDE的系统，可以检测出先前技术无法检测到的"sleds”，且有较低的误报率与更高的计算效率。</p>
-<p>有时IDSs对网络的理解与终端系统的理解有很大的差异，这是IDSs面临的最大挑战。实际上第4节中许多TCP/IP变形攻击就利用了这一特性。为解决此问题，Handley等人提出为IDS定制一套标准化组件，以解决IDS和终端系统理解数据包时产生的歧义或差异。这种方法最大的难点在于冷启动(cold start)问题(当标准化转换器开始上线运行时，它没有正确状态的信息来进行比较)，另外标准化转换器本身可能成为攻击者的目标。</p>
-<p>Wang 等人提出了随机建模/测试的防御与回避(模仿)策略。在随机建模/测试下，每个监视器运行分析之前都要对有效载荷进行随机分区。直观来看，因为模拟攻击者不知道他们的有效载荷将会被怎样划分与分析，所以他们很难通过简单地填充有效载荷就使其与正常流量混淆。因此即使攻击者拥有目标网络和IDS的全局信息，随机化组件也几乎不可能模拟正常流量。后续研究者中还讨论了基于随机的多态混合防御，不过这种类型的防御只有在攻击者发现随机化种子时才会起作用(这体现了安全领域"猫捉老鼠"的本质)。</p>
-<p>最后，我们发现了一项研究，它使用对抗训练来防范对抗攻击。我们发现IDS社区中研究对抗训练的工作非常少，这是不可思议的，因为对抗训练是其它领域对抗攻击防御中最主流的方法。</p>
-<p>IDS性能不佳时由于有限且不平衡的数据集。目前的解决方法之一是使用数据增强(可以理解为对抗训练)。首先使用蒙特卡罗算法生成入侵数据，然后利用这些数据来增强入侵检测系统的学习能力。最终证明此方法在准确性、精密度、召回率和F1-score方面优于基于机器学习的IDSs。</p>
-<h2 id="5-2-防御针对IDSs的对抗性投毒攻击">5.2 防御针对IDSs的对抗性投毒攻击</h2>
-<p>我们首先讨论为什么机器学习模型容易受到中毒影响。简单来讲，模型为了学习样本中的所有信息，必须做出两个层面的假设，分别位于模型层和数据层。</p>
-<span class="label info">模型假设</span>：有关分类器模型及其对数据表达方式的假设。例如数据为线性(存在一个线性函数可以正确的表示学习任务)、数据可分离(存在一个可以正确分离两个或多个类的边界)以及特征的独立性(每个特征都相互独立且携带了样本真实类别的信息)<br>
-<span class="label info">数据假设</span>：有关数据数据分布的假设。例如数据的稳定性(训练数据集和测试数据集遵循相同的数据分布)和数据点是独立同分布的(i.i.d)。<br><br>
-<p>投毒攻击有意违反上述假设。例如使用与正常数据分布不同的垃圾游戏破坏数据稳定性或扰动数据子集来打破i.i.d假设。针对投毒攻击的防御应围绕上述假设，做到减轻攻击者对它们的影响。广义上讲，投毒防御分为数据消毒(data sanitization)和鲁棒学习(robust learning)两类。</p>
-<p>数据清洗指在将数据输入到模型的训练池之前先进行检查，了解新添加的数据是否有对抗性，从而在有毒样本毒害模型前排除它。Cretu等人在2008发表了一篇具有开创性的论文，其中首次使用了机器学习背景下“数据消毒”的概念。作者利用每个数据点添加到数据集中的时间来判定它有毒的概率，这是因为攻击或异常相比模型的正常训练过程往往出现时间都有限且较短。</p>
-<p>另一种流行的数据消毒的技术是"拒绝负面影响"(Reject On Negative Impact , RONI)技术。它衡量增加/丢弃每个训练样本对分类器精度的负面影响。防御者先训练一个不包含新训练样本输入的模型，然后再训练一个包含新训练样本输入的模型副本。然后比较两个模型的准确性，如果添加候选样本对准确性有损害，那就拒绝此样本。这种方法对垃圾邮件分类器非常有效，可以成功的将垃圾邮件检测率从80%提升到87%，而非垃圾邮件的检测率始终保持在95%以上。</p>
-<p>鲁邦学习假定大部分数据来自已知且可信的来源，但部分数据来此未知或敌对的来源。鲁邦学习的目的是限制未知来源数据对模型的影响。因此有部分工作致力于改良基于主成分分析(PCA)的IDS的鲁棒性。由于PCA容易受到异常值的影响，需要一种更好的算法来防范投毒攻击，Croux等人提出了PCA-Gird算法，该算法大大降低了离群值的影响，能够成功剔除有毒的训练数据。</p>
-<h1>6 结论</h1>
-<p>数值是我们这一代的趋势，随着越来越多的电子设备上线，整个世界变成了一台大型计算机，因此网络安全变得更加重要。传统的安全方法如特征匹配或启发式算法已经不能很好的进行扩展，并逐渐被更加自动化的技术(如机器学习)所取代。</p>
-<p>在这项调研中，我们研究了机器学习在入侵检测系统中的作用。简要概述了IDSs的历史遗迹机器学习是如何进入这个领域的。我们重点研究了攻击者会如何利用ML-IDS本身的特点，遗迹如何使他们对此类攻击具有鲁棒性。</p>
-<p>我们对我来保持谨慎乐观的态度，我们相信机器学习的安全性会在包括网络安全在内各方面有持续的进步。然而我们也知晓在面向IDS的对抗攻击领域，特别是防御方面还有很多工作等待完善。</p>
-<hr>
-<h1>参考文献</h1>
-<ul>
-<li><a href="http://www.cscjournals.org/manuscript/Journals/IJAE/Volume8/Issue3/IJAE-186.pdf">Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>论文研读报告</category>
-      </categories>
-      <tags>
-        <tag>对抗攻击</tag>
-        <tag>入侵检测系统</tag>
-        <tag>机器学习</tag>
-        <tag>回避攻击</tag>
-        <tag>投毒攻击</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《长夜难明》读书笔记</title>
-    <url>/archives/a19fb9aa.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>长夜难明，但总有人燃灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<p>《长夜难明》出版于2017年，是紫金陈社会派推理作品三部曲的最后一部。后于2020年改编电视剧《沉默的真相》。虽然是推理小说，但本书一反常态的总是将罪犯的所作所为先展现出来，然后再描写警方的行动，即先知道结果再讲述推演过程。作为一部社会派推理小说，作者想表达并非推理的步骤，而是借推理过程映射出社会中存在的现象与问题。本书讲述了一批富有正义感的人为了揭露杭市最大企业卡恩集团与地方政府、黑社会勾结，诱骗未成年少女为政府官员提供性服务并借此牟利的犯罪行为，付出了青春、事业、名声、前途、家庭甚至生命的感人故事，但结局却与他们的预期大相径庭。<br>
-<img src="/images/20201028-1/1.webp" alt="图 1"></p>
+<p>如果你是第一次接触陀思妥耶夫斯基的作品，我强烈推荐最先读这本《罪与罚》。作为一部俄罗斯的长篇小说，《罪与罚》绝对不会让你感到一丝的无聊或因人名引起的阅读障碍。这本书每一章环环相扣，从最开始就将读者引入主角疯狂的谋杀计划，然后一步一步实现计划，又紧张刺激的逃离警察追捕，最后主角因自己的“超人”哲学理论崩塌而夜不能寐，陷入幻想与自责的深渊。这本书不仅讨论了深刻而丰富的社会学理论，同时通过高超的情节安排与严密的逻辑框架讲述了一个引人入胜故事。<br>
+<img src="/images/20201020-1/1.webp" alt="图 1"></p>
 <h1>1 人物介绍</h1>
 <ul>
 <li>
-<span class="label default">侯贵平</span><br>
+<span class="label default">拉斯柯尔尼科夫</span><br>
 </li>
 </ul>
-<p>江华大学法律系大学生，为了争取保研名额下乡支教。任教期间发现了卡恩集团与当地黑社会多次诱骗自己班级女学生为政府官员提供性服务的犯罪行为并偷拍到一些照片。侯贵平多次在平康县警察局举报，却迟迟得不到回复。心急如焚的侯贵平将所有证据整理打印并上交到杭市政府，但他的举报信不仅被扣留，在举报当天晚上他被谋害至死。</p>
+<p>拉斯柯尔尼科夫（罗佳、罗季卡）是一名贫穷的法律系大学生，经常典当家物，换得钱财以勉强度日。然而他却有远大的抱负，并且富有思想。在受到当时社会风气的影响下，又了解了拿破仑的生平之后，他产生了所谓“超人”的思想。罗佳认为贪婪的阿廖娜太太有罪，是社会的虱子，并应亲自执行“超人”的权利，对阿廖娜进行制裁。但其实他同时也是因为已经交不起房租，急需钱财，才去杀人越货。在高尚与卑鄙的双重思维下，罗佳谋划并实施了对阿廖娜的谋杀。罗佳是一个矛盾个体，他既是慷慨、善良的人道主义者，在一次火灾中舍身求出一位素不相识的孩子。同时冷酷无情、麻木不仁，在谋杀阿廖娜和后来应付司法调查时残忍、阴险到了失去人性的地步。</p>
 <ul>
 <li>
-<span class="label default">李静</span><br>
+<span class="label default">阿廖娜·伊凡诺夫娜</span><br>
 </li>
 </ul>
-<p>江华大学法律系大学生，侯贵平前女友，江阳的同学，张超教授妻子。虽然李静从未正面对抗过黑暗力量，但她是整个故事的见证者，与正面力量的穿线人。</p>
+<p>阿廖娜·伊凡诺夫娜是一位掌管当铺又经常放高利贷的老太婆。她为人吝啬又贪婪，毫无同情心，熟练于利用当地学生周期性资金短缺、急用钱的特点，只付极少的代价来收购学生们典当的物品。</p>
 <ul>
 <li>
-<span class="label default">江阳</span><br>
+<span class="label default">丽莎维塔·伊凡诺夫娜</span><br>
 </li>
 </ul>
-<p>江华大学法律系大学生，研究生毕业从事杭市检察官工作。在被李静告知侯贵平是被谋害而非自杀以及卡恩集团奸淫幼女等事件后，下定决心查清此案。但随着案情调查的逐渐深入，他愈发感觉到这个案件背后组织的庞大。每次发现证据都会被第一时间销毁，哪怕犯罪同伙已经被抓到公安局，只差将记录他的口供，证人却被人在审问室谋杀。甚至当地刑警队长也是这伙犯罪势力的一员，江阳也因此反被人被诬陷入狱，出狱后被解职，只能靠摆摊维修手机生活。最后患肺癌自杀死亡。</p>
+<p>丽莎维塔·伊凡诺夫娜是阿廖娜·伊凡诺夫娜的妹妹，她为人真诚善良，但却受尽姐姐阿廖娜的欺凌。她无意间闯进罗佳的杀人现场，由于过度惊吓，她即没有反抗也没有喊叫，但依然被更为惊慌的罗佳用斧头劈死。丽莎维塔的死动摇了罗佳的信念，开始怀疑自我，陷入自责的深渊。</p>
 <ul>
 <li>
-<span class="label default">张超</span><br>
+<span class="label default">索尼娅</span><br>
 </li>
 </ul>
-<p>刑辩律师，曾是江华大学法律系教授，侯贵平、李静、江阳等人都是张超的学生。第一个看出侯贵平的死亡不是自杀而另有原因的人，可以说从一开始张超就看清了真相。但出于自保和对李静的私心没有及时报案。后又在为被冤入狱的江阳辩护时失误，导致对江阳误判。最终带着赎罪的心情实施了一场精心策划的地铁抛尸案，为的是将这起轰动大众媒体的抛尸案和卡恩集团的犯罪行为绑定在一起，引发更高层对此事的注意，并进一步引导警方侦破卡恩集团的罪行。</p>
-<ul>
-<li>
-<span class="label default">朱伟</span><br>
-</li>
-</ul>
-<p>现任平康县公安局刑警副队长，曾经的刑警队长，有着极强的正义感，行事干练多次破获重要案件。但为人耿直得罪了不少高层领导，被当时的刑警副队长陷害，停职学习后降级为副队长。后与江阳一起合作，重新调查侯贵平的案件。</p>
-<ul>
-<li>
-<span class="label default">陈明章</span><br>
-</li>
-</ul>
-<p>原平康县公安局法医，后来从公安局辞职，下海经商。陈明章是朱伟的挚友，专业技术高超又有着很强的商业头脑。他为人圆滑，懂得黑白势力之间的平衡，还经常利用自己的技术能力在工作之外获取一些不正当的收入，但其实内心是一个有着极强正义感的人。总是在暗中帮助朱伟、江阳等人对抗黑恶势力。<br>
-<img src="/images/20201028-1/2.webp" alt="图 2"></p>
-<ul>
-<li>
-<span class="label default">李建国</span><br>
-</li>
-</ul>
-<p>现任平康县公安局刑警队长，工作中与朱伟格格不入，后来甚至诬陷朱伟，险些害朱伟入狱。一直充当卡恩集团的保护伞。</p>
-<ul>
-<li>
-<span class="label default">孙红运</span><br>
-</li>
-</ul>
-<p>卡恩集团董事长，在三次产业改革中，从纺织业到食品加工到房地产行业，他总是能预见性的把握最好的产业链，让卡恩集团逐渐发展成杭市最大的民营产业，极大的推动了杭市经济发展。卡恩集团黑白通吃，同时也做着为政府官员提供性服务的工作。孙红运权力极广，不论是省市政府，还是平康县公安局，甚至当地黑社会都有卡恩集团的势力。他曾被江阳抓到犯罪证据，被带到公安局，但却在众多警官和省市领导面前宣传起卡恩集团，最后全身而退。</p>
+<p>女孩索尼娅是一名妓女，曾经与与丽莎维塔认识。由于职业问题，她在社会中受人歧视，可是罗佳却对她如常人一样尊敬，并多次给予她帮助。因此索尼娅深深的爱上了罗佳。即便在罗佳向她坦白是自己杀死了伊凡诺夫娜姐妹后，受到打击的她依旧深深爱着罗佳。她在明白了罗佳每天魂不守舍，夜不能寐的原因后，规劝罗佳去自首，去赎罪，去获得新生。她愿意陪着罗佳一同受罚，一同被钉上十字架。最终索尼娅成功感化了罗佳，让罗佳到警局自首。</p>
 <h1>2 故事梗概</h1>
-<p>《长夜难明》的开篇布局非常吸引人，一名流浪汉在数百名群众的眼皮下的地铁站抛尸。在人群这样密集还有多层安检的地点抛尸让警方感到疑惑，这样的行为也引起了媒体界的轩然大波，现场视频被人们在网上盛传。之后查明流浪汉竟然是当地知名律师张超，而他也在刑讯中认罪伏法，交代了大部分罪责。似乎一切已成定局，只待开庭定罪。万万没想到，开庭时张超当庭翻供，指责警方逼供，导致他精神压力才认罪。而后又说法医鉴定的死亡时间内自己有不在场证明，物证有机票，人证有当天的客户，警方被打了一个措手不及。但实际上警方并没有实施任何逼供行为，那么为什么张超不在刑讯时直接说出不在场证明，而偏偏等到开庭之日呢，结合在地铁站抛尸的奇怪行为，本案件专案组副组长严良意识到抛尸案只是一个更大谜团的冰山一角。</p>
-<p><img src="/images/20201028-1/3.webp" alt="图 3"></p>
-<p>这个谜团在后面的交叉叙事中逐渐明朗，让读者逐渐看到了盘根十多年的案件。在杭市平康县的一个偏僻的小村庄，法律系支教大学生侯贵平发现班上有女学生因怀孕请假，又目睹了另一个女学生因被冒充家属的黑社会拐骗进城，学生回校不久后便自杀身亡。处于对自己学生的责任心，侯贵平开始调查罪恶的源头。尽管他的大学老师张超教授劝他不要举报，也有当地的小混混以钱财诱惑他，但他始终没有放弃。在多次向当地警察局报警却没得到回应后，他开始自己调查案件。在一次跟踪行动中侯贵平目睹了一次诱骗学生的直接证据，并偷拍到了一些照片，照片里不仅有当地的小混混，还有当地最大企业卡恩集团的董事长助理以及一位省级领导。他将所有证据整理打印并上交到杭市政府，结果当天晚上，侯贵平被栽赃陷害至死，最后落得强奸村寡妇、强奸女学生、自杀身亡的下次。他的父亲因羞耻自杀，母亲也因故发疯而死。</p>
-<p><img src="/images/20201028-1/4.webp" alt="图 4"></p>
-<p>侯贵平的女友李静知道侯贵平绝非自杀，在侯贵平调查时也将大部分调查信息告诉了李静和他的大学导师张超教授。三年后侯贵平的同学江阳研究生毕业来到平康县做检察官工作，李静将三年前的侯贵平案件真相全部告诉了江阳。江阳在一开始也意识到这个案件的棘手，担心自己刚上任如果处理不好这个复杂案件对他的前途不利。但他又认为这确实就是检察官的职责，在女友和刑警队副队长朱伟的鼓励下，江阳开始重新调查这个旧案。</p>
-<p><img src="/images/20201028-1/5.webp" alt="图 5"></p>
-<p>随着案情调查的逐渐深入，他们愈发感觉到这个案件背后组织的庞大。每次发现证据都会被第一时间销毁，哪怕犯罪同伙已经被抓到公安局，只差将记录他的口供，证人却被人在审问室谋杀。甚至当地刑警队长也是这伙犯罪势力的一员，江阳也因此反被人被诬陷入狱，出狱后被解职，只能靠摆摊维修手机生活。朱伟调离公职，在警察大学学习。江阳得知自己已经肺癌晚期后，想用自己的死引起更多人的关注，并将这次死亡案件与十年前的侯贵平案件以及卡恩集团的犯罪行为绑定到一起。江阳借助法医陈明章制作的精密工具实施自杀提前结束了自己的生命，并与张超联手将案发现场布置的像是张超失手杀人，但张超当天坐飞机前往外地接律师工作构造不在场证明。几天后张超返回杭市到地铁站抛尸。在张超被捕翻供后，朱伟慢慢的给警方透露信息，一步步引导警方将调查深入到十年前的侯贵平自杀案件。</p>
-<p><img src="/images/20201028-1/6.webp" alt="图 6"></p>
-<p>故事的最后，伴随国家平反原件错案、反腐倡廉运动的节奏，侯贵平的案件成功平反，省级领导夏立平“意外”坠楼身亡，李建国“自杀”身亡，然而结局却依旧长夜难明：</p>
-<blockquote>
-<p>朱伟凝视着窗外，这个夜晚天空如墨，想起被带到异地关押的陈明章，他不禁悲从中来，拿过酒瓶，用力灌了几口。</p>
-<p>严良也是丧气地摇头，对这个结果完全无法理解。</p>
-<p>赵铁民苦笑道：“高厅说了，我们最大的失算在于夏立平。我们以为夏立平是这里面最高的官，恐怕错了，所以夏立平坠楼了，孙红运反而活了下来。”</p>
-<p>“还有谁？”</p>
-<p>“不知道。”</p>
-<p>严良沉默不语，过了片刻，他们三人都笑了起来。</p>
-<p>这一晚，他们喝了很多酒，说了很少的话。</p>
-<p>天很黑，他们不知道什么时候才能亮起来。</p>
-<hr>
-<p>中纪委办公室，王书记一脸铁青地看着面前这份卷宗，周围的纪检官员全部忐忑不安地望着他。</p>
-<p>他肃然站起身，把卷宗扔在了面前，没看任何人一眼，向外走去。</p>
-<p>2014年7月29日，大老虎落马。</p>
-<p>（全文终）</p>
-</blockquote>
+<p>贫穷的大学生罗佳，因无力付学费而辍学蜗居在租来的斗室之中，浑浑噩噩，过着温饱不定的日子。他希望得到一些金钱，但又受不了去做工资低廉的工作，更不愿意向家人寻求帮助，让自己的现状被家里人知道。于是，他每天都在痛苦与无尽的臆想中度过。他维持性命的唯一途径，就是到放高利贷的阿廖娜太太那里典当物品换区少的可怜的资金，然后买点面包和酒。罗佳生性高傲，在一次次被阿廖娜无理的剥削后，他逐渐产生了对阿廖娜的杀意，而在听到许多人对阿廖娜心有怨愤时，又进一步认为自己站在了大众的一方。他发表了一篇阐述“超人”理论思想的论文，即被选中的非凡人物为了新世纪的生长，有超越现行社会规范的权利。<br>
+<img src="/images/20201020-1/2.webp" alt="图 2"><br>
+罗佳的母亲来信说罗佳的妹妹杜尼娅即将嫁给一个有钱人卢任。而他们也即将启程前来彼得堡，并表示以后罗佳可以和卢任一起工作，从此一家人团聚，过上幸福的生活。信中母亲还说，她用养老金担保到一笔现金，会提前送来给罗佳使用。然而罗佳却从信中读出，卢任不是一个可以值得信任的人，他知道平时善良温柔的妹妹这次是为了让罗佳过上好日子，而将自己出卖给了一个她并不爱的人。这种因为贫穷而带来的悲剧，让罗佳进一步陷入到极度的痛苦纠结中。而这进一步强化了罗佳内心中对阿廖娜的杀意。<br>
+<img src="/images/20201020-1/3.webp" alt="图 3"><br>
+多日以来，罗佳正因为食不果腹、营养不良，导致身体极差，脾气变得阴阳不定。他的世界昏昏沉沉，有时整日睡觉不出门，有时又到街上闲逛一整天。在有了谋杀阿廖娜的想法后，他总会有意无意的到阿廖娜太太那边去，关注所有关于她的消息。有一天，罗佳终于鼓起勇气从院子里拿了一把斧子，走进老妇人家里。将老妇人与无意间闯进杀人现场的丽莎维塔一并杀害，从她的房间里取走了钱袋和一些首饰，仓皇而逃。他本以为抢夺了阿廖娜太太的钱财，就有机会重新开始，而杀害一个放高利贷的老太婆，并不会给社会带来多大的损失。反而因为她本来就是一个遭到众人忌恨的人，自己的行为会得到他人的理解。然而在杀害两人后，尤其是因为杀死了无辜的丽莎廖娜后，罗佳开始了无尽的自我怀疑，陷入迷茫与被揭露的幻想中。他把抢来的钱财放在陌生的院子里，压在石头底下隐藏，并不打算使用。将母亲寄给他的三十卢布用来帮助他人，不顾自己身无分文。他甚至向向警察打听案件进展，对警察说出自己对案件真相的“猜想”。在自首与继续隐藏之间犹豫不决。<br>
+<img src="/images/20201020-1/4.webp" alt="图 4"><br>
+罗佳的母亲和妹妹来到彼得堡，罗佳此前见到了卢任，证实了自己的想法。卢任吝啬而自大，对杜尼娅毫无爱意，罗佳立志要阻断这场婚事。罗佳与妓女索尼娅的相识，又让他逐渐找回人性。但是在对索尼娅坦白是他杀死了伊凡诺夫娜姐妹时，被罗佳妹妹的另一个追随者偷听到了秘密。同时警官几乎猜出了真正的杀人凶手，但是由于没有证据，只能不断试探罗佳，试图逼迫他自首。许多事情缠绕在一起，让罗佳的精神更加脆弱，多次处于崩溃的边缘。罗佳在经历了长时间的精神折磨后，被妓女索尼娅感动，接受索尼娅的规劝，走进警察局自首。最终因为罗佳平生做了很多善事，同时警方发现罗佳抢了钱却分文不动，又用自己的钱帮助他人，结合他发表的论文，他被法官判定为精神病患者，罗佳只是被送到西伯利亚服八年劳役。然而事实上，罗佳在进入劳改营后，思维又回归最初的冷静。他又拾起了“超人”哲学的理念，重新解释了自己的行为。他对阿廖娜的死没有丝毫悔意，唯一让罗佳自责的只是在惊慌中杀死了无辜善良的丽莎维塔。索尼娅一路同他到西伯利亚，陪他改造，两人最终相爱，开始走进真正的新生活。<br>
+<img src="/images/20201020-1/5.webp" alt="图 5"></p>
 <h1>3 个人感悟</h1>
-<p>紫金陈的多数作品是本格派推理小说，但最新的《推理之王》三部曲从《无证之罪》到《坏小孩》再到《长夜难明》，作品的推理性逐渐降低而成为了社会派的小说，作者的主要目的显然不是展现正反派的博弈，而越来越注重反映社会现象。诱奸少女，杀人灭口，诬陷忠良，监守自盗，践踏司法，一开始的“提点”和收买，撕破脸皮之后的威胁和陷害，以及没有明写的钱权交易，贪腐包庇……书中每一条线索都在这个社会中真实地发生着，甚至都可以在社会新闻版面找到原型。书中的犯罪手法简单粗暴，甚至不需要什么推理就能直接看明真相。然而真相明明已经呼之欲出，可是又那么触不可及。中间隔着的那一层叫做权力的透明薄膜，让人窒息。书中侯贵平的结局令人震惊而江阳的结局令人唏嘘，如果说侯贵平当年是年轻气盛，凭着一腔热血去撞击冰山露出来的那一角，那么江阳就是在看到冰山的实质后仍然全速开进的舵手，凭的是对公平公正与对法律的信仰。</p>
-<p><img src="/images/20201028-1/7.webp" alt="图 7"></p>
-<p>书中的结局：“2014年7月29日，大老虎落马。”是令人慰藉却又最苍凉的一句。作者用这个时间无疑是在映射周永康事件，然而稍有常识的人都知道，大老虎绝不是被某个手持长矛的英雄掀下马的，那是高层的利益置换，是政治博弈的结果。那不是江阳的胜利，不是人民的胜利，不是制度的胜利，更不是法律的胜利，而是政治的胜利，是实权者的胜利。甚至在一开始，作者就提到了司法改革，文中反复出现的萧山叔侄平反案也一遍遍提醒着读者——四个人十年的坚持，一条年轻的生命，一个名律师的囹圄之灾，都不是翻案的充分条件。最后案子能一步步查回到十年前去，说到底还是靠赶上了好时候。如果江阳早一年患病，同样的计策不一定能顺利实施。我们理解沉默的大多数，甚至感激他们至少没有添加阻力，因为他们就是我们，我们理解。可是不得不承认他们也是见风使舵的，如果不是嗅到政治风向的改变，案子可能还会像侯贵平、江阳时代一样在哪一级被压下。</p>
-<p><img src="/images/20201028-1/8.webp" alt="图 8"></p>
-<p>我们生活在这样的一个时代，长夜难明，但总有人燃灯前行；纵有人舍命燃灯，但依旧长夜难明。如何面对这样的时代，借鲁迅先生的话：</p>
+<p>《罪与罚》的故事情节很简单，从表面上看，就是一个杀人犯杀人后因良心谴责而自首的故事。但是书中对主角罗佳杀人前后的思想变化进行了详尽的分析：他为什么要杀人？为什么抢了钱不用，反而开始用自己的钱帮助他人？为什么要和警察透漏自己杀人的想法，想要自首又犹豫不决？以及他对“超人”理论的思索与讨论。对这样一个在外界看起来是真的像一个神经病一样的杀人犯的内心想法进行了细致入微的描写与分析。<br>
+罗佳的杀人原因，也是他提出的超人主义哲学，即人类社会有两种人，一种是凡人，一种是非凡的人。凡人会遵守世俗的法律，而非凡的人，他们能凌驾于法律之上，为了更高崇的目的而清除一些必要的障碍。他们被称为伟人，他们被称为英雄。凡人可以通过跨越某条界限变成非凡的人，这里在俄语中一语双关，俄语“罪 (Преступле́ние)”一词就是“跨越界限”的意思。而罗佳想做凯撒，想做拿破仑。凯撒、拿破仑，他们都是伟大的谋杀者,他们双手沾上了无数的鲜血，他们的内心却没有丝毫的动摇，而我们称他们为英雄。杀死阿廖娜，并不是谋杀，而是罗佳的一次实验。阿廖娜是这次实验的小白鼠。而丽莎维塔，是这次实验的附属牺牲品。<br>
+书中不止有罗佳的超人逻辑这一种哲学理论，其实有多种理论在相互碰撞，诸如：</p>
+<span class="label info">超人主义哲学（书中代表人物罗佳）</span>：社会中是有一部分人可以为非作歹、不受法律约束。人分为两种，一种是不平凡的人，一种是平凡的人。伟大的人物通常都是罪犯，为了美好的未来，可以任意践踏平凡人的利益。平凡的人维持世界，不平凡的人推进世界。<br>
+<span class="label info">功利主义哲学（书中代表人物卢任）</span>：先利己再利他，唯有利己才能利他。为个人发展就是为大家发展，所有人都秉持这种观念，最终能导致福利的普遍化。<br>
+<span class="label info">进步主义哲学（书中代表人物列别贾特尼科夫）</span>：这种观点会用抽象的理论批判传统的一切，认为传统是对个体的束缚。比如认为婚姻是政府对个人的约束，一个人想和任何人在任何时候在一起或分开都应该是被允许的。<br>
+<span class="label info">虚无主义哲学（书中代表人物斯维里加洛夫）</span>：人生没有终极意义，当下的快乐就是一切。如果人生本身是荒谬的、空虚的，那么人生中任何事都没有意义。自杀是虚无主义的必然结果。
+<p><img src="/images/20201020-1/6.webp" alt="图 6"><br>
+如果读俄文原版，你会发现书中用了大量的一语双关，并且几乎每个人的名字都有着象征意义。比如主角拉斯柯尔尼科夫（Raskol’nikov）中的“Raskol”意为“分裂”。<br>
+最后从立意上来看，《罪与罚》是一本反乌托邦小说。陀思妥耶夫斯基构造这种情节不是为了检验超人哲学想法对不对。而是通过描写一个杀人者的内心冲突来映射整个人类社会的发展规律，对超人哲学的观点进行反思。它是对理想主义者的一个警钟。理想，并非建立在乌托邦之上，它是精神世界里的一个抽象概念。任何试图实现这概念的理想主义者，都不能忽视人的价值。任何试图以牺牲少数人的生命去实现理想的行为，虽然不能否认它的价值，但都值得警惕。因为抽象的概念，永远不及具体生动的人更值得我们珍惜。</p>
+<h1>4 好句摘抄</h1>
 <blockquote>
-<p>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！</p>
+<p>大家都杀人，在世界上，现在杀人，过去也杀人。血像瀑布一样地流，像香槟一样地流。为了这，有人被钉上十字架，被冠以罪名离开人世。有人却在神殿里被戴上桂冠，以后又被称作人类的恩主。</p>
+</blockquote>
+<blockquote>
+<p>人这种卑鄙的东西，什么都会习惯的。</p>
+</blockquote>
+<blockquote>
+<p>有时，一个人遇上强盗，整整半小时感到死亡的恐惧，最后，刀架到脖子上，反倒什么都不怕了。</p>
+</blockquote>
+<blockquote>
+<p>世界上没有什么比直言不讳更难，也没有什么比阿谀奉承更容易的了。直言不讳，即使其中只有百分之一的音调是假的，那么立刻就会产生不和谐，随之而来的是争吵。而阿谀奉承，即使从头至尾全部音调都是虚假的，可还是让人高兴，听着不会觉得不愉快，哪怕这愉快有点儿肉麻，可还是感到愉快。而且不管阿谀奉承多么肉麻，其中却至少有一半让人觉得好像是真实的。</p>
+</blockquote>
+<blockquote>
+<p>先生，贫穷不是罪恶，这是真理。我知道，就像嗜酒不是美德一样，这更是真理。可是赤贫却是罪恶！贫穷的时候，您还能保证自己天生感情的高尚气度，但是在赤贫、穷到一无所有的情况下，却是无论什么时候、什么人都做不到的。为了赤贫，人们甚至不是用棍子赶走，而是拿扫帚把他从人类社会里清扫出去，让他受更大的屈辱。而且这是公正的，因为在赤贫的情况下，我自己首先就准备凌虐自己，于是我找到了酒。</p>
+</blockquote>
+<blockquote>
+<p>要知道，女人就是这样，爱你也是她，害你也是她，两者并行不悖。</p>
+</blockquote>
+<blockquote>
+<p>谁最会欺骗自己，谁就能过得最快活。</p>
+</blockquote>
+<blockquote>
+<p>胡扯是一切生物中只有人类才享有的唯一特权。通过胡扯，可以得到真理！</p>
+</blockquote>
+<blockquote>
+<p>犯罪是对社会组织的不正常现象的抗议。</p>
+</blockquote>
+<blockquote>
+<p>现实主义者不会害怕他们的研究结果。</p>
+</blockquote>
+<blockquote>
+<p>人们最害怕什么呢？他们最害怕迈出新的一步，最害怕自己新的想法。</p>
+</blockquote>
+<blockquote>
+<p>一百个疑点也绝不能构成一件证据。</p>
+</blockquote>
+<blockquote>
+<p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
+</blockquote>
+<blockquote>
+<p>那时魔鬼引诱我杀死了一只虱子，但是后来它又告诉我，我没有去权利走那条路，因为我也不过就是个虱子，和所有其余人一样。</p>
+</blockquote>
+<blockquote>
+<p>只要能活着，活着，活着！不管怎样活着，只要活着就好！多么正确的真理！谁要是为此把人叫做卑鄙的东西，那么他才是最卑鄙的。</p>
 </blockquote>
 <hr>
 <h1>参考</h1>
 <ul>
-<li><a href="https://book.douban.com/subject/26923390/">长夜难明- 豆瓣读书</a></li>
-<li><a href="https://www.guibuyu.org/109_109392/">长夜难明- 免费电子版</a></li>
+<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5">罪与罚- 维基百科</a></li>
+<li><a href="https://ilibrary.ru/text/69/index.html">罪与罚- 俄文原版</a></li>
 </ul>
 ]]></content>
       <categories>
         <category>读书笔记</category>
-        <category>中国文学</category>
+        <category>俄罗斯文学</category>
       </categories>
       <tags>
-        <tag>中国文学</tag>
-        <tag>紫金陈</tag>
+        <tag>俄罗斯文学</tag>
+        <tag>陀思妥耶夫斯基</tag>
       </tags>
   </entry>
   <entry>
@@ -900,244 +824,187 @@ f_i = arg \ min_f \ E_x \ H(f(x),b(x)) + E_x \ H(f(x+G(x)),b(x+G(x)))<br>
       </tags>
   </entry>
   <entry>
-    <title>《罪与罚》读书笔记</title>
-    <url>/archives/af8ce812.html</url>
+    <title>《长夜难明》读书笔记</title>
+    <url>/archives/a19fb9aa.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
+            <p>长夜难明，但总有人燃灯前行；纵有人舍命燃灯，但依旧长夜难明。</p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
-<p>如果你是第一次接触陀思妥耶夫斯基的作品，我强烈推荐最先读这本《罪与罚》。作为一部俄罗斯的长篇小说，《罪与罚》绝对不会让你感到一丝的无聊或因人名引起的阅读障碍。这本书每一章环环相扣，从最开始就将读者引入主角疯狂的谋杀计划，然后一步一步实现计划，又紧张刺激的逃离警察追捕，最后主角因自己的“超人”哲学理论崩塌而夜不能寐，陷入幻想与自责的深渊。这本书不仅讨论了深刻而丰富的社会学理论，同时通过高超的情节安排与严密的逻辑框架讲述了一个引人入胜故事。<br>
-<img src="/images/20201020-1/1.webp" alt="图 1"></p>
+<p>《长夜难明》出版于2017年，是紫金陈社会派推理作品三部曲的最后一部。后于2020年改编电视剧《沉默的真相》。虽然是推理小说，但本书一反常态的总是将罪犯的所作所为先展现出来，然后再描写警方的行动，即先知道结果再讲述推演过程。作为一部社会派推理小说，作者想表达并非推理的步骤，而是借推理过程映射出社会中存在的现象与问题。本书讲述了一批富有正义感的人为了揭露杭市最大企业卡恩集团与地方政府、黑社会勾结，诱骗未成年少女为政府官员提供性服务并借此牟利的犯罪行为，付出了青春、事业、名声、前途、家庭甚至生命的感人故事，但结局却与他们的预期大相径庭。<br>
+<img src="/images/20201028-1/1.webp" alt="图 1"></p>
 <h1>1 人物介绍</h1>
 <ul>
 <li>
-<span class="label default">拉斯柯尔尼科夫</span><br>
+<span class="label default">侯贵平</span><br>
 </li>
 </ul>
-<p>拉斯柯尔尼科夫（罗佳、罗季卡）是一名贫穷的法律系大学生，经常典当家物，换得钱财以勉强度日。然而他却有远大的抱负，并且富有思想。在受到当时社会风气的影响下，又了解了拿破仑的生平之后，他产生了所谓“超人”的思想。罗佳认为贪婪的阿廖娜太太有罪，是社会的虱子，并应亲自执行“超人”的权利，对阿廖娜进行制裁。但其实他同时也是因为已经交不起房租，急需钱财，才去杀人越货。在高尚与卑鄙的双重思维下，罗佳谋划并实施了对阿廖娜的谋杀。罗佳是一个矛盾个体，他既是慷慨、善良的人道主义者，在一次火灾中舍身求出一位素不相识的孩子。同时冷酷无情、麻木不仁，在谋杀阿廖娜和后来应付司法调查时残忍、阴险到了失去人性的地步。</p>
+<p>江华大学法律系大学生，为了争取保研名额下乡支教。任教期间发现了卡恩集团与当地黑社会多次诱骗自己班级女学生为政府官员提供性服务的犯罪行为并偷拍到一些照片。侯贵平多次在平康县警察局举报，却迟迟得不到回复。心急如焚的侯贵平将所有证据整理打印并上交到杭市政府，但他的举报信不仅被扣留，在举报当天晚上他被谋害至死。</p>
 <ul>
 <li>
-<span class="label default">阿廖娜·伊凡诺夫娜</span><br>
+<span class="label default">李静</span><br>
 </li>
 </ul>
-<p>阿廖娜·伊凡诺夫娜是一位掌管当铺又经常放高利贷的老太婆。她为人吝啬又贪婪，毫无同情心，熟练于利用当地学生周期性资金短缺、急用钱的特点，只付极少的代价来收购学生们典当的物品。</p>
+<p>江华大学法律系大学生，侯贵平前女友，江阳的同学，张超教授妻子。虽然李静从未正面对抗过黑暗力量，但她是整个故事的见证者，与正面力量的穿线人。</p>
 <ul>
 <li>
-<span class="label default">丽莎维塔·伊凡诺夫娜</span><br>
+<span class="label default">江阳</span><br>
 </li>
 </ul>
-<p>丽莎维塔·伊凡诺夫娜是阿廖娜·伊凡诺夫娜的妹妹，她为人真诚善良，但却受尽姐姐阿廖娜的欺凌。她无意间闯进罗佳的杀人现场，由于过度惊吓，她即没有反抗也没有喊叫，但依然被更为惊慌的罗佳用斧头劈死。丽莎维塔的死动摇了罗佳的信念，开始怀疑自我，陷入自责的深渊。</p>
+<p>江华大学法律系大学生，研究生毕业从事杭市检察官工作。在被李静告知侯贵平是被谋害而非自杀以及卡恩集团奸淫幼女等事件后，下定决心查清此案。但随着案情调查的逐渐深入，他愈发感觉到这个案件背后组织的庞大。每次发现证据都会被第一时间销毁，哪怕犯罪同伙已经被抓到公安局，只差将记录他的口供，证人却被人在审问室谋杀。甚至当地刑警队长也是这伙犯罪势力的一员，江阳也因此反被人被诬陷入狱，出狱后被解职，只能靠摆摊维修手机生活。最后患肺癌自杀死亡。</p>
 <ul>
 <li>
-<span class="label default">索尼娅</span><br>
+<span class="label default">张超</span><br>
 </li>
 </ul>
-<p>女孩索尼娅是一名妓女，曾经与与丽莎维塔认识。由于职业问题，她在社会中受人歧视，可是罗佳却对她如常人一样尊敬，并多次给予她帮助。因此索尼娅深深的爱上了罗佳。即便在罗佳向她坦白是自己杀死了伊凡诺夫娜姐妹后，受到打击的她依旧深深爱着罗佳。她在明白了罗佳每天魂不守舍，夜不能寐的原因后，规劝罗佳去自首，去赎罪，去获得新生。她愿意陪着罗佳一同受罚，一同被钉上十字架。最终索尼娅成功感化了罗佳，让罗佳到警局自首。</p>
+<p>刑辩律师，曾是江华大学法律系教授，侯贵平、李静、江阳等人都是张超的学生。第一个看出侯贵平的死亡不是自杀而另有原因的人，可以说从一开始张超就看清了真相。但出于自保和对李静的私心没有及时报案。后又在为被冤入狱的江阳辩护时失误，导致对江阳误判。最终带着赎罪的心情实施了一场精心策划的地铁抛尸案，为的是将这起轰动大众媒体的抛尸案和卡恩集团的犯罪行为绑定在一起，引发更高层对此事的注意，并进一步引导警方侦破卡恩集团的罪行。</p>
+<ul>
+<li>
+<span class="label default">朱伟</span><br>
+</li>
+</ul>
+<p>现任平康县公安局刑警副队长，曾经的刑警队长，有着极强的正义感，行事干练多次破获重要案件。但为人耿直得罪了不少高层领导，被当时的刑警副队长陷害，停职学习后降级为副队长。后与江阳一起合作，重新调查侯贵平的案件。</p>
+<ul>
+<li>
+<span class="label default">陈明章</span><br>
+</li>
+</ul>
+<p>原平康县公安局法医，后来从公安局辞职，下海经商。陈明章是朱伟的挚友，专业技术高超又有着很强的商业头脑。他为人圆滑，懂得黑白势力之间的平衡，还经常利用自己的技术能力在工作之外获取一些不正当的收入，但其实内心是一个有着极强正义感的人。总是在暗中帮助朱伟、江阳等人对抗黑恶势力。<br>
+<img src="/images/20201028-1/2.webp" alt="图 2"></p>
+<ul>
+<li>
+<span class="label default">李建国</span><br>
+</li>
+</ul>
+<p>现任平康县公安局刑警队长，工作中与朱伟格格不入，后来甚至诬陷朱伟，险些害朱伟入狱。一直充当卡恩集团的保护伞。</p>
+<ul>
+<li>
+<span class="label default">孙红运</span><br>
+</li>
+</ul>
+<p>卡恩集团董事长，在三次产业改革中，从纺织业到食品加工到房地产行业，他总是能预见性的把握最好的产业链，让卡恩集团逐渐发展成杭市最大的民营产业，极大的推动了杭市经济发展。卡恩集团黑白通吃，同时也做着为政府官员提供性服务的工作。孙红运权力极广，不论是省市政府，还是平康县公安局，甚至当地黑社会都有卡恩集团的势力。他曾被江阳抓到犯罪证据，被带到公安局，但却在众多警官和省市领导面前宣传起卡恩集团，最后全身而退。</p>
 <h1>2 故事梗概</h1>
-<p>贫穷的大学生罗佳，因无力付学费而辍学蜗居在租来的斗室之中，浑浑噩噩，过着温饱不定的日子。他希望得到一些金钱，但又受不了去做工资低廉的工作，更不愿意向家人寻求帮助，让自己的现状被家里人知道。于是，他每天都在痛苦与无尽的臆想中度过。他维持性命的唯一途径，就是到放高利贷的阿廖娜太太那里典当物品换区少的可怜的资金，然后买点面包和酒。罗佳生性高傲，在一次次被阿廖娜无理的剥削后，他逐渐产生了对阿廖娜的杀意，而在听到许多人对阿廖娜心有怨愤时，又进一步认为自己站在了大众的一方。他发表了一篇阐述“超人”理论思想的论文，即被选中的非凡人物为了新世纪的生长，有超越现行社会规范的权利。<br>
-<img src="/images/20201020-1/2.webp" alt="图 2"><br>
-罗佳的母亲来信说罗佳的妹妹杜尼娅即将嫁给一个有钱人卢任。而他们也即将启程前来彼得堡，并表示以后罗佳可以和卢任一起工作，从此一家人团聚，过上幸福的生活。信中母亲还说，她用养老金担保到一笔现金，会提前送来给罗佳使用。然而罗佳却从信中读出，卢任不是一个可以值得信任的人，他知道平时善良温柔的妹妹这次是为了让罗佳过上好日子，而将自己出卖给了一个她并不爱的人。这种因为贫穷而带来的悲剧，让罗佳进一步陷入到极度的痛苦纠结中。而这进一步强化了罗佳内心中对阿廖娜的杀意。<br>
-<img src="/images/20201020-1/3.webp" alt="图 3"><br>
-多日以来，罗佳正因为食不果腹、营养不良，导致身体极差，脾气变得阴阳不定。他的世界昏昏沉沉，有时整日睡觉不出门，有时又到街上闲逛一整天。在有了谋杀阿廖娜的想法后，他总会有意无意的到阿廖娜太太那边去，关注所有关于她的消息。有一天，罗佳终于鼓起勇气从院子里拿了一把斧子，走进老妇人家里。将老妇人与无意间闯进杀人现场的丽莎维塔一并杀害，从她的房间里取走了钱袋和一些首饰，仓皇而逃。他本以为抢夺了阿廖娜太太的钱财，就有机会重新开始，而杀害一个放高利贷的老太婆，并不会给社会带来多大的损失。反而因为她本来就是一个遭到众人忌恨的人，自己的行为会得到他人的理解。然而在杀害两人后，尤其是因为杀死了无辜的丽莎廖娜后，罗佳开始了无尽的自我怀疑，陷入迷茫与被揭露的幻想中。他把抢来的钱财放在陌生的院子里，压在石头底下隐藏，并不打算使用。将母亲寄给他的三十卢布用来帮助他人，不顾自己身无分文。他甚至向向警察打听案件进展，对警察说出自己对案件真相的“猜想”。在自首与继续隐藏之间犹豫不决。<br>
-<img src="/images/20201020-1/4.webp" alt="图 4"><br>
-罗佳的母亲和妹妹来到彼得堡，罗佳此前见到了卢任，证实了自己的想法。卢任吝啬而自大，对杜尼娅毫无爱意，罗佳立志要阻断这场婚事。罗佳与妓女索尼娅的相识，又让他逐渐找回人性。但是在对索尼娅坦白是他杀死了伊凡诺夫娜姐妹时，被罗佳妹妹的另一个追随者偷听到了秘密。同时警官几乎猜出了真正的杀人凶手，但是由于没有证据，只能不断试探罗佳，试图逼迫他自首。许多事情缠绕在一起，让罗佳的精神更加脆弱，多次处于崩溃的边缘。罗佳在经历了长时间的精神折磨后，被妓女索尼娅感动，接受索尼娅的规劝，走进警察局自首。最终因为罗佳平生做了很多善事，同时警方发现罗佳抢了钱却分文不动，又用自己的钱帮助他人，结合他发表的论文，他被法官判定为精神病患者，罗佳只是被送到西伯利亚服八年劳役。然而事实上，罗佳在进入劳改营后，思维又回归最初的冷静。他又拾起了“超人”哲学的理念，重新解释了自己的行为。他对阿廖娜的死没有丝毫悔意，唯一让罗佳自责的只是在惊慌中杀死了无辜善良的丽莎维塔。索尼娅一路同他到西伯利亚，陪他改造，两人最终相爱，开始走进真正的新生活。<br>
-<img src="/images/20201020-1/5.webp" alt="图 5"></p>
+<p>《长夜难明》的开篇布局非常吸引人，一名流浪汉在数百名群众的眼皮下的地铁站抛尸。在人群这样密集还有多层安检的地点抛尸让警方感到疑惑，这样的行为也引起了媒体界的轩然大波，现场视频被人们在网上盛传。之后查明流浪汉竟然是当地知名律师张超，而他也在刑讯中认罪伏法，交代了大部分罪责。似乎一切已成定局，只待开庭定罪。万万没想到，开庭时张超当庭翻供，指责警方逼供，导致他精神压力才认罪。而后又说法医鉴定的死亡时间内自己有不在场证明，物证有机票，人证有当天的客户，警方被打了一个措手不及。但实际上警方并没有实施任何逼供行为，那么为什么张超不在刑讯时直接说出不在场证明，而偏偏等到开庭之日呢，结合在地铁站抛尸的奇怪行为，本案件专案组副组长严良意识到抛尸案只是一个更大谜团的冰山一角。</p>
+<p><img src="/images/20201028-1/3.webp" alt="图 3"></p>
+<p>这个谜团在后面的交叉叙事中逐渐明朗，让读者逐渐看到了盘根十多年的案件。在杭市平康县的一个偏僻的小村庄，法律系支教大学生侯贵平发现班上有女学生因怀孕请假，又目睹了另一个女学生因被冒充家属的黑社会拐骗进城，学生回校不久后便自杀身亡。处于对自己学生的责任心，侯贵平开始调查罪恶的源头。尽管他的大学老师张超教授劝他不要举报，也有当地的小混混以钱财诱惑他，但他始终没有放弃。在多次向当地警察局报警却没得到回应后，他开始自己调查案件。在一次跟踪行动中侯贵平目睹了一次诱骗学生的直接证据，并偷拍到了一些照片，照片里不仅有当地的小混混，还有当地最大企业卡恩集团的董事长助理以及一位省级领导。他将所有证据整理打印并上交到杭市政府，结果当天晚上，侯贵平被栽赃陷害至死，最后落得强奸村寡妇、强奸女学生、自杀身亡的下次。他的父亲因羞耻自杀，母亲也因故发疯而死。</p>
+<p><img src="/images/20201028-1/4.webp" alt="图 4"></p>
+<p>侯贵平的女友李静知道侯贵平绝非自杀，在侯贵平调查时也将大部分调查信息告诉了李静和他的大学导师张超教授。三年后侯贵平的同学江阳研究生毕业来到平康县做检察官工作，李静将三年前的侯贵平案件真相全部告诉了江阳。江阳在一开始也意识到这个案件的棘手，担心自己刚上任如果处理不好这个复杂案件对他的前途不利。但他又认为这确实就是检察官的职责，在女友和刑警队副队长朱伟的鼓励下，江阳开始重新调查这个旧案。</p>
+<p><img src="/images/20201028-1/5.webp" alt="图 5"></p>
+<p>随着案情调查的逐渐深入，他们愈发感觉到这个案件背后组织的庞大。每次发现证据都会被第一时间销毁，哪怕犯罪同伙已经被抓到公安局，只差将记录他的口供，证人却被人在审问室谋杀。甚至当地刑警队长也是这伙犯罪势力的一员，江阳也因此反被人被诬陷入狱，出狱后被解职，只能靠摆摊维修手机生活。朱伟调离公职，在警察大学学习。江阳得知自己已经肺癌晚期后，想用自己的死引起更多人的关注，并将这次死亡案件与十年前的侯贵平案件以及卡恩集团的犯罪行为绑定到一起。江阳借助法医陈明章制作的精密工具实施自杀提前结束了自己的生命，并与张超联手将案发现场布置的像是张超失手杀人，但张超当天坐飞机前往外地接律师工作构造不在场证明。几天后张超返回杭市到地铁站抛尸。在张超被捕翻供后，朱伟慢慢的给警方透露信息，一步步引导警方将调查深入到十年前的侯贵平自杀案件。</p>
+<p><img src="/images/20201028-1/6.webp" alt="图 6"></p>
+<p>故事的最后，伴随国家平反原件错案、反腐倡廉运动的节奏，侯贵平的案件成功平反，省级领导夏立平“意外”坠楼身亡，李建国“自杀”身亡，然而结局却依旧长夜难明：</p>
+<blockquote>
+<p>朱伟凝视着窗外，这个夜晚天空如墨，想起被带到异地关押的陈明章，他不禁悲从中来，拿过酒瓶，用力灌了几口。</p>
+<p>严良也是丧气地摇头，对这个结果完全无法理解。</p>
+<p>赵铁民苦笑道：“高厅说了，我们最大的失算在于夏立平。我们以为夏立平是这里面最高的官，恐怕错了，所以夏立平坠楼了，孙红运反而活了下来。”</p>
+<p>“还有谁？”</p>
+<p>“不知道。”</p>
+<p>严良沉默不语，过了片刻，他们三人都笑了起来。</p>
+<p>这一晚，他们喝了很多酒，说了很少的话。</p>
+<p>天很黑，他们不知道什么时候才能亮起来。</p>
+<hr>
+<p>中纪委办公室，王书记一脸铁青地看着面前这份卷宗，周围的纪检官员全部忐忑不安地望着他。</p>
+<p>他肃然站起身，把卷宗扔在了面前，没看任何人一眼，向外走去。</p>
+<p>2014年7月29日，大老虎落马。</p>
+<p>（全文终）</p>
+</blockquote>
 <h1>3 个人感悟</h1>
-<p>《罪与罚》的故事情节很简单，从表面上看，就是一个杀人犯杀人后因良心谴责而自首的故事。但是书中对主角罗佳杀人前后的思想变化进行了详尽的分析：他为什么要杀人？为什么抢了钱不用，反而开始用自己的钱帮助他人？为什么要和警察透漏自己杀人的想法，想要自首又犹豫不决？以及他对“超人”理论的思索与讨论。对这样一个在外界看起来是真的像一个神经病一样的杀人犯的内心想法进行了细致入微的描写与分析。<br>
-罗佳的杀人原因，也是他提出的超人主义哲学，即人类社会有两种人，一种是凡人，一种是非凡的人。凡人会遵守世俗的法律，而非凡的人，他们能凌驾于法律之上，为了更高崇的目的而清除一些必要的障碍。他们被称为伟人，他们被称为英雄。凡人可以通过跨越某条界限变成非凡的人，这里在俄语中一语双关，俄语“罪 (Преступле́ние)”一词就是“跨越界限”的意思。而罗佳想做凯撒，想做拿破仑。凯撒、拿破仑，他们都是伟大的谋杀者,他们双手沾上了无数的鲜血，他们的内心却没有丝毫的动摇，而我们称他们为英雄。杀死阿廖娜，并不是谋杀，而是罗佳的一次实验。阿廖娜是这次实验的小白鼠。而丽莎维塔，是这次实验的附属牺牲品。<br>
-书中不止有罗佳的超人逻辑这一种哲学理论，其实有多种理论在相互碰撞，诸如：</p>
-<span class="label info">超人主义哲学（书中代表人物罗佳）</span>：社会中是有一部分人可以为非作歹、不受法律约束。人分为两种，一种是不平凡的人，一种是平凡的人。伟大的人物通常都是罪犯，为了美好的未来，可以任意践踏平凡人的利益。平凡的人维持世界，不平凡的人推进世界。<br>
-<span class="label info">功利主义哲学（书中代表人物卢任）</span>：先利己再利他，唯有利己才能利他。为个人发展就是为大家发展，所有人都秉持这种观念，最终能导致福利的普遍化。<br>
-<span class="label info">进步主义哲学（书中代表人物列别贾特尼科夫）</span>：这种观点会用抽象的理论批判传统的一切，认为传统是对个体的束缚。比如认为婚姻是政府对个人的约束，一个人想和任何人在任何时候在一起或分开都应该是被允许的。<br>
-<span class="label info">虚无主义哲学（书中代表人物斯维里加洛夫）</span>：人生没有终极意义，当下的快乐就是一切。如果人生本身是荒谬的、空虚的，那么人生中任何事都没有意义。自杀是虚无主义的必然结果。
-<p><img src="/images/20201020-1/6.webp" alt="图 6"><br>
-如果读俄文原版，你会发现书中用了大量的一语双关，并且几乎每个人的名字都有着象征意义。比如主角拉斯柯尔尼科夫（Raskol’nikov）中的“Raskol”意为“分裂”。<br>
-最后从立意上来看，《罪与罚》是一本反乌托邦小说。陀思妥耶夫斯基构造这种情节不是为了检验超人哲学想法对不对。而是通过描写一个杀人者的内心冲突来映射整个人类社会的发展规律，对超人哲学的观点进行反思。它是对理想主义者的一个警钟。理想，并非建立在乌托邦之上，它是精神世界里的一个抽象概念。任何试图实现这概念的理想主义者，都不能忽视人的价值。任何试图以牺牲少数人的生命去实现理想的行为，虽然不能否认它的价值，但都值得警惕。因为抽象的概念，永远不及具体生动的人更值得我们珍惜。</p>
-<h1>4 好句摘抄</h1>
+<p>紫金陈的多数作品是本格派推理小说，但最新的《推理之王》三部曲从《无证之罪》到《坏小孩》再到《长夜难明》，作品的推理性逐渐降低而成为了社会派的小说，作者的主要目的显然不是展现正反派的博弈，而越来越注重反映社会现象。诱奸少女，杀人灭口，诬陷忠良，监守自盗，践踏司法，一开始的“提点”和收买，撕破脸皮之后的威胁和陷害，以及没有明写的钱权交易，贪腐包庇……书中每一条线索都在这个社会中真实地发生着，甚至都可以在社会新闻版面找到原型。书中的犯罪手法简单粗暴，甚至不需要什么推理就能直接看明真相。然而真相明明已经呼之欲出，可是又那么触不可及。中间隔着的那一层叫做权力的透明薄膜，让人窒息。书中侯贵平的结局令人震惊而江阳的结局令人唏嘘，如果说侯贵平当年是年轻气盛，凭着一腔热血去撞击冰山露出来的那一角，那么江阳就是在看到冰山的实质后仍然全速开进的舵手，凭的是对公平公正与对法律的信仰。</p>
+<p><img src="/images/20201028-1/7.webp" alt="图 7"></p>
+<p>书中的结局：“2014年7月29日，大老虎落马。”是令人慰藉却又最苍凉的一句。作者用这个时间无疑是在映射周永康事件，然而稍有常识的人都知道，大老虎绝不是被某个手持长矛的英雄掀下马的，那是高层的利益置换，是政治博弈的结果。那不是江阳的胜利，不是人民的胜利，不是制度的胜利，更不是法律的胜利，而是政治的胜利，是实权者的胜利。甚至在一开始，作者就提到了司法改革，文中反复出现的萧山叔侄平反案也一遍遍提醒着读者——四个人十年的坚持，一条年轻的生命，一个名律师的囹圄之灾，都不是翻案的充分条件。最后案子能一步步查回到十年前去，说到底还是靠赶上了好时候。如果江阳早一年患病，同样的计策不一定能顺利实施。我们理解沉默的大多数，甚至感激他们至少没有添加阻力，因为他们就是我们，我们理解。可是不得不承认他们也是见风使舵的，如果不是嗅到政治风向的改变，案子可能还会像侯贵平、江阳时代一样在哪一级被压下。</p>
+<p><img src="/images/20201028-1/8.webp" alt="图 8"></p>
+<p>我们生活在这样的一个时代，长夜难明，但总有人燃灯前行；纵有人舍命燃灯，但依旧长夜难明。如何面对这样的时代，借鲁迅先生的话：</p>
 <blockquote>
-<p>大家都杀人，在世界上，现在杀人，过去也杀人。血像瀑布一样地流，像香槟一样地流。为了这，有人被钉上十字架，被冠以罪名离开人世。有人却在神殿里被戴上桂冠，以后又被称作人类的恩主。</p>
-</blockquote>
-<blockquote>
-<p>人这种卑鄙的东西，什么都会习惯的。</p>
-</blockquote>
-<blockquote>
-<p>有时，一个人遇上强盗，整整半小时感到死亡的恐惧，最后，刀架到脖子上，反倒什么都不怕了。</p>
-</blockquote>
-<blockquote>
-<p>世界上没有什么比直言不讳更难，也没有什么比阿谀奉承更容易的了。直言不讳，即使其中只有百分之一的音调是假的，那么立刻就会产生不和谐，随之而来的是争吵。而阿谀奉承，即使从头至尾全部音调都是虚假的，可还是让人高兴，听着不会觉得不愉快，哪怕这愉快有点儿肉麻，可还是感到愉快。而且不管阿谀奉承多么肉麻，其中却至少有一半让人觉得好像是真实的。</p>
-</blockquote>
-<blockquote>
-<p>先生，贫穷不是罪恶，这是真理。我知道，就像嗜酒不是美德一样，这更是真理。可是赤贫却是罪恶！贫穷的时候，您还能保证自己天生感情的高尚气度，但是在赤贫、穷到一无所有的情况下，却是无论什么时候、什么人都做不到的。为了赤贫，人们甚至不是用棍子赶走，而是拿扫帚把他从人类社会里清扫出去，让他受更大的屈辱。而且这是公正的，因为在赤贫的情况下，我自己首先就准备凌虐自己，于是我找到了酒。</p>
-</blockquote>
-<blockquote>
-<p>要知道，女人就是这样，爱你也是她，害你也是她，两者并行不悖。</p>
-</blockquote>
-<blockquote>
-<p>谁最会欺骗自己，谁就能过得最快活。</p>
-</blockquote>
-<blockquote>
-<p>胡扯是一切生物中只有人类才享有的唯一特权。通过胡扯，可以得到真理！</p>
-</blockquote>
-<blockquote>
-<p>犯罪是对社会组织的不正常现象的抗议。</p>
-</blockquote>
-<blockquote>
-<p>现实主义者不会害怕他们的研究结果。</p>
-</blockquote>
-<blockquote>
-<p>人们最害怕什么呢？他们最害怕迈出新的一步，最害怕自己新的想法。</p>
-</blockquote>
-<blockquote>
-<p>一百个疑点也绝不能构成一件证据。</p>
-</blockquote>
-<blockquote>
-<p>人能从洁白里拷打出罪恶，也能从罪恶中拷打出洁白。</p>
-</blockquote>
-<blockquote>
-<p>那时魔鬼引诱我杀死了一只虱子，但是后来它又告诉我，我没有去权利走那条路，因为我也不过就是个虱子，和所有其余人一样。</p>
-</blockquote>
-<blockquote>
-<p>只要能活着，活着，活着！不管怎样活着，只要活着就好！多么正确的真理！谁要是为此把人叫做卑鄙的东西，那么他才是最卑鄙的。</p>
+<p>真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。这是怎样的哀痛者和幸福者？然而造化又常常为庸人设计，以时间的流驶，来洗涤旧迹，仅使留下淡红的血色和微漠的悲哀。在这淡红的血色和微漠的悲哀中，又给人暂得偷生，维持着这似人非人的世界。我不知道这样的世界何时是一个尽头！</p>
 </blockquote>
 <hr>
 <h1>参考</h1>
 <ul>
-<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B8_%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D0%B5">罪与罚- 维基百科</a></li>
-<li><a href="https://ilibrary.ru/text/69/index.html">罪与罚- 俄文原版</a></li>
+<li><a href="https://book.douban.com/subject/26923390/">长夜难明- 豆瓣读书</a></li>
+<li><a href="https://www.guibuyu.org/109_109392/">长夜难明- 免费电子版</a></li>
 </ul>
 ]]></content>
       <categories>
         <category>读书笔记</category>
-        <category>俄罗斯文学</category>
+        <category>中国文学</category>
       </categories>
       <tags>
-        <tag>俄罗斯文学</tag>
-        <tag>陀思妥耶夫斯基</tag>
+        <tag>中国文学</tag>
+        <tag>紫金陈</tag>
       </tags>
   </entry>
   <entry>
-    <title>Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 研读报告</title>
-    <url>/archives/bebd9392.html</url>
-    <content><![CDATA[<p>越来越多的网络入侵检测系统（NIDS）开始引入机器学习技术，以检测为止攻击。但是机器学习已被发现极易受到对抗攻击，这对基于机器学习的网络入侵检测系（ML-NIDS）统带来了潜在威胁。在目前的环境下有关传统的基于签名的NIDS相关研究不在有效，而ML-NIDS的相关研究还主要集中于百合检测和特征维度，对于黑盒ML-NIDS的研究基本上未得到开发。为弥补这一缺陷，本课题对实际流量空间中基于机器学习入侵检测系统的对抗攻击进行研究。本工作由清华大学网络科学与网络空间研究院<a href="http://www.insc.tsinghua.edu.cn/publish/wyy/10857/2018/20180410092237634446731/20180410092237634446731_.html">王之梁</a>团队研究完成。</p>
-<h1>1 课题创新点</h1>
+    <title>The Threat of Adversarial Attacks Against Machine Learning in Network Security: A Survey 研读报告</title>
+    <url>/archives/9863deb2.html</url>
+    <content><![CDATA[<h1>摘要</h1>
+<p>机器学习算法使许多决策系统执行更快、更准确、更高效。然而相比其她领域，机器学习在网络安全中的应用面临更多的主动对抗动机的威胁。因为机器学习在网络安全中的应用(如恶意软件检测、入侵检测和垃圾邮件过滤)本身就是对抗性的。这可以被视为攻击者和防御者之间的一场军备竞赛，对手不断探测机器学习系统，并将其输入设计为可绕过系统，诱导系统做出错误预测的样本。在本项调查中，我们首先将机器学习从技术、任务和深度角度分类。然后介绍了机器学习在网络安全应用中的类别。接下来我们研究了网络安全中针对机器学习的各种对抗性攻击，并介绍了网络安全中对抗性攻击的两种分类方法。首先，我们根据网络安全应用的分类对网络安全中的对抗攻击进行划分。其次，我们将网络安全中的对抗攻击从问题空间与特征空间两个维度进行划分。然后我们分析了针对基于机器学习的网络安全应用程序上的对抗攻击的各种防御方案。最后，我们总结了一个对抗风险网格图，使用此图评估了几种针对应用于网络安全的机器学习的对抗攻击。我们还确定了每个攻击分类在网格图中的位置。</p>
+<h1>简介</h1>
+<p>设计者在设计机器学习算法时更注重准确率和效率，这些模型的安全性和鲁棒性往往遭到忽视。研究证明对抗样本可以轻易欺骗机器学习系统。对抗样本是一种特制的输入，它可以导致机器学习模型对输入进行错误的分类。机器学习系统通常在两个阶段接收数据，分别是在训练阶段输入的训练数据和在预测阶段输入的测试数据。将网络安全领域的对抗攻击进行<span class="label info">问题空间</span>和<span class="label info">特征空间</span>两个维度的划分。基于机器学习任务和技术的判别自主性与指令自主性来评估网络安全中对抗攻击的风险。</p>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
+      </categories>
+      <tags>
+        <tag>网络安全</tag>
+        <tag>机器学习</tag>
+        <tag>对抗样本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A fully scalable big data framework for Botnet detection based on network traffic analysis 研读报告</title>
+    <url>/archives/820ee20f.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>中文译名“可扩展的僵尸网络流量检测大数据框架”。本工作由S.H. Mousavi等人完成，于2019年发表于Information Sciences。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h1>Abstract</h1>
+<p>传统僵尸网络检测方法受限于系统可接受的网络带宽，无法满足Gbps级的网络需求。因此在数据收集、存储、特征提取和分析方面都存在瓶颈。本文提出了一个可扩展的大数据框架，可对僵尸网络检测系统中每个组件进行扩展。框架可用于任何僵尸网络检测方法，包括统计方法、机器学习方法和基于图的方法。实验结果表明本框架可在一个真实网络环境中实现5Gbps的吞吐量和5000万个IP地址访问。框架运行时间随着输入数据的增长呈对数上升。</p>
+<h1>1. Introduction</h1>
+<p>当前互联网应用的规模快速增长，网络安全威胁加剧，这使传统网络安全方法逐渐失效。如今僵尸网络是最严重的网络安全威胁之一，每个僵尸网络由分布在整个互联网上的受感染主机网组成。每个感染主机(Bots)都由僵尸网络的管理者(Botmaster)通过代理软件控制，两者之间的通信被称为命令与控制通道(C&amp;C通道)。</p>
+<h1>2. Related word</h1>
+<p>可扩展性是僵尸网络检测方法面临的重要挑战之一，但目前没有工作实现了在高速网络带宽的可扩展性，即同时实现数据处理与存储的可伸缩性。</p>
+<h1>3. Proposed scalable big data framework for botnet detection Scalability(可扩展的僵尸网络检测框架)</h1>
+<p>在检测僵尸网络的整体过程中，即从网络嗅探到数据收集到特征提取最后到部署分析算法(如机器学习、基于图的分析、基于统计的分析等)都必须考虑数据量的可伸缩性。图1显示了该框架的总体架构，该框架可以从被监控的网关手机数据，进行被动分析。也可以部署在大型ISP或拥有大量网络用户的企业级组织。<br>
+<img src="/images/20210324-1/1.webp" alt="图 1: 僵尸网络检测框架"></p>
+<h2 id="3-1-网络流量处理模块">3.1 网络流量处理模块</h2>
+<p>该模块对网络流量进行处理，根据需求从接受到的流量中提取原始网络数据。这里配置了一些常用的僵尸网络检测数据获取工具，包括DNS流量提取器、Http流量提取器以及NetFlow流量提取器。所有工具必须以符合整体处理流程的速度处理数据，并且每个工具并行处理输入的流量。这个模块中的工具可以选取一些常见的并行网络流量处理工具，如PFring[1]与Nprobe<a href="Norobe%E6%98%AF%E4%B8%80%E7%A7%8D%E6%8E%A2%E9%92%88%E5%9E%8B%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7">2</a>。另外如Napatech[3]等专为高速网络流量开发的高性能硬件也可于此模块部署。</p>
+<h2 id="3-2-可伸缩的队列模块">3.2 可伸缩的队列模块</h2>
+<p>第二个模块任务是同步数据的生产者和消费者。由于有许多数据生产者和消费者并行处理原始数据，因此该模块提供了一个分布式队列系统来进行协调。在此模块的协助下，即使后续模块没有准备好或发生拥塞，框架的可用性也不会受到影响。网络上可能分布着许多数据生产者传感器，每个传感器只处理整个网络的一部分，并将原始数据发送到一个队列系统中。此模块将在一个列队中聚合所有原始数据，并为下一个模块中的并行处理提供基础设施。这个模块可以使用Apache Kafka[4]和Redis[5]等分布式队列系统。</p>
+<h2 id="3-3-流处理模块">3.3 流处理模块</h2>
+<p>队列模块就像一个枢纽模块，不需要任何处理就可以接收和保存原始数据。而流处理模块需要将所有接收到的数据统一处理并存储在一个可伸缩的数据结构中。其主要有一下两个任务：首先，它需要处理接收到的数据，然后进行清理和解析，最后将它们存储在一个可扩展的大数据存储系统中(如HDFS)。其次，它需要根据检测方法提取特征，为后续的分析模块做准备。</p>
+<h2 id="3-4-大数据平台">3.4 大数据平台</h2>
+<p>检测APT和复杂僵尸网络需要在大时间窗口中存储和处理网络行为。因此我们选取Hadoop平台进行数据存储与处理，Hadoop本身具有可扩展性。值得注意的是，数据存储格式和压缩方案对其它模块性能有很大影响，通常大数据处理的瓶颈是I/O和数据从硬盘到主存的传输速度。数据压缩可以有效降低主存与磁盘之间的数据交换。由于僵尸网络流量都是结构化数据，需要进行多次聚合和统计操作，因此这里选择柱状存储格式。Apache Parquet可实现结构化、柱状存储并支持多种压缩编解码器[6]。在这种架构下，可能有许多消费者进程，其中每个进程都处理输入记录的一部分，并将预处理和解析后的数据存储到HDFS parquet文件中。</p>
+<h2 id="3-5-分析模块">3.5 分析模块</h2>
+<p>根据输入数据选择最佳的存储格式与压缩方法，将预处理并格式化后的数据存储在可扩展的大数据平台上。分析模块还要为各种不同的僵尸网络检测方法提供工具与基础设施。</p>
+<h1>4. Experimental setup and results</h1>
+<p>采用Bilge等人提出的Disclosure模型[7]测试评估本框架。改模型是使用基于NetFlow特征的机器学习算法检测C&amp;C服务器，具体步骤如下：</p>
+<ol>
+<li>环境部署</li>
+<li>收集并导入NetFlow数据</li>
+<li>基于特征的检测算法</li>
+<li>基于特征的NetFlow</li>
+<li>基于hive和用户自定义功能提取特征</li>
+<li>准备训练和测试数据集</li>
+<li>使用SparkML部署机器学习算法</li>
+</ol>
+<h1>5. Experimental results</h1>
+<p>实验主要目的是评估框架可伸缩性以及在C&amp;C服务器检测中的效果。实验验证本框架在数据收集、存储、特征提取和机器学习算法四个阶段都可以提供可扩展性，并且发现了网络检测最复杂的阶段是特征提取。</p>
+<h1>6. Conclusions</h1>
+<p>近年来，随着网络规模和僵尸网络复杂性的增长，僵尸网络检测安全策略的可扩展性称为主要挑战。目前为止，已发表的研究还没有提出有效的解决大型网络的可伸缩性部署的解决方案。本文为此问题提出了一个完整的策略框架，但也存在缺点。框架安装需要充足的计算资源，小型企业负担不起，云服务提供商为大数据部署提供计算基础设施或许称为可能。</p>
+<h1>References</h1>
 <ul>
-<li>实用性：在不修改流量功能的前提下，以有限知识自动诱变恶意流量。</li>
-<li>通用性：此方案可攻击任何机器学习分类器（与模型无关）。</li>
-<li>可解释：提出一种基于特征的机器学习解释方法，衡量目标系统抵御此类攻击的鲁棒性。</li>
-</ul>
-<h1>2 方案设计</h1>
-<h2 id="2-1-目标系统">2.1 目标系统</h2>
-<p>基于非有效载荷的NIDS：指在NIDS的检测未对流量的有效载荷进行检查。大多数ML-NIDS都属于此类，其原因是因为对于加密流量来说，检查有效载荷非常困难。逃避使用异常检测实现对流量有效载荷进行检测的工作已经比较完善。基于非有效载荷的NIDS更注重于检查DDos、Dos、扫描、爆破和僵尸网络等基于迭代的攻击。</p>
-<h2 id="2-2-实现方法">2.2 实现方法</h2>
-<p>为规避黑盒ML-NIDS检测，课题定制了一个双层优化模型。第一层模型使用生成对抗网络（GAN）计算恶意流量在目标分类器中的最优对抗样本特征；第二层模型使用粒子群优化算法，在不修改流量功能的前提下，以有限知识自动有百年恶意流量，提取特征相似的最佳流量突变体。<br>
-<img src="/images/20201012-1/1.webp" alt="图1：NIDS攻击检测逃避框架"></p>
-<h1>3 理论证明</h1>
-<h2 id="3-1-现有工作">3.1 现有工作</h2>
-<p>$ E(\cdot) $ 目标系统特征提取器：输入流量，输出特征向量。<br><br>
-$ C(\cdot) $ 目标系统分类器：输入特征，输出恶意概率信息的二元分类器。<br><br>
-$ t $：原始恶意流量。<br><br>
-$ \hat{t} $：变异恶意流量。<br><br>
-$ f $：$ t $ 的特征，即 $ E(t) $。<br><br>
-$ \hat{f} $：$ \hat{t} $ 的特征,即 $ E(\hat{t}) $。<br><br>
-现有工作重要集中于特征维度即，即在产生对抗样本时直接修改特征，而不考虑如何实现流量的变换。即解决优化问题：<br>
-\[ argmin_{\hat{f}}C(\hat{f}) \]<br>
-或者在白盒环境下研究如何对流量进行变形，即解决优化问题:<br>
-\[ argmin_{\hat{t}}C(E(\hat{t})) \]</p>
-<h2 id="3-2-目标问题">3.2 目标问题</h2>
-<p>实际灰盒攻击(PGA)：攻击者拥有与目标分类器相同的特征提取器。<br>
-实际黑盒攻击(PBA)：攻击者没有目标分类器的特征信息。<br>
-$ E’(\cdot) $ 代理特征提取器：对于PGA，$ E(\cdot) $=$ E’(\cdot) $；对于PBA，使用常用特征集模拟 $ E(\cdot) $。<br><br>
-$ C’(\cdot) $ <br>近似分类器：借助对 $ C(\cdot) $ 的输入输出测试，训练一个与 $ C(\cdot) $ 概率分布近似的二元分类器。<br><br>
-$ M(\cdot) $ 变异操作：输入$ t $，输出集合：<br>
-\[ \left \{ \hat{t}|t的所有变异流量集合 \right \} \]<br>
-$ M_{s}(\cdot) $ 安全变异操作：输入$ t $，输出集合：<br>
-\[ \left \{ \hat{t}|t的所有安全变异流量集合，即变异可以保留恶意流量t的恶意功能 \right \} \]<br>
-则目标优化模型为：<br>
-\begin{equation} argmin_{\hat{t}}\ C’(E’(\hat{t}))\quad s.t.\ \hat{t}\in M_s(t) \label{evasion_attack} \end{equation}</p>
-<h2 id="3-3双层优化模型">3.3双层优化模型</h2>
-<p>虽然公式\eqref{evasion_attack}非常直观，但却很难解决。所以将其转化为双层优化模型解决。<br>
-$ f^* $：良性样本特征。<br><br>
-$ L(\cdot,\cdot) $ 距离度量函数：输入两个特征$ \hat{f} $, $ f^* $，输出两个特征之间的距离。距离越近$ \hat{f} $被误分类于良性的可能性越大。<br><br>
-$ h $ ：目标分类器异常阈值，即 $ C’(f^*)&lt;h $ 时 $ f^* $ 被分类于良性。</p>
-<p>\begin{equation}<br>
-argmin_{\hat{t}}\ L(E’(\hat{t}),f^*) \label{traffic_adversarial}<br>
-\end{equation}</p>
-<p>\begin{equation}<br>
-s.t.\quad f^*=argmin_{f^*}\ L(f^*,E’(t)) \label{feature_adversarial}<br>
-\end{equation}</p>
-<p>\begin{equation}<br>
-C’(f^*)&lt;h \label{anomaly_threshold}<br>
-\end{equation}</p>
-<p>\begin{equation}<br>
-\hat{t}\in M_s(t) \label{safe_mutation}<br>
-\end{equation}</p>
-<p>先在公式\eqref{anomaly_threshold}的限制下通过公式\eqref{feature_adversarial}计算 $ f^* $ ，即对抗样本特征。然后使用得出的结果 $ f^* $ 在公式\eqref{safe_mutation}的限制下通过公式\eqref{traffic_adversarial}计算 $ \hat{t} $<br>
-从拓扑角度解释双层模型，如图所示。先在原本分类良好的特征空间中（Construction），计算出对抗样本特征（Generation），然后将恶意流量靠近对抗样本特征（Mutation）。<br>
-<img src="/images/20201012-1/2.webp" alt="图2：特征空间中的攻击步骤"><br>
-其中对抗样本特征使用生成对抗网络（GAN）计算产生，其损失函数为：</p>
-<p>\begin{equation}<br>
-l_G = E_{f \in F_{mal, z \sim p_z(z)}}[logD(G(f,z)) + L(f,G(f,z))]  \label{lG}<br>
-\end{equation}</p>
-<p>\begin{equation}<br>
-L_D = -E_{f \in F_{ben}}log(1-D(f)) - E_{f \in F_{gen}}logD(f) \label{lD}<br>
-\end{equation}</p>
-<h1>4 实验</h1>
-<h2 id="4-1-实验配置">4.1 实验配置</h2>
-<p>使用六个攻击流量集与Kitsune等六个NIDS系统以及两个特征提取器测试课题提出的可解释行防御方案有效性。</p>
-<ul>
-<li>数据集：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>数据集（样本数）</th>
-<th>攻击类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kitsune Dataset(40,000)</td>
-<td>Mirai Botnet, Fuzzing, SSDP DoS</td>
-</tr>
-<tr>
-<td>CIC IDS2017(40,000)</td>
-<td>Port Scan, Brute Force, DDoS</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>目标NIDS：<a href="https://github.com/ymirsky/Kitsune-py">Kitsune</a></li>
-<li>特征提取器：<br>
-AfterImage: 基于数据包，流量包本身<br>
-CI-CFlowMeter: 基于流，流量统计特性</li>
-<li>分类器<br>
-无监督模型：KitNET(Kitsune自带)<br>
-有监督模型：Logistics Regression (LR), Decision Tree (DT), Support Vector Machine (SVM), Multi-Layer Perceptron (MLP), Isolation Forest (IF)</li>
-</ul>
-<h2 id="4-2-实验结果">4.2 实验结果</h2>
-<p>本课题提出的方案比过往工作如随机化突变和白盒对抗方法（TWA）具有更强规避性。<br>
-<img src="/images/20201012-1/3.webp" alt="图3：规避率对比"><br>
-本课题提出的特征剔除方案比对抗训练和特征工程方案对模型加强效果更好。<br>
-<img src="/images/20201012-1/4.webp" alt="图4：防御表现"></p>
-<h1>5 贡献</h1>
-<ul>
-<li>总结了大部分最新的ML-NIDS中的常用功能，并介绍了一些流量突变运算符。这些运算符可以在不破坏流量恶意特征的前提下对流量进行变换。</li>
-<li>扩展了GAN将目标机器学习分类器视为黑盒的思想，从而可以规避除了深度神经网络（DNN）以外的任何机器学习模型。</li>
-<li>提出了一种特征空间解释机器学习的方法，有效检测NIDS的鲁棒性。通过量化攻击者对每个流量特征的可操作程度，提出一种通过删除安全评分较差特征的防御策略。</li>
-</ul>
-<h1>6 可改进</h1>
-<ul>
-<li>本课题先使用GAN网络计算出恶意流量在目标系统中的最佳对抗样本的特征然后使用粒子群优化算法将恶意流量逼近最佳特征。这种方法有效的解决了目前多数工作只停留在特征维度讨论NIDS的对抗样本，实际上没有真实攻击效果的问题。但本方案实质上仍是从特征角度进行对抗样本分析，只是在此之上增加了一项工序。这种先将最优特征确定然后令恶意样本逼近的算法会丢失大量可行对抗样本，这是因为不仅仅最优特征对抗样本可以绕过分类器，事实上还存在很多特征组合可以产生有效的（有真实世界可执行性的）对抗样本。</li>
-<li>本课题使用基于特征的机器学习可解释方法衡量目标系统低于对抗攻击的鲁棒性，并提出通过删除安全性较差的特征的防御策略。这种策略没有考虑删除的特征对目标分类器分类性能的影响，应该考虑更佳的防御方案，而不是直接删除特征这种硬性策略。</li>
-<li>只考虑非有效载荷判定。非有效载荷完全不会改变流量恶意行为吗？</li>
-<li>如何检测组合流量攻击？</li>
-</ul>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://arxiv.org/abs/2005.07519v2">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs 原文</a></li>
+<li>[1] S. Gallenmüller , P. Emmerich , F. Wohlfart , D. Raumer , G. Carle , Comparison of frameworks for high-performance packet IO, in: Architectures for Net- working and Communications Systems (ANCS), 2015 ACM/IEEE Symposium on, IEEE, 2015, pp. 29–38 .</li>
+<li>[2] L. Deri , N. SpA , nProbe: an open source netflow probe for gigabit networks, in: TERENA Networking Conference, 2003 .</li>
+<li>[3] Napatech, Zero Packet Loss, 2016, <a href="http://www.napatech.com/">http://www.napatech.com/</a> .</li>
+<li>[4] N. Garg , Apache Kafka, Packt Publishing Ltd, 2013 .</li>
+<li>[5] J.L. Carlson , Redis in Action, Manning Publications Co., 2013 .</li>
+<li>[6] D. Vohra , Apache parquet, in: Practical Hadoop Ecosystem, Springer, 2016, pp. 325–335 .</li>
+<li>[7] L. Bilge , D. Balzarotti , W. Robertson , E. Kirda , C. Kruegel , Disclosure: detecting botnet command and control servers through large-scale netflow anal- ysis, in: Proceedings of the 28th Annual Computer Security Applications Conference, ACM, 2012, pp. 129–138 .</li>
+<li>[8] <a href="https://www.sciencedirect.com/science/article/pii/S0020025519309703">A fully scalable big data framework for Botnet detection based on network traffic analysis</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -1145,9 +1012,12 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
         <category>论文研读报告</category>
       </categories>
       <tags>
-        <tag>对抗攻击</tag>
-        <tag>网络安全</tag>
-        <tag>入侵检测系统</tag>
+        <tag>机器学习</tag>
+        <tag>僵尸网络检测</tag>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+        <tag>可扩展性</tag>
       </tags>
   </entry>
   <entry>
@@ -1320,347 +1190,477 @@ CI-CFlowMeter: 基于流，流量统计特性</li>
       </tags>
   </entry>
   <entry>
-    <title>人工智能内生安全——模型窃取</title>
-    <url>/archives/7bfc85ae.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>模型窃取指通过黑盒探测来窃取模型甚至恢复模型的训练样本数据。如今我们进入到了一个机器学习即服务（Mlaas）的时代，很多公司训练机器学习模型分类器并向用户付费提供接口来获取利润。公司不希望自己消耗大量资源训练的分类器可以被竞争对手轻松复制，如何保护机器学习模型本身不被复制与窃取逐渐成为工业界重要需求之一。另外模型窃取攻击直接对用户隐私造成威胁,攻击者只需要拖过一个人的姓名，就可以通过不断在黑盒模型中不断测试输入输出，最终从噪音文件逐渐逆向出个人照片。<br>
-<img src="/images/20201008-4/1.webp" alt="利用模型逆向通过姓名获取照片"><br>
-机器学习分类器被发现存在可移植，如果两个模型的功能相似，即便它们们使用的机器学习算法不同，同一对抗样本也可能对他们都有攻击效果，右图为模型可移植性比较。即如果模型A为SVM（支持向量机）而模型B为DNN（深度神经网络），它们使用同一训练样本集学习，理论上由于内部算法不同，其分类面结构应该大相径庭，然而实现发现在模型A上计算生成的对抗样本有64.34%的概率在模型B中也能产生对抗效应，这使得防御模型窃取成为抵御对抗攻击的重要前提。<br>
-<img src="/images/20201008-4/2.webp" alt="机器学习可移植性比较"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的模型窃取技术可以总结为模型萃取、成员推断和模型逆向。</p>
-<div class="note danger">
-            <p>模型萃取攻击</p>
-          </div>
-<p>模型萃取攻击指攻击者通过大量记录对一个黑盒机器学习模型的输入输出测试，将其作为自己模型的输入输出进行训练，使自己的模型越来越逼近目标模型，以达到复制并窃取模型的目的。攻击者首先模糊测试目标分类器的分类算法并大致拟合模型分布，形成一个影子模型（shadow model）。然后分析影子模型各类别边界并在边界采样，形成边界样本集。最后将边界样本集分别输入影子模型和目标模型，对于分类结果不同的样本，将其标签设置为目标分类器结果并加入到作为影子模型的训练样本中。循环此过程是影子模型最终无限接近目标模型。</p>
-<div class="note danger">
-            <p>成员推断攻击</p>
-          </div>
-<p>成员推断攻击指攻击者希望分析某样本是否在模型的初始训练集中。可以执行这种攻击的依据是模型对于待识别样本在其初始训练集中这个条件的真与假会表现与其分类过程与结果中。比如置信度、准确率甚至判别速度、模型耗能等因素会因待识别样本是否在训练集中而有不同，手机这些信息并对其进行建模。最终可以得到一个判断样本是否在模型训练样本中的二元分类器。</p>
-<div class="note danger">
-            <p>模型逆向攻击</p>
-          </div>
-<p>模型逆向指攻击者可以通过模型的输出逆向出模型的出入。对于人脸识别系统，攻击者可以通过个人信息如姓名逐渐从噪音文件逆向出个人照片。一般攻击者对攻击目标有一个模糊的范围，通过不断测试模型的输入输出，可以逐渐缩小范围以锁定目标文件。</p>
-<h1>3 防御方案</h1>
-<p>目前比较有效的防御方案是模型水印和联邦学习。</p>
-<div class="note success">
-            <p>模型水印技术</p>
-          </div>
-<p>模型水印主要防御模型窃取攻击。模型水印可以理解为模型制作者在模型中留下一个后门，在使用这个模型前必须通过这个后门，模型才可以正确运行。由于模型萃取技术很难将分类器细节还原，对于后门信息攻击者无法有效萃取。</p>
-<div class="note success">
-            <p>联邦学习技术</p>
-          </div>
-<p>联邦学习主要防御成员推断与模型逆向攻击。联邦学习指的是每个用户使用自己的模型训练自己的数据集，最后统一调和所有用户的模型参数，得到一个最终模型。由于最红模型的输入不是用户的初始数据，攻击者逆向出原始训练数据的难度很大。</p>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://towardsdatascience.com/how-to-attack-machine-learning-evasion-poisoning-inference-trojans-backdoors-a7cb5832595c">How to attack Machine Learning ( Evasion, Poisoning, Inference, Trojans, Backdoors)</a></li>
-<li><a href="https://towardsdatascience.com/ai-and-ml-security-101-6af8026675ff">AI Security and Adversarial Machine Learning 101</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>模型窃取</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——数据投毒</title>
-    <url>/archives/e598100d.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>数据投毒指通过污染训练样本达到改变分类器边界的目的。数据投毒一般发生在在线学习系统中。阿里巴巴在2019年公司安全报告上称他们收到了一种模型偏斜的数据投毒攻击，在最开始阿里巴巴安全部报告称他们持续的接收到某种低级的攻击流量，这种流量可以轻易地被阿里入侵检测系统拦截。令人不解的是攻击者明知道这种攻击会被拦截，并不能达到攻击效果，但是他们依然不停的发送这种低级的攻击流量。最后阿里安全部门才发现攻击者前后发送了两轮攻击流量，第一批低级攻击流量的目的不是为了进入公司内网，而仅仅是为了干扰入侵检测系统，发送集中于模型边界的大量恶意样本，使模型黑白样本分布不均匀，致使推动模型边界，使模型偏斜。而第二轮攻击流量是一批对抗攻击流量，原本就在模型边界的对抗样本，在模型偏斜之后，更容易的绕过了入侵检测系统的过滤。<br>
-<img src="/images/20201008-3/1.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的数据投毒技术有反馈化武器，模型偏斜和后门攻击。为便于理解，每种攻击方式使用简易图示辅助介绍：图中橙色线表示原始分类边界，紫色线表示被篡改后的分类边界。蓝色叉号表示恶意样本，绿色圆形代表白样本，红色边缘的样本为攻击者构造的样本。骷髅表示被攻击者利用的区域。</p>
-<div class="note danger">
-            <p>反馈化武器</p>
-          </div>
-<p>一般用于将样本标签决定权交给用户的机器学习模型。由于攻击者可以有意的将样本标记为错误的分类器，这种模型如果没有有效的保护手段，很容易受到攻击。分类边界会被不断拉偏最终导致整个模型分类结果不可靠。<br>
-<img src="/images/20201008-3/2.webp" alt="反馈化武器"></p>
-<div class="note danger">
-            <p>模型偏斜攻击</p>
-          </div>
-<p>如上所述，攻击者通过集中投放位于模型边界的样本，使模型样本分布不均匀，模型为了寻找最优分割面，会改动其分类边界，使攻击者可以利用分类界面附近的危险区域。其一般伴随对抗攻击同时出现。<br>
-<img src="/images/20201008-3/3.webp" alt="模型偏斜"></p>
-<div class="note danger">
-            <p>后门攻击</p>
-          </div>
-<p>后门攻击希望达到的目的是在攻击者不进行操作的时候，普通用户可以正常使用分类器，即在大多数情况下分类器分类结果可靠，只有在特殊区域的样本会被错误分类，这使防御方也很难察觉这种攻击。<br>
-<img src="/images/20201008-3/4.webp" alt="后门攻击"></p>
-<h1>3 防御方案</h1>
-<p>数据投毒问题可以说是关于“如何在噪音的环境中学习模型”问题的延伸，对于数据投毒还没有一个比较完善的防御方案。一般通过均匀采样、构建标准数据集以及集成学习来缓解攻击问题。</p>
-<div class="note success">
-            <p>均匀采样</p>
-          </div>
-<p>数据分布不均匀是导致数据投毒的根本原因，如果可以在训练模型时保证各类样本均匀分布，就可以从根本上杜绝这种攻击。但在真实的生产网络中实现均匀采样是难以实现的。</p>
-<div class="note success">
-            <p>构建标准数据集</p>
-          </div>
-<p>数据投毒一般用于攻击在线学习系统，如果我们构建一个样本集，在每次更新模型后，模型必须通过样本集的“考核”，即需要能以较高准确率分类标准数据集中的样本这次更新才会执行，确保模型不会因为一次集中的数据投毒而大幅改变分类边界。</p>
-<div class="note success">
-            <p>集成学习技术</p>
-          </div>
-<p>集成学习指同时训练多个机器学习模型，在识别待测样本时综合每个模型的的分类结果，给出最终分类判断。这种方式可以在一定程度上抵御数据投毒攻击。</p>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://arxiv.org/abs/1608.08182">Data poisoning attacks on factorization-based collaborative filtering</a></li>
-<li><a href="http://pages.cs.wisc.edu/~jerryzhu/pub/AlfeldAAAI2016.pdf">Data Poisoning Attacks against Autoregressive Models</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>数据投毒</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——对抗攻击</title>
-    <url>/archives/929f209b.html</url>
-    <content><![CDATA[<h1>1 技术简介</h1>
-<p>对抗攻击指通过特殊构造的输入使分类器结果不可靠。比如在一个交通路牌上贴一些黑白色块贴纸就可以让自动驾驶系统将其误判为绿灯标志。<br>
-<img src="/images/20201008-2/1.webp" alt="对路牌做微小扰动就可以令自动驾驶系统将其误判为其它标志"><br>
-目前对于对抗样本产生的原因尚未有统一定论，<a href="https://arxiv.org/abs/1412.6572">Goodfellow 提出一种猜测</a>称深度神经网络在高维空间中的线性特征是产生对抗样本的根本原因。每层神经元的输出$ a=g(wx+b) $,实际上是在空间中的旋转、移动和拉伸。</p>
-<span class="label primary">旋转</span>：使用权重$ w $进行线性变换；<br><br>
-<span class="label primary">移动</span>：使用偏置$ b $进行平移；<br><br>
-<span class="label primary">拉伸</span>：使用激活函数$ g $进行非线性变化。<br><br>
-<p>对于简单的分类问题，在二维平面被拉伸可成可以通过直完成分割的分类布局，对于更复杂的问题，通过增加神经元，在高维空间进行分离。总之神经网络学习到的并非人类认知的底层逻辑，而仅仅是在高维空间中，通过一切扭曲变换使得样本可以被线性分割。<br>
-<img src="/images/20201008-2/2.webp" alt="深度神经网络在高位空间的线性化是对抗样本的成因"><br>
-在如图的拉伸结果中，距离较大的地方可以认为其映射是连续的，但缠绕在一起的部分超平面已经无法连续。对抗样本正是在这类区域增加扰动，扰动虽然极其微小但对于分类器来说，样本早已跨越了分类界限。我们可以简单理解为在分类器边界对样本做一个微小的扰动，以改变样本类别。<br>
-<img src="/images/20201008-2/3.webp" alt="边界样本更容易被对抗攻击"><br>
-用数学语言来理解，在训练分类器时，我们固定输入 $ x $ 和真实类别 $ y $，调整参数 $ \theta $ 使损失函数最小化，尽量缩小判别类别 $ f(x) $ 与真实类别 $ y $ 的距离。而在攻击一个已经训练好的分类器时，即分类器参数 $ \theta $ 确定，在保证真实类别 $ y $ 不变的条件下，调整 $ x $ 使得损失函数最大，即尽量拉大判别类别 $ f(x) $ 与真实类别 $ y $ 的距离，使分类器判别错误。那么如何能最大化损失函数呢？就是在损失函数于样本的梯度方向增加一个步长的扰动，此扰动要在足够微小以避免改变真实类别 $ y $ ，满足 $ L_{\infty} $约束$ ||x^*-x||_{\infty}\leq\epsilon  $ 以最小的步长达到分类器边界。则最终得到的对抗样本 $ x^* $ 为：</p>
-<p>\[ x^*=x+\epsilon\cdot sign(\bigtriangledown_{x}J(\theta,x,y)) \]<br>
-其中 $ sign() $ 是符号函数，括号里面是损失函数对 $ x $ 的偏导，$ x $ 是输入的原始图片，$ x^* $ 是生成的对抗样本，$ J $ 是分类器的损失函数，$ y $ 是输入图片x的标签（真实类别）。<br>
-<img src="/images/20201008-2/4.webp" alt="最大化损失函数以寻找对抗样本"></p>
-<h1>2 攻击方案</h1>
-<p>已发现的对抗攻击技术可以分为用于白盒的梯度攻击和用于黑盒的优化攻击，根据攻击目的也可以分为置信度降低攻击、无目标攻击和有目标攻击。</p>
-<div class="note danger">
-            <p>基于梯度的对抗攻击</p>
-          </div>
-<p>如上所述，在白盒条件下，计算损失函数梯度并在此方向向样本中加入微量扰动。</p>
-<div class="note danger">
-            <p>基于优化的对抗攻击</p>
-          </div>
-<p>多用于黑盒环境，由于不知道模型参数所以无法计算梯度，退一步考虑怎样才能找到最小的扰动方式。比如使用GAN（生成对抗网络）使对抗样本分布向目标类别样本分布拟合，或者使用最优化算法在空间中寻找最优的扰动解集。</p>
-<div class="note danger">
-            <p>置信度降低攻击</p>
-          </div>
-<p>攻击者目标为使分类器对于某样本的置信度降低。比如从99%是A类降低到55%是A类。</p>
-<div class="note danger">
-            <p>无目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，但不关心错误分类与哪一类。比如使某原属于A类的样本被分类器分类与非A类。</p>
-<div class="note danger">
-            <p>有目标攻击</p>
-          </div>
-<p>攻击者目的为使分类器对于某样本的判别出现错误，且指定其错误分类于某类。比如使某原属于A类的样本被分类于B类。</p>
-<h1>3 防御方案</h1>
-<p>现有的防御手段有对抗训练、梯度隐藏、随机化以及去噪。</p>
-<div class="note success">
-            <p>对抗训练技术</p>
-          </div>
-<p>对已经训练完成的分类器计算生成对抗样本，并将对抗样本集加入模型训练集中，进一步加强训练分类器。此方案虽然可以抵御部分对抗样本，但并不能从根本上解决对抗攻击问题。对抗训练后的模型依旧可以找到可以攻击成功的对抗样本，并且不断的对抗训练会使分类边界不断扩大。</p>
-<div class="note success">
-            <p>梯度隐藏</p>
-          </div>
-<p>隐藏分类器返回的置信度信息，由于白盒对抗攻击通常使用分类器返回的置信度来调整扰动，辅助产生对抗样本。隐藏模型梯度可以增加攻击者难度。</p>
-<div class="note success">
-            <p>模型随机化</p>
-          </div>
-<p>本方案主要防御基于梯度的对抗攻击，将模型的输入进行随机化处理。比如对于图像识别分类器，每次给图片样本加一个宽度随机的边框，由于在模型训练时也进行这种处理，模型在分类时可以识别任意宽度边框的样本，但对于梯度攻击，不同宽度的边框会计算出完全不同的梯度，由于边框宽度是随机变化的，使得攻击者无法确定梯度方向。</p>
-<div class="note success">
-            <p>样本去噪</p>
-          </div>
-<p>此方案很直接，因为对抗模型实在原始样本中添加微小噪音扰动。那么为了防御这种攻击，在模型分类时，先对模型的输入进行去噪处理，去除攻击者为制造对抗样本而增加的噪音。然而目前并没有很完善的针对对抗攻击的去噪技术，一些去噪甚至会起到相反效果，使对抗攻击样本被误分类的置信度更高。</p>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://baijiahao.baidu.com/s?id=1596201339578975526&amp;wfr=spider&amp;for=pc">神经网络中的对抗攻击与对抗样本</a></li>
-<li><a href="https://arxiv.org/abs/2005.07519">Practical Traffic-space Adversarial Attacks on Learning-based NIDSs</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-        <tag>对抗攻击</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工智能内生安全——背景介绍</title>
-    <url>/archives/b967121.html</url>
-    <content><![CDATA[<p>本编文章为笔者研究方向“面向网络流量的人工智能内生安全保护”的提纲。如今人工智能在各种传统分类识别问题上显示出强大能力。但由于其算法缺乏可解释性，人工智能系统在数据、算法、模型等多方面存在脆弱点。目前多数机器学习方法都假设其环境是良性的，但这种假设并不总是成立。本片文章将从信息安全三要素（完整性、可用性、机密性）角度分析现有人工智能系统存在的内生安全问题。</p>
-<h1>1 工业界应用现状</h1>
-<p>人工智能内生安全指的是人工智能系统自身存在的脆弱性。如今越来越多的系统引入AI技术，它的确在传统分类识别问题上显示出强大的能力。但是由于其系统缺乏可解释性，AI在数据、算法、模型等多方面都存在脆弱点。目前工业界对其脆弱性的重视程度和对AI系统的保护远远不够。<br>
-<img src="/images/20201008-1/1.webp" alt="在熊猫照片上加入微量噪音就能严重影响分类器性能"><br>
-在ICLR2015会议上Goodfellow展示了向熊猫图片中加入肉眼难以发现的微量干扰，，就可以严重影响分类器识别性能，将其识别为猿猴。这种技术如果用在攻击入侵检测系统或自动驾驶系统，将会带来灾难性的后果。<br>
-<img src="/images/20201008-1/2.webp" alt="Google 垃圾邮件识别系统受到数据投毒攻击"><br>
-谷歌公司也曾多次受到针对其人工智能垃圾邮件识别系统的攻击，导致公司必须重新训练邮件分类器。谷歌垃圾邮件分类器使用在线学习技术，攻击者将大量垃圾邮件反馈为非垃圾邮件以达到干扰分类器性能的目的。图片中横轴为时间，纵轴为邮件数量，绿线表示用户手动标记为垃圾邮件，红线表示用户手动标记为非垃圾邮件。由于将标签决定权交给用户，而又没有有效的保护措施，导致了这次数据投毒攻击。<br>
-对人工智能系统的攻击测试与防御加固会受到越来越多的关注。目前已发现多种破坏机器学习模型的攻击手段，诸如对抗攻击、数据投毒、模型窃取等。而在网络入侵检测系统上的有效防御研究还远远不足。这给面向网络流量的人工智能内生安全保护带来了新的挑战。</p>
-<h1>2 学术界研究现状</h1>
-<p>使用Web of Science统计关于人工智能内生安全的研究发现近几年研究人员在这方面的兴趣快速增长.<br>
-<img src="/images/20201008-1/3.webp" alt="人工智能内生安全近年论文发表数量"><br>
-<img src="/images/20201008-1/4.webp" alt="人工智能内生安全近年论文应用领域"><br>
-但是在入侵检测系统上的工作较少。从信息安全三要素角度考虑，破坏人工智能完整性的主要问题有对抗攻击和数据投毒；破坏人工智能系统可用性的主要从模型代码漏洞角度入手；破坏人工智能系统机密性的主要问题为模型窃取。<br>
-<img src="/images/20201008-1/5.webp" alt="人工智能内生安全研究内容"><br>
-由于模型漏洞和具体代码实现有关，我们的研究主要从对抗攻击、数据投毒与模型窃取三个方面进行。您可以在以下的三篇文章中详细了解人针对工智能内生安全的主要攻击手段与目前提出的有效防御方案。</p>
-<ul>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——对抗攻击">人工智能内生安全——对抗攻击</a>
-</li>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——数据投毒">人工智能内生安全——数据投毒</a>
-</li>
-<li>
-<a href="/archives/b967121.html" title="人工智能内生安全——模型窃取">人工智能内生安全——模型窃取</a>
-</li>
-</ul>
-<h1>3 推荐书目</h1>
-<p>最后推荐四本与人工智能内生安全相关的书籍。<br>
-<img src="/images/20201008-1/6.webp" alt="人工智能安全推荐书目"><br>
-《人工智能安全》是方滨兴院士主编，在2020年6月份出版的书，内容很前沿甚至有些科幻。本书追求广度而非深度，适合作为入门书籍寻找兴趣点；<br>
-《Adversarial Machine Learning》是一本理论性很强的关于机器学习对抗攻击的书，其从拓扑学角度解释了机器学习算法内核以及对抗攻击产生的原理；<br>
-《Interpretable Machine Learning》是一本工程性很强的关于可解释机器学习的书，此书完整<a href="https://christophm.github.io/interpretable-ml-book">电子版</a>免费阅读，并有对应的<a href="https://github.com/christophM/interpretable-ml-book">GitHub开源项目</a>；<br>
-《Attacking Artificial Intelligence》是2019年哈佛大学的一份调查报告，其统计了学术界和工业界在人工智能安全方面的进展以及各国政府出台的关于AI安全的政策与法律，本书主要侧重于网络安全领域。</p>
-<hr>
-<h1>参考</h1>
-<ul>
-<li><a href="https://www.zuozuovera.com/archives/1617/">AI与安全「2」：Attack AI（1）总述</a></li>
-<li><a href="https://elie.net/blog/ai/attacks-against-machine-learning-an-overview/">Attacks against machine learning — an overview</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>科研总结</category>
-        <category>人工智能</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-        <tag>信息安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 搭建个人博客教程</title>
-    <url>/archives/1085c2b.html</url>
-    <content><![CDATA[<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h1>1 准备工作</h1>
-<h2 id="1-1-注册-GitHub-账号">1.1 注册 GitHub 账号</h2>
-<p>访问 <a href="https://github.com">GitHub</a> 官网注册 GitHub 账号并进行邮箱验证。<br>
-<img src="/images/20201006-1/1.webp" alt="图 1"></p>
-<h2 id="1-2-安装-Node-js-和-nmp">1.2 安装 Node.js 和 nmp</h2>
-<p>访问 <a href="https://nodejs.org">Node.js</a> 官网安装 Node.js，nmp 是随同 Node.js 一起安装的包管理工具。<br>
-<img src="/images/20201006-1/2.webp" alt="图 2"></p>
-<h2 id="1-3-安装-Git-for-Windows">1.3 安装 Git for Windows</h2>
-<p>访问 <a href="https://gitforwindows.org">Git</a> 官网安装 Git for Windows。<br>
-<img src="/images/20201006-1/3.webp" alt="图 3"></p>
-<h1>2 搭建 GitHub 博客</h1>
-<h2 id="2-1-创建-GitHub-仓库">2.1 创建 GitHub 仓库</h2>
-<p>新建一个 Repositories, 存放博客项目文件。<br>
-<img src="/images/20201006-1/4.webp" alt="图 4"><br>
-新建一个名为“<span class="label warning">你的用户名.github.io</span>”的仓库。如果你的GIthub用户名是 <span class="label warning">test</span>，那么就新建 <span class="label warning">test.github.io</span>的仓库（必须是你的用户名，其它名称无效），由此可见，每一个 GitHub 账户最多只能创建一个这样可以直接使用域名访问的仓库。<br>
-<img src="/images/20201006-1/5.webp" alt="图 5"><br>
-跳转到该库界面，选择 Settings。<br>
-<img src="/images/20201006-1/6.webp" alt="图 6"><br>
-进入 Settings 后，下拉找到 GitHub pages 设置界面，点击 Choose a theme。<br>
-<img src="/images/20201006-1/7.webp" alt="图 7"><br>
-选择一个博客主题，然后点击 Select theme。<br>
-<img src="/images/20201006-1/8.webp" alt="图片 8"><br>
-到这一步就已经可以访问自己的博客了。在地址栏输入：<span class="label warning">用户名.github.io</span> 就可以访问页面了。<br>
-<img src="/images/20201006-1/9.webp" alt="图 9"></p>
-<h2 id="2-2-配置-SSH-Key">2.2 配置 SSH Key</h2>
-<p>在 Windows 菜单里搜索启动 Git Bash，设置 <a href="http://user.name">user.name</a> 和 user.email 的配置信息：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"你的 GitHub 用户名"</span></span><br><span class="line">git config --global user.email <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>生产SSH秘钥文件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"你的 GitHub 注册邮箱"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>然后直接三个回车即可，默认不需要设置密码。<br>
-找到生成的 .ssh 的文件夹中的 id_rsa.pub 密钥，用记事本打开并复制里面的内容。<br>
-<img src="/images/20201006-1/10.webp" alt="图 10"><br>
-打开GitHub主页，进入个人设置 –&gt; SSH and GPG keys –&gt; New SSH key：<br>
-新建 New SSH key，将复制的内容粘贴到key中，title随便填，保存。<br>
-<img src="/images/20201006-1/11.webp" alt="图 11"><br>
-启动 Git Bash 输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 注意邮箱地址不用改</span></span><br></pre></td></tr></tbody></table></figure>
-<p>如果提示：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Are you sure you want to continue connnecting (yes/no)?</span><br></pre></td></tr></tbody></table></figure>
-<p>输入 <span class="label default">yes</span>，然后会看到：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></tbody></table></figure>
-<p>看到这个信息说明 SSH 已配置成功！</p>
-<h1>3 使用Hexo写博客</h1>
-<h2 id="3-1-安装Hexo">3.1 安装Hexo</h2>
-<p>在自己认为合适的地方创建博客文件夹，然后在该目录下右键点击 Git Bash Here，打开 Git 的控制台窗口，之后的所有操作都在 Git 控制台中进行，不要再使用 Windows 的控制台了。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install -g hexo <span class="comment"># 安装Hexo</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="3-2-初始化Hexo">3.2 初始化Hexo</h2>
-<p>仍在该目录下右键 Git Bash Here，输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></tbody></table></figure>
-<p>输入以上命令后，hexo 会自动下载一些文件到这个目录，包括 node_modules，其中比较重要的几个文件的目录结构如下：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></tbody></table></figure>
-<p>输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 开启本地预览服务</span></span><br></pre></td></tr></tbody></table></figure>
-<p>执行以上命令后，Hexo 就会在 public 文件夹生成相关 html 文件，这些文件将来都会提交到 GitHub 中。<br>
-打开浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> 即可看到博客内容，第一次初始化时Hexo已经自动生成了一篇名为 Hello World 的文章。<br>
-<img src="/images/20201006-1/12.webp" alt="图 12"></p>
-<h2 id="3-3-配置-Hexo">3.3 配置 Hexo</h2>
-<p>在 Hexo 中有两种主要配置文件，其名称都是 _config.yml。其中，一种位于站点根目录下，主要包含 Hexo 本身的配置；另一种位于主题目录下，这种配置文件由主题坐着提供，主要用于配置主题相关选项。为了描述方便，在以下说明中，将前者称为<span class="label info">站点配置文件</span>，后者称为<span class="label primary">主题配置文件</span>。<br>
-修改<span class="label info">站点配置文件</span>中有关 deploy 的部分，注意将 username 修改为你的 GitHub 用户名：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
-<p>并安装插件：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></tbody></table></figure>
-<p>打开 Git Bash，输入 <span class="label danger">hexo d</span> 就会将本次所有改动的代码全部提交，没有改动的不会提交。<br>
-此时访问博客地址就和本地预览服务一样了。<br>
-<img src="/images/20201006-1/13.webp" alt="图 13"></p>
-<h2 id="3-4-写第一篇博文">3.4 写第一篇博文</h2>
-<p>定位到 Hexo 根目录，执行命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo new <span class="string">'my-first-blog'</span></span><br></pre></td></tr></tbody></table></figure>
-<p>Hexo 会在 _posts 下生成相关 md 文件。我们只需打开这个文件就可以编写博客了，一般完整格式如下：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: postName #文章页面上的显示名称，一般是中文</span><br><span class="line">date: 2013-12-02 15:30:16 #文章生成时间，一般不改，但可以修改</span><br><span class="line">categories: 默认分类 #分类</span><br><span class="line">tags: [tag1,tag2,tag3] #文章标签，可空缺</span><br><span class="line">description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">以下是正文</span><br></pre></td></tr></tbody></table></figure>
-<p>#4 美化主题</p>
-<h2 id="4-1-下载-Next-主题">4.1 下载 Next 主题</h2>
-<p>以 Next 主题为例，如果你熟悉 Git，建议使用克隆最新版本的方式，之后的更新可以通过 <span class="label danger">git pull</span> 来快速更新，而不用再下载压缩包替换。<br>
-使用 Git Bash 定位到 Hexo 站点目录下。使用 Git checkout 代码：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="4-2-启用主题">4.2 启用主题</h2>
-<p>打开<span class="label info">站点配置文件</span>，找到 theme 字段，并将其值改为 next。</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></tbody></table></figure>
-<p>至此，Next 主题安装完成。下一步我们验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用 <span class="label danger">hexo clean</span> 命令来清除 Hexo 缓存。然后输入命令 <span class="label danger">hexo d</span> 开启本地预览服务，当命令行输出中提示：</p>
-<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></tbody></table></figure>
-<p>使用浏览器访问 <a href="http://localhost:4000">http://localhost:4000</a> ，检查站点是否正确运行。<br>
-当你看到站点的外观与下图所示类似时，说明已经成功安装 Next 主题。这是 Next 默认的 Scheme–Muse。<br>
-<img src="/images/20201006-1/14.webp" alt="图 14"><br>
-执行 <span class="label danger">hexo d</span> 提交代码。终于，我们的博客已经搭建完毕，后续可以进一步美化博客主题，并不断充实博客内容。您可以通过以下连个网址查询具体的网站与主题配置以进一步完善您的网站。</p>
-<ul>
-<li><a href="https://hexo.io/">Hexo框架官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/">Next主题官方文档</a></li>
-</ul>
-<blockquote class="blockquote-center">
+    <title>Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey 研读报告</title>
+    <url>/archives/92fdf3b8.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
-            <p>开始耕耘你的网上花园吧！</p>
+            <p>中文译名“调研：面向NIDS的对抗攻击与防御”。本调查由<a href="https://laptrinhx.com/author/ilja-moisejevs">Ilja Moisejevs</a>整理完成，文章与2019年发表于IJAE2019。</p>
 
             <i class="fa fa-quote-right"></i>
           </blockquote>
+<h1>摘要</h1>
+<p>世界正在变得越来越数字化和互联化，保护我们的数字设备已经不再是一个简单的问题。自上世纪80年代提出入侵检测系统（IDS）的概念以来，他一直是网络安全的一个重要组成部分。传统IDS系统依赖于特征匹配规则与启发式算法，然而随着对处理数据的需求量不断增长以及计算能力不断进步，基于机器学习的入侵检测系统（ML-IDS）逐渐进入人们视野。</p>
+<p>ML-IDS的挑战在于机器学习在正常情况下可以更好的检测入侵，但它本身也容易受到了解系统工作原理的对手攻击。在本调查报告中我们综述了这的对手可以对IDS进行的各种不同类型的攻击，另一方面IDS也可以通过各种防御手段提高自身健全性。在深入研究攻击与防御方法之前，我们首先阐明IDS的一些历史背景与不同种类的对抗攻击方法。</p>
+<h1>1. 引言</h1>
+<p>将机器学习技术引入安全领域并不罕见，而IDS负责监督通过主机的流量（HIDS）或检测网络本身（NIDS）。2008至2018年期间，关于在IDS设置机器学习算法的相关研究爆发式上升。然而研究表明机器学习（包括深度学习）系统并不是完美的，对手可以在训练阶段和测试阶段对机器学习系统进行攻击，前者我们称为中毒攻击，而后者则称为回避攻击。尽管在图像领域已经对上述几种攻击进行了研究，但网络安全领域的研究仍有巨大的漏洞。</p>
+<p>针对中毒攻击主要采取异常检测和鲁棒学习的防御手段，而针对对抗攻击的防御手段较多，包括对抗训练、梯度隐藏、输入修正、检测干扰、加入额外NULL类以及形式化方法。上述方法并非都适用于IDS。</p>
+<p>这篇文章的动机是做出首个关于IDS对抗攻击和防御的调研。目前已经有一些关于IDS分类器本身的调研，但没有站在IDS对手角度的调研。值得注意的是由于基于机器学习的IDS的对抗攻击和防御是一个新颖的话题，我们有时被迫跳出纯粹的ML-IDS，回顾基于传统规则库和统计法的攻击和防御技术。对于IDS对抗攻击的防御措施目前缺乏相关研究，我们希望在不就的将来，这些淋雨得到补充。</p>
+<h1>2. 入侵检测系统与机器学习</h1>
+<h2 id="2-1-IDS历史简介">2.1 IDS历史简介</h2>
+<p>从1980年James Anderson发表了一篇具有开创性意义的论文《Computer Security Threat Monitoring and Surveillance》开始，IDS的概念已经存在了近40年。文中Anderson为政府组织介绍了审计追踪的概念，以及如何使用它们来跟踪滥用和恶意用户的行为。它的出现致使几乎所有操作系统的审计子系统得到巨大的改进，并未IDS的可能性播下种子。</p>
+<p>IDSs的下一个里程碑式发展来自Dorothy Denning博士，她也是在从事一个政府项目时试图根据用户的行为活动创建用户档案，以分析政府大型机器的审计追踪记录。1984年，她协助开发了第一个入侵检测模型——Intrusion Detection Expert System (IDES)，并在同年将模型发布，为随后的IDS工作奠定了基础。</p>
+<p>商业化IDSs发展始于20世纪90年代初。Haystack Labs的Stalker是第一款推出的商业HIDS。其它商业IDS还有SAIC的Computer Misuse Detection System (CMDS) 以及Air Force’s Cryptologic Support Center的Automated Security Measurement System (ASIM)。1994年，ASIM项目转型为一家商业公司(the Wheel Group)并发布了第一款商业NIDS——NetRanger。</p>
+<h2 id="2-2-IDS的分类">2.2 IDS的分类</h2>
+<p>讨论IDSs要从两个重要维度——部署位置和检测目标。从前者说，可以将IDSs部署在单个主机上(称为HIDS)，也可以部署在网络本身上，监督不同节点之间的数据包流(称为NIDS)。如上所述，HIDS是首先被发明和部署的，而NIDS是最近才开发出来的。</p>
+<p><img src="/images/20210317-1/1.webp" alt="图 1: 一个含有HIDS和NIDS的网络典型结构图"></p>
+<p>当然，每种方法都有其优点和缺陷。例如HIDS可以单独安装于各个主机上，并有效的判断主机的损坏程度。另一方面，NIDS是一种整体检测方案，可以节省安装时间和成本，通常被认为是抵御外部入侵的首选方案。如今许多组织将两者结合起来使用。</p>
+<p>IDSs的第二各重要维度四它们的运作方式。广义的说，IDS分为基于特征和基于异常两种。与反病毒领域类似，基于特征的IDS专注于查找已知的威胁，特征是有效的指纹，允许IDS快速扫描数据包，并确定它是否携带有害信息。而基于异常的IDS专注于检测未知威胁，他们通常比基于特征的系统更复杂，最近已经发展到使用机器学习，因此它是本次调研的重点。</p>
+<h2 id="2-3-IDSs中的机器学习">2.3 IDSs中的机器学习</h2>
+<p>2002年 Mahoney 和 Chan 最早尝试将机器学习整合到IDSs中。他们的系统通过应用层的数据链接学习协议词汇表，以检测未知攻击。</p>
+<p>基于机器学习的IDSs有多种特征。例如IDS社会中最受欢迎的数据集之一KDD-99和它的后代NSL-KDD有多达41个可供建模的特征。不同工作使用不同数量的特征，使用不同的预处理方法。其它方法依赖于端到端的学习(通常是深度学习)，可以免去人工的特征预处理。</p>
+<p><img src="/images/20210317-1/2.webp" alt="图 2: KDD-99和NSL-KDD特征表"></p>
+<p>在过往的工作中，几乎所有类型的机器学习算法都已经运用于IDS中。其中最完整的一项调研由Hindy等人完成。在比较了超过80个使用机器学习的IDS工作后得出结论：最受欢迎的算法是人造神经网络(19%), SVM(14.4%), k-means(11.7%), 决策树(9.0%), 贝叶斯网络(9.0%), 模糊逻辑(7.2%), 以及kNNs(5.4%)。详细情况见图3(2008至2018年发表的有关IDSs文章中97.3%是基于机器学习的)。</p>
+<p><img src="/images/20210317-1/3.webp" alt="图 3: IDS中使用的算法"></p>
+<p>尽管有许多有关ML-IDSs的研究，但实际部署方面却存在明显的差距。Sommer 和 Paxson 对这一问题进行了深入研究，得出了以下五个关键因素：</p>
+<ol>
+<li>机器学习通常更擅长寻找相似点而不是异常点。即使异常检测可以看作是一个分类问题，但如果您正在寻找新的威胁，那么根据定义，您有一个未被充分表达的类别。</li>
+<li>IDS的误判成本非常高。假阳性(误报)的代价非常昂贵，而假阴性(漏报)则可能对系统造成严重的损害。</li>
+<li>机器学习判断结果和操作解释之间存在语义差异。一个“异常”并不一定意味着攻击，而且很难将恶意异常和良性异常区分开来。</li>
+<li>系统输入数据很容易变异。即使在单独网络中，诸如连接带宽的持续时间和应用程序的随机组合都会带来巨大的变化——在短时间内此现象更加严重。</li>
+<li>现实情况会妨碍系统评价。由于敏感性问题，获取拥有某种特殊功能的网络数据是最困难的，因此公开可用的数据集往往是合成的或者匿名的，而两者都不能代表实际生产网络的环境。</li>
+</ol>
+<h1>3 对抗机器学习的分类</h1>
+<p>针对机器学习的攻击也可以像其它安全领域一样，根据对手目标、时机、能力等因素对不同方法进行分组。</p>
+<p>我们借用CIA安全范式(机密性、完整性、可用性)来分析对手的目标。根据CIA范式，攻击者的目标可以是以下三种目标之一。</p>
+<ol>
+<li>
+<span class="label info">机密性(Confidentiality)</span>——获取敏感个人隐私信息，比如训练机器学习的数据集或者机器学习模型本身。
+</li>
+<li>
+<span class="label info">完整性(Integrity)</span>——违反机器学习系统的真实性，例如在不引起主机注意的情况下对输入进行错误的分类。
+</li>
+<li>
+<span class="label info">可用性(Availability)</span>——使机器学习系统完全崩溃。例如令IDSs瘫痪，从而使网络没有防御性能。
+</li>
+</ol>
+<p>时机是指攻击者在机器学习系统运行过程中执行攻击的位置。一般来说机器学习有两个步骤。首先，系统在已知的训练数据集上“训练”，试图学习隐藏在数据中的模式(监督学习)或者理解数据集中不同部分之间的关系(非监督学习)。然后，系统将进行测试，对输入的新数据(未知数据)进行预测。根据任务的不同，这些预测结果可以通过类别标签(分类)、连续变量(回归)和分配簇(聚类)表达。</p>
+<p><img src="/images/20210317-1/4.webp" alt="图 4: 机器学习系统执行的两个步骤"></p>
+<p>事实证明，面对对抗攻击，这两个步骤(训练和预测)都是脆弱的。在训练时进行的攻击旨在向训练池中诸如有害的、恶意的数据，使模型学习一些本不应该学习的内容。我们把这种攻击称为投毒攻击。</p>
+<p>在测试时进行攻击利用了机器学习系统普遍存在的一个有趣特性——它们很容易被精心设计的按特定方向加入扰动的输入所欺骗，我们称之为回避攻击。2013年，Szegedy等人在试图理解神经网络是如何“思考”时发现了这个漏洞。自此以后，有关对抗样本的研究指数级上升，图5可以看出社区对机器学习系统安全性和鲁棒性的兴趣变化。</p>
+<p><img src="/images/20210317-1/5.webp" alt="图 5: 在arxiv上发表的关于对抗机器学习的文章数量"></p>
+<p>另一种可以在测试期间执行的攻击类型是隐私攻击，这些攻击旨在从机器学习系统中提取信息，而不是直接影响其预测。</p>
+<p>结合攻击者的目标和时机，我们恶意得到如图6所示关系：</p>
+<p><img src="/images/20210317-1/6.webp" alt="图 6: 针对机器学习分类器的攻击类型总结"></p>
+<p>最后，能力是指攻击者对目标机器学习系统的认知水平。普遍来看认知水平有三种可能的层次：</p>
+<ol>
+<li>
+<span class="label info">白盒攻击(WhiteBox)</span>：白盒指的是那种详细理解目标机器学习模型内部结构的攻击者。通常涉及一下方面：模型架构、模型权重、训练样本(或训练数据分布)。
+</li>
+<li>
+<span class="label info">黑盒攻击(BlackBox)</span>：黑盒指的是不具备上述知识的攻击者类型。黑盒攻击者执行攻击时，除了分类器的输出外没有更多的访问权限。如果他们只从分类器输出接收到类别标签，则称为硬标签攻击。如果他们同时获得了分类器的分类置信度，则称为置信攻击。
+</li>
+<li>
+<span class="label info">灰盒攻击(GrayBox)</span>：灰盒或许是三者中最含糊不清的一种。它指的是位于白盒与黑盒中间的攻击者。这样的攻击者能够查询模型，并得到输出。他也可能知道模型的特征空间和模型训练集的样本分布。
+</li>
+</ol>
+<p>在这项调研中，我们将重点集中在回避攻击与中毒攻击上，我们忽略了针对IDSs的隐私攻击。我们也尝试记录攻击是在白盒还是黑盒情况下进行，因为这将极大地影响攻击的威力。</p>
+<h1>4 对入侵检测系统的攻击</h1>
+<p>正如在引言中所述，由于针对ML-IDS的对抗攻击研究较少，我们先回顾一下传统IDS的攻击，即基于特征/统计属性的攻击。此类攻击提供了以价值的历史背景。然后我们将讨论针对ML-IDS上的回避攻击，并在本节结束时回顾中毒攻击研究。</p>
+<h2 id="4-1-面向非机器学习IDS的回避攻击">4.1 面向非机器学习IDS的回避攻击</h2>
+<p>TCP/IP变形攻击(TCP/IP transformation attacks)是利用设计复杂的TCP/IP协议内容来阻止IDS正确执行的攻击。IDS受到的第一次严重攻击就是这种类型。</p>
+<p>Chung等人在1995年发起了第一次TCP/IP变形攻击(距离第一个商业IDS发布仅一年)。在这项具有开创性意义的工作中，作者展示了如何将恶意行为分布在几个会话中来逃避检测。</p>
+<p>Paxson是第一个对IDS回避攻击进行分类的人。他们总结了三种攻击方式：</p>
+<ol>
+<li>
+<span class="label info">过载攻击(Overload attack)</span>，这种攻击令监视器负载过大，使它无法接受所有数据并开始丢包。
+</li>
+<li>
+<span class="label info">崩溃攻击(Crash attack)</span>，这种攻击令监视器出现故障或者耗尽其资源使其停止工作。此类攻击比过载攻击要巧妙得多，但攻击者也需要做更多的工作来找出监视器中的漏洞。
+</li>
+<li>
+<span class="label info">掩蔽攻击(Subterfuge attack)</span>，这种攻击制作一种阻碍显示器正常读取的带有干扰的输入。例如在文本中插入“NUL”，并期待监视器会忽略其后面的字符。
+</li>
+</ol>
+<p>前两种攻击可以看作是DoS攻击的变体，而第三种是经典的回避型TCP/IP变形攻击。</p>
+<p>Ptacek 和 Newsham 提出了一种他们定义的TCP/IP变性攻击分类：</p>
+<ol>
+<li>
+<span class="label info">嵌入式攻击(Insertion attack)</span>: 因为IDS会接受所有数据包，而终端主机系统并不会。所以攻击者可以在数据包中“嵌入”只有IDS能看到的数据。例如可以将"\GET/cgi- bin/phf?"转换为"\GET/cgi-bin/pleasedontdetecttthisforme?"，并将"leasedontdetectt", "is" 以及 "orme?" 发送给IDS
+</li>
+<li>
+<span class="label info">回避攻击(Evasion attack)</span>: 与嵌入式攻击相反，这种方法攻击者要确保一些数据包没有到达IDS。还是以上面的例子来讲， 可以将"\GET/cgi- bin/phf?"拆分为"\GET/cgi-bin/p" 和 "hf?"。只要IDS只接受到其中一个就不会发现入侵。在IP层和TCP层都有许多不同的方法，这主要是由于TCP数据包的可重组属性。
+</li>
+<li>
+<span class="label info">拒绝服务攻击(DoS attack)</span>: DoS攻击可以通过资源耗尽等方法令IDS关机并使攻击顺利执行。
+</li>
+</ol>
+<p>作者对4个商业IDSs(WheelGroup’sNetRanger, InternetSecuritySystems’RealSecure, AbirNet’sWall-3, NetworkFlightRecorder’sNFR)进行测试，发现他们都容易受到攻击。他们的结论是，目前尚不清楚如何在部委IDS建立第二次保护的情况下修复已发现的漏洞。</p>
+<p>与Ptacek 和 Newsham相似，Handley等人也发现了IDS能看到与终端系统截然不同的网络，而这可以被攻击者利用。他们讨论了有关网络拓扑差异的问题并深入到协议实现级别进行研究，总结了攻击者可以如何利用IP分片、TTL和IP分片重组等网络属性执行恶意行为。</p>
+<p>下面介绍拟态攻击。在这类攻击中，攻击者首先制作一个恶意数据包，然后修改一部分数据包内容来“模仿”一个良性数据包。例如攻击者可能想要包含某个特定的字符串或函数达到恶意效果，但要使用与良性样本向关联的API调用来隐藏其有效负载的恶意性。</p>
+<p>Wagner 和 Soto 首次成功的对HIDS进行了模拟攻击。他们在白盒环境下访问一个隐藏的信息系统，获取系统内信息并手动篡改文件，同时避免被检测到。他们的攻击方法包括用自己的调用来替换系统调用，并插入大量无操作调用，以混淆真实的恶意活动。</p>
+<p>Tan 等人针对两个不同的基于系统调用的HIDS进行回避攻击。他们设计了几个模仿良性文件的带有漏洞的恶意版本，并逃避了检测。此外他们还演示了一种伪装攻击方法，即将严重的攻击行为伪装为另一种看起来不那么眼红的攻击，这种方法不仅提供了一种回避攻击的方案，还提出了利用另一种攻击转义系统注意力的新思路。</p>
+<p>接下来我们研究多态混合攻击。多态指的是恶意软件从一个实例转变为另一个实例，是一种规避特征检测的方案。而混合指的是恶意短剑通过复制良性实例的属性，来使自身看起来像是良性的。综上所述，多态混合是指不同版本的恶意流量与正常流量混合，以不被IDS检测到的方法。</p>
+<p>多态混合的思想由Fogla等人最先提出，作者对字节分布分类器发起一种多态混合攻击。它查看各种n-gram的出现频率，并判定该频率是否正常。他们的攻击分为三个步骤：</p>
+<ol>
+<li>根据目标网络内数据包的大小分布情况，确定正确的包尺寸，使其不被判定为异常。然后将他们的有效载荷分解为相应数量的数据包。</li>
+<li>设计一种字符替换算法，对有效载荷中的字符进行加密，使它们看起来无害。例如正常的网络流量为可打印字符，而恶意流量的有效载荷却含有不可打印字符。此算法将会修复这个问题。</li>
+<li>使用一些终端字节(terminal bytes)填充数据包，使他们可以与正常流量混合。</li>
+</ol>
+<p>作者表明他们的攻击成功回避了目标IDS(他们将纯多态攻击作为对比基线，由于没有混合操作，纯多态攻击被IDS判定为异常)。</p>
+<p>Kolesnikov 和 Lee 的工作中建立了一个"blender", 其可根据正常的网络情况输出可回避IDS检测的流量变体。他们也是通过一个替换表来实现这项功能，并成功的在4种不同的IDS上测试了他们的攻击。</p>
+<p>后续工作进一步形式化了多态混合的思想，并提出了一个自动生成此类攻击的框架。</p>
+<h2 id="4-2-面向基于机器学习的入侵检测系统的回避攻击">4.2 面向基于机器学习的入侵检测系统的回避攻击</h2>
+<p>我们首先讨论白盒攻击，如第三节所述，这些攻击者拥有对目标ML-IDS最高的认知水平——包括模型梯度。他们在攻击时可以直接优化模型的损失函数(通常是与训练相反的优化方向，即梯度上升)。相关方案多数是在图像识别领域发明的，因此我们会发现针对ML-IDS的攻击通常是直接从图像领域转录的。</p>
+<p>Huang等人分别对三种基于深度学习的IDS(MLP、CNN、LSTM)进行了白盒攻击。作者使用了在图像领域著名的对抗攻击算法FGSM和JSMA。其中FGSM造成的损害最为严重，它将LSTM的精度从98%降低到42%。</p>
+<p>Rigaki 和 Elragal 利用神经网络生成对抗样本攻击SVM、决策树和随机森林。他们也测试了FGSM和JSMA算法，但得出的结论是这种攻击方式会改变太多的特征，所以无法在现实情况复现。另一方面，JSMA对每个数据包只改变平均6%的特征就可以成功避开检测器。实验结果还表明，面对对抗攻击，使用随机森林的IDS健壮性最强。</p>
+<p>Clements等人从借助图像领域的FGSM、JSMA、C&amp;W、ENM 4种不同的攻击算法攻击基于深度学习的NIDS。他们执行了两组攻击，第一组针对完整性，第二组针对可用性，并成功的使用四种算法找到了对抗样本。其中最佳的生成算法为ENM。仅更改了1.38个特征就可以实现回避攻击。</p>
+<p>Wang 等人探讨了视觉领域的IDSs攻击。他们对NSL-KDD数据集实施了JSMA、FGSm、LL-FGSM、Random FGSM、DeepFool和C&amp;W攻击。最终发现JSMA可以以特征变更最少的条件产生有效的对抗样本，不过所有的算法在评估中都可以成功产生有效的对抗样本。</p>
+<p>现在我们讨论黑盒攻击。如第三节所述，黑盒攻击比白盒攻击的限制条件更多，攻击者通常只有很少的信息可以使用。然而这并不是说黑盒攻击不强大，图像领域的一些强力攻击都属于黑盒攻击。</p>
+<p>Rigaki and Garcia 对IDSs中的黑盒攻击进行了全面的研究。作者提出在C&amp;C期间修改流量来避免被入侵检测系统检测到。他们利用良性的Facebook流量训练了一个对抗生成网络(GAN)，并将其放在一个独立的服务器上，利用GAN事实修改恶意流量。经过400次训练，他们成功引导恶意流量以100%的通过率避开ML-IDS检测。值得一提的是，使用很少的数据(仅200个流量)就可以完成对GAN的训练。</p>
+<h2 id="4-3-IDSs上的投毒攻击">4.3 IDSs上的投毒攻击</h2>
+<p>Chung 和 Mok 是第一个尝试在IDSs上进行投毒攻击的人。作者开发了一种针对Autograph蠕虫的过敏性攻击。Autograph的工作流程分为两个阶段：1)根据行为特征发现网络中的可疑节点。2)观察可疑节点及其流量，并将其转化为阻断规则。而过敏攻击的流程为：1)使Autograph相信该节点为感染节点。2)Autograph学习了通过该节点的正常流量，并将此类流量定义为恶意流量。这是一种以可用性为目标的投毒攻击实例。</p>
+<p>Chung 和 Mok 尝试对基于特征的IDS进行投毒攻击，Nelson 和 Joseph 是第一个尝试对基于机器学习的IDS进行投毒的人。虽然他们的工作缺乏经验评估，但却得出了一个令人惊讶的积极结论：攻击者需要指数级的数据才能破坏机器学习算法。然而本文中作者使用了一个不现实的假设：分类器拥有一个无限的训练窗口(而不是滑动窗口)。更现实的情况是分类器根据不平衡的实时数据进行不断的调整。</p>
+<p>Rubinstein 等人他们通过向训练池中注入无意义数据((chaff)，令一个分类器中毒而使即将到来的DoS攻击避开检测。总体来说，作者能够仅通过插入10%的chaff实现令28%的DoS攻击回避检测。同时他们还研究了攻击者的知识水平与攻击时机对攻击成功的影响。</p>
+<p>Kloft and Laskov 尝试对基于质心的聚类算法的异常检测IDS进行投毒攻击。他们从准备好的数据中随机选择一个漏洞和一组正常的训练集，然后执行投毒攻击指导分类器中毒。实验发现，为了使分类器中毒，攻击者要控制35%的训练池(当攻击者能向训练池中加入任意的样本时)或5-15%的流量(当攻击者仅能改变一定数量的样本时)。</p>
+<p>最后，Biggio等人对一个IDS系统进行了3种不同的攻击，其中一种为后门投毒。每个网络数据包被认定为一个单独的样本，标记为正常(合法)或异常(恶意)，并用256维特征向量表示。他们假设攻击者知道系统使用的特征，但不能访问检测器本身(也不知道它是如何工作的——即黑盒场景)。注入的恶意样本模拟其它现有的网络流量(通过模拟相同的有效负载字节直方图)，这样他们就不会被检测到。</p>
+<p>我们希望在本节描述的总体图景是：在IDSs领域中，对抗性研究领域发展良好且活跃。这并不意外，因为IDSs是现代安全系统中最主要的组成部分之一，而重要的是我们需要考虑攻击者会如何利用它们。</p>
+<h1>5 入侵检测系统的防御</h1>
+<p>进入最后一个话题，讨论如何加强ML-IDS的安全性。与机器学习的其他领域(比如图像识别，自然语言处理、语音识别、甚至恶意软件分类)不同，IDSs的对抗性防御领域研究相当稀少。当然这也是因为在此方面的攻击也很少见。尽管如此，以下是我们对避免IDSs受到对抗性攻击的现有工作的总结，与攻击部分相同分为回避与投毒。</p>
+<h2 id="5-1-防御针对IDSs的对抗性回避攻击">5.1 防御针对IDSs的对抗性回避攻击</h2>
+<p>我们讨论的第一种防御类型是探测(detection)。如今大多数的网络蠕虫都是多态的，他们使用加密/解密器将shellcode隐藏。然而有些组件是不加密的——比如解密器。这种组件可以用来作为检测那些难以捉摸的蠕虫的特征。</p>
+<p>这一观点为Akritidis等人的研究奠定了基础。作者为IDS设计了一种启发式防御方案——对"sleds"(缓冲区溢出攻击的一个常见特征)进行检测。简单来说，“sleds"就是攻击者为实现恶意攻击，在有效载荷中所需要的一个NOP命令序列。尽管他们不是第一个提出通过检测"sleds"来实现防御的人，但他们的工作相比之前的研究有巨大的进步。他们实现了一个名为STRIDE的系统，可以检测出先前技术无法检测到的"sleds”，且有较低的误报率与更高的计算效率。</p>
+<p>有时IDSs对网络的理解与终端系统的理解有很大的差异，这是IDSs面临的最大挑战。实际上第4节中许多TCP/IP变形攻击就利用了这一特性。为解决此问题，Handley等人提出为IDS定制一套标准化组件，以解决IDS和终端系统理解数据包时产生的歧义或差异。这种方法最大的难点在于冷启动(cold start)问题(当标准化转换器开始上线运行时，它没有正确状态的信息来进行比较)，另外标准化转换器本身可能成为攻击者的目标。</p>
+<p>Wang 等人提出了随机建模/测试的防御与回避(模仿)策略。在随机建模/测试下，每个监视器运行分析之前都要对有效载荷进行随机分区。直观来看，因为模拟攻击者不知道他们的有效载荷将会被怎样划分与分析，所以他们很难通过简单地填充有效载荷就使其与正常流量混淆。因此即使攻击者拥有目标网络和IDS的全局信息，随机化组件也几乎不可能模拟正常流量。后续研究者中还讨论了基于随机的多态混合防御，不过这种类型的防御只有在攻击者发现随机化种子时才会起作用(这体现了安全领域"猫捉老鼠"的本质)。</p>
+<p>最后，我们发现了一项研究，它使用对抗训练来防范对抗攻击。我们发现IDS社区中研究对抗训练的工作非常少，这是不可思议的，因为对抗训练是其它领域对抗攻击防御中最主流的方法。</p>
+<p>IDS性能不佳时由于有限且不平衡的数据集。目前的解决方法之一是使用数据增强(可以理解为对抗训练)。首先使用蒙特卡罗算法生成入侵数据，然后利用这些数据来增强入侵检测系统的学习能力。最终证明此方法在准确性、精密度、召回率和F1-score方面优于基于机器学习的IDSs。</p>
+<h2 id="5-2-防御针对IDSs的对抗性投毒攻击">5.2 防御针对IDSs的对抗性投毒攻击</h2>
+<p>我们首先讨论为什么机器学习模型容易受到中毒影响。简单来讲，模型为了学习样本中的所有信息，必须做出两个层面的假设，分别位于模型层和数据层。</p>
+<span class="label info">模型假设</span>：有关分类器模型及其对数据表达方式的假设。例如数据为线性(存在一个线性函数可以正确的表示学习任务)、数据可分离(存在一个可以正确分离两个或多个类的边界)以及特征的独立性(每个特征都相互独立且携带了样本真实类别的信息)<br>
+<span class="label info">数据假设</span>：有关数据数据分布的假设。例如数据的稳定性(训练数据集和测试数据集遵循相同的数据分布)和数据点是独立同分布的(i.i.d)。<br><br>
+<p>投毒攻击有意违反上述假设。例如使用与正常数据分布不同的垃圾游戏破坏数据稳定性或扰动数据子集来打破i.i.d假设。针对投毒攻击的防御应围绕上述假设，做到减轻攻击者对它们的影响。广义上讲，投毒防御分为数据消毒(data sanitization)和鲁棒学习(robust learning)两类。</p>
+<p>数据清洗指在将数据输入到模型的训练池之前先进行检查，了解新添加的数据是否有对抗性，从而在有毒样本毒害模型前排除它。Cretu等人在2008发表了一篇具有开创性的论文，其中首次使用了机器学习背景下“数据消毒”的概念。作者利用每个数据点添加到数据集中的时间来判定它有毒的概率，这是因为攻击或异常相比模型的正常训练过程往往出现时间都有限且较短。</p>
+<p>另一种流行的数据消毒的技术是"拒绝负面影响"(Reject On Negative Impact , RONI)技术。它衡量增加/丢弃每个训练样本对分类器精度的负面影响。防御者先训练一个不包含新训练样本输入的模型，然后再训练一个包含新训练样本输入的模型副本。然后比较两个模型的准确性，如果添加候选样本对准确性有损害，那就拒绝此样本。这种方法对垃圾邮件分类器非常有效，可以成功的将垃圾邮件检测率从80%提升到87%，而非垃圾邮件的检测率始终保持在95%以上。</p>
+<p>鲁邦学习假定大部分数据来自已知且可信的来源，但部分数据来此未知或敌对的来源。鲁邦学习的目的是限制未知来源数据对模型的影响。因此有部分工作致力于改良基于主成分分析(PCA)的IDS的鲁棒性。由于PCA容易受到异常值的影响，需要一种更好的算法来防范投毒攻击，Croux等人提出了PCA-Gird算法，该算法大大降低了离群值的影响，能够成功剔除有毒的训练数据。</p>
+<h1>6 结论</h1>
+<p>数值是我们这一代的趋势，随着越来越多的电子设备上线，整个世界变成了一台大型计算机，因此网络安全变得更加重要。传统的安全方法如特征匹配或启发式算法已经不能很好的进行扩展，并逐渐被更加自动化的技术(如机器学习)所取代。</p>
+<p>在这项调研中，我们研究了机器学习在入侵检测系统中的作用。简要概述了IDSs的历史遗迹机器学习是如何进入这个领域的。我们重点研究了攻击者会如何利用ML-IDS本身的特点，遗迹如何使他们对此类攻击具有鲁棒性。</p>
+<p>我们对我来保持谨慎乐观的态度，我们相信机器学习的安全性会在包括网络安全在内各方面有持续的进步。然而我们也知晓在面向IDS的对抗攻击领域，特别是防御方面还有很多工作等待完善。</p>
 <hr>
-<h1>参考</h1>
+<h1>参考文献</h1>
 <ul>
-<li><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa">使用hexo+github搭建免费个人博客详细教程</a></li>
-<li><a href="https://tding.top/archives/7f189df5.html">Hexo 建站教程</a></li>
+<li><a href="http://www.cscjournals.org/manuscript/Journals/IJAE/Volume8/Issue3/IJAE-186.pdf">Adversarial Attacks and Defenses in Intrusion Detection Systems: A Survey</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>工具教程</category>
-        <category>Hexo</category>
+        <category>科研总结</category>
+        <category>论文研读报告</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>Next</tag>
+        <tag>对抗攻击</tag>
+        <tag>入侵检测系统</tag>
+        <tag>机器学习</tag>
+        <tag>回避攻击</tag>
+        <tag>投毒攻击</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生成对抗网络原理解析与损失函数推导</title>
+    <url>/archives/d4e17af.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>本文以最基本的概念讲解生成对抗网络的设计原理，基于信息论与概率论分析生成对抗网络损失函数的推导过程。文章有助于理解不限于生成对抗网络的其它深度学习损失函数推演思路，致力于使读者可以举一反三构造符合特定环境的生成对抗网络。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h1>1 机器学习模型</h1>
+<p>机器学习模型可以实现如分类、聚类、回归、生成等许多功能，而要理解生成对抗网络（GAN）我们要先明白分类器和生成器的功能。</p>
+<span class="label info">分类器（Classifier）</span> 分类器模型可以通过学习一些样本的类别信息，然后便能对输入的未知类别样本进行分类。比如让机器看一些不同类别的动物图片并告诉它图片对应的动物类别，然后机器便可自己辨别新的图片是哪个类别，这就是分类器。<br>
+<span class="label info">生成器（Generatior）</span> 生成器模型可以通过学习一些样本，然后便能生成类似的样本。比如让机器看一些动物图片，然后机器便可自己生成动物图片，这就是生成器。
+<h1>2 生成对抗网络</h1>
+<h2 id="2-1-古典生成器模型缺陷">2.1 古典生成器模型缺陷</h2>
+<p>GAN是一种生成器，在它出现之前已经有了很多种类的生成器模型，比如玻尔兹曼机、变分自编码器等，这些模型多使用生成数据和真实数据之间的MSE值（mean square error）来判断模型的好坏，其判断依据可以简单理解为生成数据与真实数据之间的距离，距离越小则认为效果越好。但在使用时人们逐渐发现使用这种判断方式的生成器效果并不理想，尤其对于手写数字或小型图标等简单图像，MSE并不能有效反映生成图片的优劣。在图1中，我们认为左侧的数字“7”是好的生成图片，而右侧是差的生成图片，但两者MSE值相等。</p>
+<p><img src="/images/20210524-1/1.webp" alt="图1：左侧的数字“7”是好的生成图片，右侧是差的生成图片。"></p>
+<h2 id="2-2-生成对抗网络原理">2.2 生成对抗网络原理</h2>
+<p>2014年Ian Goodfellow提出了生成对抗网络模型，他从零和博弈中受到启发，令生成器（Generatior）与判别器（Discriminator）之间持续对抗，使两者能力不断增强。其中<span class="label info">判别器</span>是一种特殊的分类器，它是只有“是”或“否”两种输出的二元分类器。下面我们通过定性描述来直观理解一下GAN的构造。</p>
+<p>如图2所示，GAN由三部分组成：<span class="label info">生成</span>、<span class="label info">判别</span>和<span class="label info">对抗</span>。生成和判别是两个独立的模块，分别由生成器与判别器实现。而对抗指的是生成器与判别器的交替训练过程。<br>
+<img src="/images/20210524-1/2.webp" alt="图2：GAN基本结构"></p>
+<span class="label info">生成模块</span>：生成模块由生成器实现。负责依据随机向量产生样本，如图片、文字等。<br>
+<span class="label info">判别模块</span>：判别模块由判别器实现。负责判断接收到的样本是真实样本还是生成器生成的样本。<br>
+<span class="label info">对抗模块</span>：对抗模块构建生成模块与判别模块的关联，实现两者交替训练。<br>
+<p>训练过程分为两步：</p>
+<ul>
+<li>
+<span class="label success">Step1</span> 先让生成器产生一些假样本，和收集到的真实样本一起输入判别器，让判别器学习正确区分两者。
+</li>
+<li>
+<span class="label success">Step2</span> 当判别器能够熟练的判断现有数据后，再让生成器以生成能够欺骗判别器的假样本为目标，不断生成更好的假样本。<br>
+</li>
+</ul>
+<p>重复进行<span class="label success">Step1</span> 和<span class="label success">Step2</span> 可使生成器与判别器相互促进，生成器的目的是让产生的样本逼近真实类别样本以假乱真，判别器的目的是将真实样本与生成器生成的样本加以区分。所以生成器产生的样本会越来越真实，而判别器的判别能力也会越来越强，最终达到纳什均衡。当判别器对任何样本的预测概率都接近0.5，即无法分辨样本是真实的还是生成器生成的，就停止训练。GAN的最终目标是产生一个足够好的生成器，其可以通过输入的随机向量，生成能够以假乱真的样本。</p>
+<h1>3 信息论</h1>
+<h2 id="3-1-信息量">3.1 信息量</h2>
+<p>生成对抗网络要准确计算并生成以假乱真的样本，就需要用损失函数定量的分析生成器与判别器的性能优劣。机器学习的损失经常使用交叉熵来定义，生成对抗网络也同样使用交叉熵来定义损失。想理解生成对抗网络损失函数的本质，要从最基本的信息量讲起。信息量顾名思义即信息的数量，其大小通过事件发生概率的负对数衡量。为了便于理解，我们通过以下例子解释信息量的定义。假设我们听到了两件事，分别如下：</p>
+<ul>
+<li>
+<span class="label success">事件A</span>    巴西队进入了2022年世界杯决赛。
+</li>
+<li>
+<span class="label success">事件B</span>    中国队进入了2022年世界杯决赛。
+</li>
+</ul>
+<p>凭直觉来说，很显然<span class="label success">事件B</span>的信息量比<span class="label success">事件A</span> 要大。究其原因，是因为<span class="label success">事件A</span>发生的概率很大，而<span class="label success">事件B</span>发生的概率很小。当越不可能的事情发生了，我们获取到的信息量就越大。越可能发生的事情发生了，我们获取到的信息量就越小。由此可见，信息量应该和事件发生的概率有关。</p>
+<p>进一步的，必然事件是必然发生的，所以没有信息量。几乎不可能发生的事情一旦发生，则具有近乎无穷大的信息量。举例来说，<span class="label danger">我永远不会死</span>这句话信息量就近乎无穷，而<span class="label danger">我是我妈生的</span>这句话信息量就很低甚至为0。</p>
+<p>通过以上的分析，可以得到信息量与概率的关系如图3所示，设$ X $是一个离散型随机变量，其取值集合为$ \chi $，概率分布函数$ p(x)=P_r(X=x),x \in \chi $，则定义事件$X = x_0$的信息量为：</p>
+<p>\begin{equation}<br>
+I(x_0)=-log(p(x_0)) \label{amount_of_information}<br>
+\end{equation}</p>
+<p>其中$ p(x_0) $的取值范围是$ [0,1] $。</p>
+<p><img src="/images/20210524-1/3.webp" alt="图3：信息量与概率的关系"></p>
+<h2 id="3-2-熵">3.2 熵</h2>
+<p>熵是一种用来描述事物内在混乱程度的度量，混乱程度越大则熵越大，混乱程度越小则熵越小。在信息论中熵可以表示一个事件的自信息量，即事件包含多少信息。比如对于一个必然事件，它的所有状态都是确定不变的，不会产生任何混乱或变化，那么它的熵就是最小值0。一般的，对于某个事件，其有$ n  $种可能性，每一种可能性都有一个概率$ p(x_i) $，我们可以通过公式\eqref{amount_of_information}计算出每一种可能性的信息量，那么如何计算熵呢？下面我们来看一个更加典型的例子来进一步理解。</p>
+<p>假设你拿出了你的电脑，按下开关，会有三种可能性，下表列出了每一种可能的概率与其对应的信息量。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">事件</th>
+<th style="text-align:center">概率</th>
+<th style="text-align:center">信息量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">电脑正常开机</td>
+<td style="text-align:center">0.7</td>
+<td style="text-align:center">$ -log(p(A))=0.36 $</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">电脑无法开机</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">$ -log(p(B))=1.61 $</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">电脑爆炸了</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">$ -log(p(C))=2.30 $</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：文中的对数为均为自然对数</p>
+</blockquote>
+<p>我们有了所有可能性的信息量，而熵被定义为所有信息量的期望，以描述该事件的自信息量，即：</p>
+<p>\begin{equation}<br>
+H(X)=- \sum_{i=1}^np(x_i)log(p(x_i)) \label{entropy}<br>
+\end{equation}</p>
+<p>其中$ n $代表所有的$ n $种可能性，所以上面问题的结果就是：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(X) &amp;= - \left [ p(A)log(p(A))+p(B)log(p(B))+p( C)log(p( C))  \right ]\\ \nonumber<br>
+&amp;= 0.7 \times 0.36 + 0.2 \times 1.61 +0.1 \times 2.30\\ \nonumber<br>
+&amp;= 0.804<br>
+\end{align}</p>
+<p>值得一提的是，如投掷硬币这类比较特殊的问题，它只有两种可能，正面朝上或背面朝上，我们称之为<span class="label danger">0-1分布</span>问题（二项分布的特例）。对于这类问题，熵的计算方法可以简化为如下算式：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(X) &amp;=- \sum_{i=1}^np(x_i)log(p(x_i)) \\<br>
+&amp;= -p(x)log(p(x))-(1-p(x))log(1-p(x))\\ \label{binomial_distribution_entropy}<br>
+\end{align}</p>
+<h2 id="3-3-相对熵（KL散度）">3.3 相对熵（KL散度）</h2>
+<p>相对熵又称KL散度，如果我们对于同一个随机变量x有两个独立的概率分布$ P(x) $和$ Q(x) $，我们可以使用KL散度来衡量这两个分布的差异。具体来说，相对熵就是<span class="label danger">用$ P $来描述目标问题</span>相比<span class="label danger">用$ Q $来描述</span>，得到的信息增量。</p>
+<p>在机器学习中，$ P $往往用来表示样本的真实分布，比如$ [1,0,0] $表示当前样本属于第一类。$ Q $用来表示模型所预测的分布，比如$ [0.7,0.2,0.1]。 $<br>
+直观的理解就是如果我们用$ P $分布来描述样本，那么就非常完美。而用$ Q $分布来描述样本，虽然可以大致描述，但是不是那么的完美，信息量不足，需要额外的一些“信息增量”才能达到和$ P $一样完美的描述。如果我们通过对模型的反复训练使$ Q $也能完美的描述样本，那么就不再需要额外的“信息增量”，$ Q $等价于$ P $。可以看出，减小$ P $与$ Q $之间的差距，即降低相对熵就是机器学习在训练模型时要达到的目标。</p>
+<p>KL散度的公式推导基于使用不同的编码描述目标样本所产生的熵差，这里不详细推导，直接给出KL散度的计算公式：</p>
+<p>\begin{equation}<br>
+D_{KL}(p||q)=\sum_{i=1}^np(x_i)log(\frac{p(x_i)}{q(x_i)}) \label{kullback_leibler_divergence}<br>
+\end{equation}</p>
+<p>其中$ n $为事件的所有可能性。$ D_{KL} $的值越小，表示$ q $分布与$ p $分布越接近。</p>
+<h2 id="3-4-交叉熵">3.4 交叉熵</h2>
+<p>对公式\eqref{kullback_leibler_divergence}变形可以得到：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+D_{KL}(p||q) &amp;= \sum_{i=1}^np(x_i)log(p(x_i)) - \sum_{i=1}^np(x_i)log(q(x_i))\\ \nonumber<br>
+&amp;= -H(p(x)) + \left [ - \sum_{i=1}^np(x_i)log(q(x_i)) \right ]<br>
+\end{align}</p>
+<p>等式的前一部分恰好是$ p $的熵，而将等式的后一部分定义为交叉熵：</p>
+<p>\begin{equation}<br>
+H(p|q)=- \sum_{i=1}^np(x_i)log(q(x_i)) \label{cross_entropy}<br>
+\end{equation}</p>
+<p>在机器学习中，为了评估样本真实类别(label)和模型预测类别(predicts)之间的差距，我们使用KL散度来判定模型的优劣，即$ D_{KL}(y||\hat y) $，由于KL散度中的前一部分$ −H(y) $是样本类别在真实世界中的熵，其固定不变，故在优化过程中，只需要关注交叉熵就可以了。所以一般在机器学习中将模型的损失(loss)直接定义为交叉熵。这里的损失指的就是用<span class="label danger">模型预测分布</span>描述样本相较于<span class="label danger">样本真实分布</span>损失的信息量。优化损失函数（即交叉熵）使其最小化，便可令模型预测分布与样本真实分布尽可能的接近，使模型的预测能力增强。</p>
+<p>特殊的，当随机分布$ P $和$ Q $是都二项分布时，即$ P $和$ Q $只有两个状态$ 0 $或$ 1 $，那么它们的差异可以用二进制交叉熵表示。令$ p $为$ P $的状态$ 1 $的概率，则$ (1-p) $是$ P $的状态$ 0 $的概率，同理，令$ q $为$ Q $的状态$ 1 $的概率，$ (1-q) $为$ Q $的状态$ 0 $的概率，则$ P $与$ Q $之间交叉熵为：</p>
+<p>\begin{equation}<br>
+H(p|q)=-(plog(q)+(1-p)log(1-q)) \label{binomial_cross_entropy}<br>
+\end{equation}</p>
+<h1>4 损失函数</h1>
+<h2 id="4-1-分类模型损失函数">4.1 分类模型损失函数</h2>
+<p>这里我们只讨论单分类问题，即每一个样本只能属于一个类别，比如一张图片只能是猫或者是狗，不能既有猫又有狗。那么此类问题的机器学习模型计算某一个样本的损失一般的方法是：</p>
+<p>\begin{equation}<br>
+loss = - \sum_{i=1}^n  y_ilog(\hat{y_i}) \label{loss}<br>
+\end{equation}</p>
+<p>其中$ n $代表总类别数量，$ y_i $为样本真实分布，$ \hat{y_i} $为模型预测分布。举例说明样本损失的计算方法，比如有以下样本：<br>
+<img src="/images/20210524-1/4.webp" alt="图4：猴子图片样本"><br>
+对应的标签和预测值如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">*</th>
+<th style="text-align:center">猫</th>
+<th style="text-align:center">猴子</th>
+<th style="text-align:center">老鼠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Label</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Pred</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:center">0.6</td>
+<td style="text-align:center">0.1</td>
+</tr>
+</tbody>
+</table>
+<p>那么模型对该样本损失为：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+loss &amp;= -(0 \times log(0.3) + 1 \times log(0.6) + 0 \times log(0.1))\\ \nonumber<br>
+&amp;= -log(0.6)<br>
+\end{align}</p>
+<p>而对应一批样本（一个batch），则将其loss定义为其中所有样本loss的平均值（期望）：<br>
+\begin{equation}<br>
+batch\ loss = -\frac{1}{m} \sum_{j=1}^m \sum_{i=1}^n  y_ilog(\hat{y_i}) \label{batch_loss}<br>
+\end{equation}<br>
+其中$ m $为当前batch中的样本数。</p>
+<h2 id="4-2-GAN损失函数">4.2 GAN损失函数</h2>
+<p>2014由Ian Goodfellow首次提出的GAN损失函数为：<br>
+\begin{equation}<br>
+\min_G \max_D V(D,G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \label{GAN_loss}<br>
+\end{equation}</p>
+<p>看到这一长串公式可能让人很难理解，下面我们将详细讲解其推导过程。</p>
+<h3 id="4-2-1-判别器损失">4.2.1 判别器损失</h3>
+<p>在GAN中，判别器（Discriminator）的优化目标是缩小判别器输出$ D(x) $的概率分布$ D $与样本真实标签概Label率分布$ L $的差异。其中$ L $与$ D $均为二项分布，$ L $概率分布只有两个取值100%或0%，即$ 1 $和$ 0 $；而$ D $概率分布表示判别器认为样本为真的概率，它的取值为100% ~ 0%，即$ [0,1] $。</p>
+<p>那么，如果一个样本（一幅图片）$ x $是真实的（real），$ p $则为$ 1 $，$ q $为$ D(x_r) $，其交叉熵为：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(L|D_r) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
+&amp;= -(1 \times logD(x_r)+(1-1) \times log(1-D(x_r))\\<br>
+&amp;= -logD(x_r)  \label{discriminator_real_entropy}<br>
+\end{align}</p>
+<p>如果一个样本是生成器生成的，即为假的（fake），$ p $则为$ 0 $，$ q $为$ D(x_f) $，其交叉熵为：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(L|D_f) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
+&amp;= -(0 \times logD(x_f)+(1-0) \times log(1-D(x_f))\\<br>
+&amp;= -log(1-D(x_f))  \label{discriminator_fake_entropy}<br>
+\end{align}</p>
+<p>于是，对于一个同时含有真实样本（real）与生成器生成样本（fake）的样本集，其交叉熵的平均值（期望）为：</p>
+<p>\begin{equation}<br>
+H(L|D) = -\frac{1}{M}(\sum_{x_r}^M log(D(x_r)) + \sum_{x_f}^M log(1-D(x_f)))  \label{discriminator_entropy}<br>
+\end{equation}</p>
+<p>如上所述，判别器的优化目标是缩小$ D $与$ L $概率分布的差异，即最小化交叉熵。所以可以将判别器损失定义为</p>
+<p>\begin{equation}<br>
+Loss_D = H(L|D) = -(\frac{1}{M}\sum_{x_r}^M log(D(x_r)) + \frac{1}{M}\sum_{x_f}^M log(1-D(x_f)))  \label{discriminator_loss_1}<br>
+\end{equation}</p>
+<p>为便于计算与表示，可将等式转化为如下的等价形式，即讲整体的交叉熵期望转换为对真假样本交叉熵各自期望的和。</p>
+<p>\begin{equation}<br>
+Loss_D = E_{x_r} \left [ -log(D(x_r)) \right ] + E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{discriminator_loss_2}<br>
+\end{equation}</p>
+<p>其中$ x_f $特指生成器生成的假样本，一般使用$ G(z) $表示，$ z $为服从正太分布$ p(z) $的随机向量，而使用$ x $表示收集的样本集中的样本（图片）。则最终将判别器损失函数定义为：<br>
+\begin{equation}<br>
+Loss_D = - \lbrace E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \rbrace \label{discriminator_loss_3}<br>
+\end{equation}</p>
+<h3 id="4-2-2-生成器损失">4.2.2 生成器损失</h3>
+<p>生成器（Generator）的优化目标是让生成器的输出$ x_f $尽可能以假乱真，即判别器对生成器生成的样本判为$ 1 $（为真）的概率越高越好。</p>
+<p>那么，如果一个样本$ x $是真实的（real），$ p $则为$ 1 $，$ q $为$ D(x_r) $，其交叉熵为：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(L|D_r) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
+&amp;= -(1 \times logD(x_r)+(1-1) \times log(1-D(x_r))\\<br>
+&amp;= -logD(x_r)  \label{generator_real_entropy}<br>
+\end{align}</p>
+<p>事实上，生成器G不关心真实样本（real）的情况，它只考虑其生成的$ x_f $是否可以欺骗判别器。从公式\eqref{generator_real_entropy}中也可以看出，在训练生成器时，对于真实样本的交叉熵$ -logD(x_r) $为固定值，并不会因生成器的优劣而变化。</p>
+<p>如果一个样本是生成器生成的，即为假的（fake），$ p $则为$ 0 $，$ q $为$ D(x_f) $，其交叉熵为：</p>
+<p>\begin{align}<br>
+\nonumber<br>
+H(L|D_f) &amp;= -(plog(q)+(1-p)log(1-q))\\ \nonumber<br>
+&amp;= -(0 \times logD(x_f)+(1-0) \times log(1-D(x_f))\\<br>
+&amp;= -log(1-D(x_f))  \label{generator_fake_entropy}<br>
+\end{align}</p>
+<p>于是，对于一个同时含有真实样本（real）与生成器生成样本（fake）的样本集，其交叉熵的平均值（期望）为：</p>
+<p>\begin{equation}<br>
+H(L|D) = -\frac{1}{M}(\sum_{x_r}^M log(D(x_r)) + \sum_{x_f}^M log(1-D(x_f)))  \label{generator_entropy}<br>
+\end{equation}</p>
+<p>如上所述，生成器的优化目标让其的输出$ x_f $尽可能以假乱真，交叉熵公式\eqref{generator_entropy}代表了判别器鉴别假样本的能力。对于一个确定的假样本，交叉熵越小，意味着判别器对假样本的判别结果概率分布与生成器生成的假样本概率分布差距越小。而在判别器模型固定的情况下，如果这个交叉熵越大，则说明生成器生成的样本可以欺骗判别器，达到以假乱真的效果。所以，生成器的优化目标可以描述为在判别器模型固定的情况下最大化交叉熵，进而将判别器损失定义为：</p>
+<p>\begin{equation}<br>
+Loss_G = -H(L|D) = \frac{1}{M}\sum_{x_r}^M log(D(x_r)) + \frac{1}{M}\sum_{x_f}^M log(1-D(x_f))  \label{generator_loss_1}<br>
+\end{equation}</p>
+<p>为便于计算与表示，可将等式转化为如下的等价形式，即讲整体的交叉熵期望转换为对真假样本交叉熵各自期望的和。</p>
+<p>\begin{equation}<br>
+Loss_G = E_{x_r} \left [ -log(D(x_r)) \right ] + E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{generator_loss_2}<br>
+\end{equation}</p>
+<p>由于在训练生成器时，公式中$ E_{x_r} \left [ -log(D(x_r)) \right ] $为固定值，所以生成器损失可以简化为</p>
+<p>\begin{equation}<br>
+Loss_G =  E_{x_f} \left [ -log(1-D(x_f)) \right ]   \label{generator_loss_3}<br>
+\end{equation}</p>
+<p>其中$ x_f $特指生成器生成的假样本，一般使用$ G(z) $表示，$ z $为服从正太分布$ p(z) $的随机向量。则最终将生成器损失函数定义为：</p>
+<p>\begin{equation}<br>
+Loss_G = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \label{generator_loss_4}<br>
+\end{equation}</p>
+<h3 id="4-2-3-整体损失函数表示">4.2.3 整体损失函数表示</h3>
+<p>现在我们再来看Ian Goodfellow提出的GAN损失函数，就能比较好的理解了。</p>
+<p>\begin{equation}<br>
+\min_G \max_D V(D,G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
+\end{equation}</p>
+<p>如2.2所述，在训练GAN的过程中，我们会迭代训练判别器与生成器。具体来说，先固定生成器不动，将判别器训练到一定程度；然后固定判别器，再进一步训练生成器；然后固定生成器，训练判别器……</p>
+<p>对于判别器，在生成器固定不动的情况下，最大化优化函数：</p>
+<p>\begin{equation}<br>
+\max_D V(D) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
+\end{equation}</p>
+<p>其等价于优化（最小化）4.2.1中的判别器损失函数\eqref{discriminator_loss_3}：</p>
+<p>\begin{equation}<br>
+Loss_D = - \lbrace E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \rbrace \nonumber<br>
+\end{equation}</p>
+<p>对于生成器，在判别器固定不动的情况下，最小化优化函数：</p>
+<p>\begin{equation}<br>
+\min_G V(G) = E_{x\sim p_{data}(x)} \left [ logD(x) \right ] + E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
+\end{equation}</p>
+<p>其中等式的前一项$ E_{x\sim p_{data}(x)} \left [ logD(x) \right ] $不会随着生成器的训练发生变化，即为一个常量，则优化函数可简化为：</p>
+<p>\begin{equation}<br>
+\min_G V(G) = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ]  \nonumber<br>
+\end{equation}</p>
+<p>其等价于优化（最小化）4.2.2中的生成器损失函数\eqref{generator_loss_4}：<br>
+\begin{equation}<br>
+Loss_G = E_{z\sim p_z(z)} \left [ log(1-D(G(z))) \right ] \nonumber<br>
+\end{equation}</p>
+<h1>5 生成对抗的本质作用</h1>
+<p>相信通过上文你已经彻底理解了Ian Goodfellow提出的GAN原理与其损失函数定义。本节将解释GAN中生成器与判别器迭代训练时的具体关系，并说明生成器的本质作用。<br>
+<img src="/images/20210524-1/5.webp" alt="图5：GAN训练过程"><br>
+图5展示了GAN的训练过程，其中：</p>
+<ul>
+<li>蓝线：判别模型的分布$ D $（线中点为样本点，样本点越高，表示其为真实样本的概率越大）</li>
+<li>黑虚线：真实数据分布P$ (x) $</li>
+<li>绿实线：生成模型分布$ G $</li>
+<li>$ x $线：真实样本数据</li>
+<li>$ z $线：随机向量，一般为正太分布（G的输入）</li>
+</ul>
+<p>(a)为训练最初阶段。$ x $是真实样本数据，其始终服从黑虚线的概率分布（假设为正太分布）。随机向量$ z $通过生成器转变为样本。但由于初始状态的生成器效果差，无法有效拟合真实样本数据，即生成器模型分布（绿实现）的均值偏离真实数据分布（黑虚线）的均值。而初始状态的判别器效果同样较差，其分布有强烈波动（蓝线）。</p>
+<p>(b)过程首先固定生成器，训练判别器，使判别器可以准确的判断真样本x和假样本$ G(z) $。可以看到图中判别器（蓝线）在生成器分布（绿线）均值处的值明显下降，即判断其为真实样本的概率下降。</p>
+<p>(c) 过程固定判别器，训练生成器。生成器在得到判别器在原始G分布的均值处判真概率下降后，调整生成器的分布，使其均值避开判别模型分布概率较低的区域，进而使其分布逐渐靠近真实数据分布$ P(x) $。</p>
+<p>循环(b)(c)，最终使生成模型分布G完全拟合真实数据分布$ P(x) $，在这种情况下判别器对真实样本和生成的假样本输出的判真概率相同，即无法辨别生成器产生的假样本，此时训练结束。</p>
+<p>从结果上来看，生成器的作用是将随机向量$ z $映射到真实样本$ x $上。其通过不断与判别器对抗，尝试调整自身分布，最后将生成模型输出分布$ G $拟合为真实数据分布$ P(x) $。一般来讲，最后我们得到的生成器可以将符合某种分布的输入转换为目标分布的样本输出。</p>
+]]></content>
+      <categories>
+        <category>科研总结</category>
+      </categories>
+      <tags>
+        <tag>生成对抗网路</tag>
       </tags>
   </entry>
 </search>
