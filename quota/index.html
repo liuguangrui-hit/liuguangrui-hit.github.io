@@ -1,7 +1,15 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI 订阅额度看板</title><style>
 body{margin:0;font-family:-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:#f5f6f8;color:#1a1a1a}
-.w{max-width:760px;margin:0 auto;padding:16px}h1{font-size:22px;margin:4px 0}.ts{color:#666;font-size:13px;margin-bottom:14px}
+.w{max-width:760px;margin:0 auto;padding:12px}h1{font-size:18px;margin:2px 0}.ts{color:#666;font-size:12px;margin-bottom:12px}
+*{box-sizing:border-box}td{overflow-wrap:anywhere}
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:12px}
+.sv{background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:12px;min-width:0}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px}.hd b{min-width:0;overflow-wrap:anywhere}
+.big{font-size:28px;font-weight:700;margin:6px 0 4px}.big small{font-size:12px;color:#666;font-weight:400;margin-left:6px}
+.bar{height:6px;background:#eceef1;border-radius:3px;overflow:hidden}.bar i{display:block;height:100%}
+.ft{font-size:12px;color:#666;margin-top:6px}
+
 .card{background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:14px;margin-bottom:12px}
 h2{font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .s{font-size:12px;padding:2px 8px;border-radius:99px;color:#fff;font-weight:600;white-space:nowrap;display:inline-block}.r{background:#d93025}.y{background:#e8a200}.g{background:#1e8e3e}.n{background:#9aa0a6}
@@ -9,12 +17,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;b
 td.k{color:#666;width:36%}.alert{background:#fdecea;border-color:#f5c2bd}ul{margin:0;padding-left:20px;font-size:14px;line-height:1.7}
 </style></head><body><div class="w">
 <h1>AI 订阅额度看板</h1><div class="ts">最后检查：2026-10-29 18:20（新加坡时间）；ChatGPT 19:13</div>
-<div class="card"><h2>总览</h2><table><tr><th>服务</th><th>状态</th><th>剩余</th><th>重置/到期</th></tr>
-<tr><td>ChatGPT Pro</td><td><span class="s r">消耗过快</span></td><td>本周 12%</td><td>约11月4日 15:00</td></tr>
-<tr><td>Claude Max 20x</td><td><span class="s r">已用完</span></td><td>本周 0%</td><td>周二 05:00</td></tr>
-<tr><td>Muse（liuguangrui.hit）</td><td><span class="s g">正常</span></td><td>本周 95%</td><td>11月4日</td></tr>
-<tr><td>Muse（seknowledge3）</td><td><span class="s g">正常</span></td><td>本周 100%</td><td>10月31日</td></tr>
-<tr><td>DeepSeek API</td><td><span class="s y">关注</span></td><td>¥56.48</td><td>按现速约1个月</td></tr></table></div>
+<div class="ov"><div class="sv"><div class="hd"><b>ChatGPT Pro 500</b><span class="s r">消耗过快</span></div><div class="big">12%<small>本周剩余</small></div><div class="bar"><i class="r" style="width:12%"></i></div><div class="ft">重置：约11月4日 15:00 · 续费 11月24日</div></div><div class="sv"><div class="hd"><b>Claude Max 20x</b><span class="s r">已用完</span></div><div class="big">0%<small>本周剩余</small></div><div class="bar"><i class="r" style="width:0%"></i></div><div class="ft">重置：周二 05:00 · 续费 11月3日</div></div><div class="sv"><div class="hd"><b>Muse · liuguangrui.hit</b><span class="s g">正常</span></div><div class="big">95%<small>本周剩余</small></div><div class="bar"><i class="g" style="width:95%"></i></div><div class="ft">重置：11月4日 · 额外 29 亿 token</div></div><div class="sv"><div class="hd"><b>Muse · seknowledge3</b><span class="s g">正常</span></div><div class="big">100%<small>本周剩余</small></div><div class="bar"><i class="g" style="width:100%"></i></div><div class="ft">重置：10月31日 · 额外 10 亿 token</div></div><div class="sv"><div class="hd"><b>DeepSeek API</b><span class="s y">关注</span></div><div class="big">¥56.48<small>余额</small></div><div class="ft">近 30 天花费 ¥53.51 · 按现速约 1 个月</div></div></div>
 <div class="card alert"><b>ChatGPT 本周只剩 12%</b>：按当前速度会在约11月4日 15:00 重置前用完。<br><b>Claude 本周额度已用完</b>：Claude Code 用掉 100%，周二 05:00（新加坡时间）重置；月度消费 US$192，已超出 US$40 上限。</div>
 <div class="card"><h2>ChatGPT Pro 500 <span class="s r">消耗过快</span></h2><table>
 <tr><td class="k">账号</td><td>liuguangrui.hit@gmail.com（Google），用户 lgr</td></tr><tr><td class="k">本周额度</td><td>剩 12%（已用 88%），按当前速度会在重置前用完</td></tr><tr><td class="k">本周重置</td><td>5天20小时后（约11月4日 15:00 SGT）</td></tr><tr><td class="k">额度范围</td><td>Codex、Work、Workspace Agents、ChatGPT for Excel 共用；聊天不计入</td></tr><tr><td class="k">Credits</td><td>0</td></tr><tr><td class="k">续费</td><td>2026-11-24 自动续费</td></tr><tr><td class="k">读取时间</td><td>2026-10-29 19:13（SGT）</td></tr></table></div>
@@ -41,5 +44,5 @@ td.k{color:#666;width:36%}.alert{background:#fdecea;border-color:#f5c2bd}ul{marg
 <tr><td class="k">数据异常</td><td>用量明细只有 3 次请求、不到 ¥0.01，与总花费对不上</td></tr>
 <tr><td class="k">计费变更</td><td>2026-11-01 00:00（北京时间）起搜索/抓取 API 按次收费</td></tr>
 <tr><td class="k">网页聊天</td><td>免费</td></tr></table></div>
-<div class="card"><h2>提醒规则</h2><ul><li>剩余额度低于 10% 时提醒</li><li>按当前消耗速度会在重置或到期前用完时提醒</li><li>状态：<span class="s g">绿</span> 正常 <span class="s y">黄</span> 需关注 <span class="s r">红</span> 已用完/超限</li></ul></div>
+<div class="card"><h2>历史快照</h2><table><tr><td class="k">2026-10-29 18:20</td><td>Claude 0% · Muse lgr 95% · Muse sek 100% · DeepSeek ¥56.48</td></tr><tr><td class="k">2026-10-29 19:13</td><td>ChatGPT 12%</td></tr></table></div><div class="card"><h2>提醒规则</h2><ul><li>剩余额度低于 10% 时提醒</li><li>按当前消耗速度会在重置或到期前用完时提醒</li><li>状态：<span class="s g">绿</span> 正常 <span class="s y">黄</span> 需关注 <span class="s r">红</span> 已用完/超限</li></ul></div>
 </div></body></html>
